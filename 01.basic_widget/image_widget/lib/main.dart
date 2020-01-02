@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'button_widget.dart';
+import 'image_widget.dart';
 
 void main() => runApp(MyApp());
 
@@ -75,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: ButtonWidgetTest(),
+        child: ImageWidgetTest(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
