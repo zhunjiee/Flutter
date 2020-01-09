@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        "new_page" : (context) => InheritedWidgetTestRoute(),
+        "new_page": (context) => InheritedWidgetTestRoute(),
       },
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -90,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             RaisedButton(
               child: Text("点击跳转新页面"),
-              onPressed: (){
+              onPressed: () {
                 Navigator.of(context).pushNamed("new_page");
               },
             )
