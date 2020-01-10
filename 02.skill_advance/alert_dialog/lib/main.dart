@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'alert_dialog_test.dart';
+import 'dialog_state_route.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         "second_page" : (context) => SecondPageView(),
+        "dialog_state" : (context) => DialogStateRoute(),
       },
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -106,6 +108,12 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text("查看Dialog跳转到下一页"),
               onPressed: (){
                 Navigator.of(context).pushNamed("second_page");
+              },
+            ),
+            RaisedButton(
+              child: Text("对话框状态管理"),
+              onPressed: (){
+                Navigator.of(context).pushNamed("dialog_state");
               },
             )
           ],
