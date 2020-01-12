@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'gesture_detector_test.dart';
+import 'drag_test.dart';
+import 'scale_test.dart';
+import 'notification_test.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,6 +16,9 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         "getture_detector" : (context) => GestureDetectorTestRoute(),
+        "drag_test" : (context) => DragTestRoute(),
+        "scale_test" : (context) => ScaleTestRoute(),
+        "notification_test" : (context) => NotificationTestRoute(),
       },
       home: MyHomePage(),
     );
@@ -91,7 +97,25 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: (){
                 Navigator.of(context).pushNamed("getture_detector");
               },
-            )
+            ),
+            RaisedButton(
+              child: Text("DragTest"),
+              onPressed: (){
+                Navigator.of(context).pushNamed("drag_test");
+              },
+            ),
+            RaisedButton(
+              child: Text("ScaleTest"),
+              onPressed: (){
+                Navigator.of(context).pushNamed("scale_test");
+              },
+            ),
+            RaisedButton(
+              child: Text("NotificationTest"),
+              onPressed: (){
+                Navigator.of(context).pushNamed("notification_test");
+              },
+            ),
           ],
         ),
       ),
