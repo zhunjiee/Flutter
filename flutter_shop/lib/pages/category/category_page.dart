@@ -11,6 +11,7 @@ import '../../config/http_request.dart';
 import 'dart:convert';
 
 class CategoryPage extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
