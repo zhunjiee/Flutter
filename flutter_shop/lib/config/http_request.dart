@@ -9,6 +9,8 @@
 import 'package:dio/dio.dart';
 import 'dart:async';
 import 'common_url.dart';
+import 'dart:convert';
+import 'package:fluttertoast/fluttertoast.dart';
 
 /*
 * POST请求
@@ -18,7 +20,7 @@ Future postRequest(String url, {Map formData}) async {
     Dio dio = Dio();
     dio.options = BaseOptions(
       contentType: "application/x-www-form-urlencoded",
-      connectTimeout: 60000,
+      connectTimeout: 30000,
     );
 
     Response response;
@@ -32,8 +34,16 @@ Future postRequest(String url, {Map formData}) async {
     }
 
     if (response.statusCode == 200) {
-      return response.data;
+      var data = json.decode(response.data.toString());
+      if (data["message"] == "success") {
+        return data["data"];
+      } else {
+        Fluttertoast.showToast(msg: data["message"]);
+        throw Exception(data["message"]);
+      }
+
     } else {
+      Fluttertoast.showToast(msg: "服务器开小差啦,请稍后再试");
       throw Exception("后端接口出现异常，请检测代码和服务器情况.........");
     }
   } catch (e) {
@@ -64,5 +74,6 @@ Future getHomePageBelowContent({int page}) async {
 * 分类模块接口
 * */
 Future getCategory() async {
+  print("开始请求分类模块数据......");
   return await postRequest("getCategory", formData: null);
 }

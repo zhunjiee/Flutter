@@ -8,12 +8,22 @@
 
 import 'package:flutter/material.dart';
 import '../../config/http_request.dart';
-import 'dart:convert';
+import '../../model/category_model.dart';
 
 class CategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    getCategory().then((value){
+      CategoryListModel listModel = CategoryListModel.fromList(value);
+      listModel.categoryListData.forEach((item){
+        CategoryModel model = item;
+        print(model.mallCategoryName);
+      });
+
+      print("listModel.toList() = ${listModel.toList()}");
+    });
+
     return Scaffold(
       body: Center(
         child: Text("分类"),

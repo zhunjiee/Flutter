@@ -24,7 +24,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String homePageContent = "正在获取数据";
   int page = 1; // 火爆专区页码
-  List<Map> hotGoodsList = List(); // 火爆专区数据
+  List<Map> hotGoodsList = new List(); // 火爆专区数据
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +33,9 @@ class _HomePageState extends State<HomePage> {
         title: Text("百姓生活+"),
       ),
       body: FutureBuilder(
-        builder: (context, snapshot) {
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            var data = json.decode(snapshot.data.toString())["data"];
+            var data = snapshot.data;
             //cast(): 类型提升，将当前List<String> 提升为泛型的父祖类 List<Map>
             List<Map> swipeDataList = (data["slides"] as List).cast(); // 轮播图数组
             List<Map> classificationList =
@@ -92,8 +92,7 @@ class _HomePageState extends State<HomePage> {
               ),
               onLoad: () async {
                 getHomePageBelowContent(page: page).then((value) {
-                  var data = json.decode(value.toString());
-                  List<Map> newGoodsList = (data["data"] as List).cast();
+                  List<Map> newGoodsList = (value as List).cast();
                   setState(() {
                     hotGoodsList.addAll(newGoodsList);
                     page++;
@@ -109,8 +108,8 @@ class _HomePageState extends State<HomePage> {
                 loadFailedText: "加载失败",
                 noMoreText: "没有更多了",
                 showInfo: false, // 不显示时间
-                enableInfiniteLoad: false,  // 取消无限加载,隐藏footer
-                enableHapticFeedback: false,  // 取消震动反馈
+                enableInfiniteLoad: false, // 取消无限加载,隐藏footer
+                enableHapticFeedback: false, // 取消震动反馈
               ),
             );
           }
