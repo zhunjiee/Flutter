@@ -3,7 +3,7 @@
  * @Description 首页
  * @Author HouGe
  * @Date 2020-02-01 19:12
- * @Version 1.0
+ * @Version 1
  */
 
 import 'package:flutter/material.dart';
@@ -134,8 +134,8 @@ class CustomSwipe extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: ScreenUtil().setWidth(750.0),
-      height: ScreenUtil().setHeight(333.0),
+      width: ScreenUtil().setWidth(750),
+      height: ScreenUtil().setHeight(333),
       child: Swiper(
         itemCount: swipeDataList.length,
         itemBuilder: (BuildContext context, int index) {
@@ -169,7 +169,7 @@ class ClassificationNavigator extends StatelessWidget {
         children: <Widget>[
           Image.network(
             item["image"],
-            width: ScreenUtil().setWidth(95.0),
+            width: ScreenUtil().setWidth(95),
           ),
           Text(item["mallCategoryName"]),
         ],
@@ -179,16 +179,16 @@ class ClassificationNavigator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    num height = classList.length > 5 ? 320.0 : 160.0;
+    num height = classList.length > 5 ? 320 : 160;
     return Container(
       height: ScreenUtil().setHeight(height),
-      padding: EdgeInsets.all(3.0),
+      padding: EdgeInsets.all(3),
       child: GridView.count(
         crossAxisCount: 5,
         children: classList.map((item) {
           return _classificationItem(context, item);
         }).toList(),
-        padding: EdgeInsets.all(5.0),
+        padding: EdgeInsets.all(5),
         physics: NeverScrollableScrollPhysics(), // 禁止滚动
       ),
     );
@@ -223,7 +223,7 @@ class LeaderPhone extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: InkWell(
+      child: GestureDetector(
         onTap: _launchUrl,
         child: Image.network(leaderImage),
       ),
@@ -253,7 +253,7 @@ class RecommendGoods extends StatelessWidget {
   Widget _recommendTitle() {
     return Container(
       alignment: Alignment.centerLeft,
-      padding: EdgeInsets.fromLTRB(10.0, 2.0, 0.0, 5.0),
+      padding: EdgeInsets.fromLTRB(10, 2, 0, 5),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border(
@@ -274,14 +274,14 @@ class RecommendGoods extends StatelessWidget {
 
   // 商品推荐单个item
   Widget _recommendItem(int index) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         print("点击了商品推荐");
       },
       child: Container(
-        width: ScreenUtil().setWidth(250.0),
-        height: ScreenUtil().setHeight(330.0),
-        padding: EdgeInsets.all(8.0),
+        width: ScreenUtil().setWidth(250),
+        height: ScreenUtil().setHeight(330),
+        padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
             color: Colors.white,
             border: Border(
@@ -310,7 +310,7 @@ class RecommendGoods extends StatelessWidget {
   // 整个商品推荐
   Widget _recommendList() {
     return Container(
-      height: ScreenUtil().setHeight(330.0),
+      height: ScreenUtil().setHeight(330),
       child: ListView.builder(
         itemBuilder: (BuildContext context, int index) {
           return _recommendItem(index);
@@ -324,8 +324,8 @@ class RecommendGoods extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil().setHeight(400.0),
-      margin: EdgeInsets.only(top: 10.0),
+      height: ScreenUtil().setHeight(400),
+      margin: EdgeInsets.only(top: 10),
       child: Column(
         children: <Widget>[
           _recommendTitle(),
@@ -364,7 +364,7 @@ class FloorContent extends StatelessWidget {
   Widget _goodsItem(Map goods) {
     return Container(
       width: ScreenUtil().setWidth(375),
-      child: InkWell(
+      child: GestureDetector(
         onTap: () {
           print("点击了楼层商品");
         },
@@ -423,7 +423,7 @@ class HotGoods extends StatelessWidget {
   Widget _hotTitle() {
     return Container(
       margin: EdgeInsets.only(top: 10),
-      padding: EdgeInsets.all(5.0),
+      padding: EdgeInsets.all(5),
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -431,18 +431,21 @@ class HotGoods extends StatelessWidget {
           bottom: BorderSide(width: 0.5, color: Colors.black12),
         ),
       ),
-      child: Text("火爆专区"),
+      child: Text(
+        "火爆专区",
+        style: TextStyle(fontWeight: FontWeight.w700),
+      ),
     );
   }
 
   // 单个火爆商品
   Widget _hotItem(Map hotData) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {},
       child: Container(
         width: ScreenUtil().setWidth(372),
-        padding: EdgeInsets.all(5.0),
-        margin: EdgeInsets.only(bottom: 3.0),
+        padding: EdgeInsets.all(5),
+        margin: EdgeInsets.only(bottom: 3),
         color: Colors.white,
         child: Column(
           children: <Widget>[
@@ -484,7 +487,7 @@ class HotGoods extends StatelessWidget {
         return _hotItem(value);
       }).toList();
       return Wrap(
-        spacing: 2.0,
+        spacing: 2,
         children: listWidget,
       );
     } else {

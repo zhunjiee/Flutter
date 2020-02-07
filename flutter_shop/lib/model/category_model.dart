@@ -9,18 +9,18 @@
 import 'package:flutter/material.dart';
 
 class CategoryListModel {
-  List<CategoryModel> categoryListData;
+  List<CategoryModel> categoryList;
 
   CategoryListModel({
-    this.categoryListData,
+    this.categoryList,
   });
 
   // 数组转模型
   CategoryListModel.fromList(List<dynamic> list) {
     if (list != null) {
-      categoryListData = new List<CategoryModel>();
+      categoryList = new List<CategoryModel>();
       list.forEach((v) {
-        categoryListData.add(new CategoryModel.fromJson(v));
+        categoryList.add(new CategoryModel.fromJson(v));
       });
     }
   }
@@ -28,8 +28,8 @@ class CategoryListModel {
   // 模型转数组
   List<dynamic> toList() {
     List<dynamic> data = new List<dynamic>();
-    if (this.categoryListData != null) {
-      data = this.categoryListData.map((v) => v.toJson()).toList();
+    if (this.categoryList != null) {
+      data = this.categoryList.map((v) => v.toJson()).toList();
     }
     return data;
   }
