@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shop/model/category_model.dart';
 import 'pages/index_page.dart';
 import 'package:provider/provider.dart';
-import 'provide/child_category.dart';
+import 'provider/category_provider.dart';
+import 'provider/category_goods_list_provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider<ChildCategory>.value(
-      value: ChildCategory(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<CategoryProvider>.value(value: CategoryProvider()),
+        ChangeNotifierProvider<CategoryGoodsListProvider>.value(value: CategoryGoodsListProvider()),
+      ],
       child: MyApp(),
     ),
   );

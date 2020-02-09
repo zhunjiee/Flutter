@@ -7,14 +7,11 @@
  */
 
 import 'package:flutter/material.dart';
-import '../../config/http_request.dart';
-import 'dart:convert';
+import '../../config/common_api.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_easyrefresh/material_header.dart';
-import 'package:flutter_easyrefresh/material_footer.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -25,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   String homePageContent = "正在获取数据";
   int page = 1; // 火爆专区页码
   List<Map> hotGoodsList = new List(); // 火爆专区数据
+  EasyRefreshController _refreshController = EasyRefreshController();
 
   @override
   Widget build(BuildContext context) {
@@ -91,12 +89,17 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               onLoad: () async {
-                getHomePageBelowContent(page: page).then((value) {
+                getHomePageBelowContent(page).then((value) {
                   List<Map> newGoodsList = (value as List).cast();
-                  setState(() {
-                    hotGoodsList.addAll(newGoodsList);
-                    page++;
-                  });
+                  if (newGoodsList != null) {
+                    setState(() {
+                      hotGoodsList.addAll(newGoodsList);
+                      page++;
+                    });
+                  } else {
+                    // 没有更多
+                    _refreshController.finishLoad(noMore: true);
+                  }
                 });
               },
               footer: ClassicalFooter(
@@ -111,13 +114,14 @@ class _HomePageState extends State<HomePage> {
                 enableInfiniteLoad: false, // 取消无限加载,隐藏footer
                 enableHapticFeedback: false, // 取消震动反馈
               ),
+              controller: _refreshController,
             );
           }
           return Center(
             child: CircularProgressIndicator(),
           );
         },
-        future: getHomePageContent(lon: "115.02932", lat: "35.76189"),
+        future: getHomePageContent("115.02932", "35.76189"),
       ),
     );
   }
