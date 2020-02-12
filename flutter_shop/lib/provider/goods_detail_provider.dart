@@ -11,14 +11,15 @@ import '../model/goods_detail_model.dart';
 import 'package:flutter_shop/config/common_api.dart';
 
 class GoodsDetailProvider with ChangeNotifier {
-  DetailModel detailModel;
+  DetailModel _detailModel = DetailModel();
+
+  DetailModel get detailModel => _detailModel;
 
   // 从后台获取商品详情数据
   getGoodsDetailData(String goodsId) {
-    getGoodsDetailById(goodsId).then((value){
-      print(value);
-      detailModel = DetailModel.fromJson(value);
-
+    getGoodsDetailById(goodsId).then((value) {
+      print("商品详情后台数据请求完成");
+      _detailModel = DetailModel.fromJson(value);
       notifyListeners();
     });
   }

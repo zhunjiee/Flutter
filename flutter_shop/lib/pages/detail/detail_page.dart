@@ -1,3 +1,5 @@
+import 'dart:math';
+
 /**
  * @ClassName goods_detail
  * @Description TODO
@@ -31,16 +33,26 @@ class GoodsDetail extends StatelessWidget {
         ),
         title: Text("商品详情"),
       ),
-      body: Container(
-        child: Text("商品ID为:$goodsId"),
+      body: FutureBuilder(
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Container(
+              child: Text("商品ID为:$goodsId"),
+            );
+          } else {
+            return CircularProgressIndicator();
+          }
+        },
+        future: _getBackInfo(context),
       ),
     );
   }
 
-  //
-  _getBackInfo(BuildContext context) async {
+  // 获取数据
+  Future _getBackInfo(BuildContext context) async {
     await Provider.of<GoodsDetailProvider>(context, listen: false)
         .getGoodsDetailData(goodsId);
-    print("加载完成................");
+    print("商品编号为 {$goodsId} 的详情数据加载完成................");
+    return "加载完成";
   }
 }

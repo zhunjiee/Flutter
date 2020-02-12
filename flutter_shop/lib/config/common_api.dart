@@ -11,7 +11,7 @@ import '../utils/http_request.dart';
 /*
 * 首页模块接口
 * */
-getHomePageContent(String lon, String lat) async {
+Future getHomePageContent(String lon, String lat) async {
   var params = {
     "lon": lon,
     "lat": lat,
@@ -49,6 +49,9 @@ getCategoryGoodsListData(int page,
   return await postRequest("getMallGoods", formData: data);
 }
 
+/*
+* 商品详情
+* */
 getGoodsDetailById(String goodsId) async {
   var data = {
     "goodId": goodsId,
