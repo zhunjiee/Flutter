@@ -11,7 +11,7 @@ import '../utils/http_request.dart';
 /*
 * 首页模块接口
 * */
-Future getHomePageContent(String lon, String lat) async {
+getHomePageContent(String lon, String lat) async {
   var params = {
     "lon": lon,
     "lat": lat,
@@ -22,7 +22,7 @@ Future getHomePageContent(String lon, String lat) async {
 /*
 * 首页模块 - 火爆专区
 * */
-Future getHomePageBelowContent(int page) async {
+getHomePageBelowContent(int page) async {
   var params = {
     "page": page,
   };
@@ -32,18 +32,26 @@ Future getHomePageBelowContent(int page) async {
 /*
 * 分类模块接口
 * */
-Future getCategoryData() async {
+getCategoryData() async {
   return await postRequest("getCategory", formData: null);
 }
 
 /*
 * 分类模块 - 分类详情列表
 * */
-Future getCategoryGoodsListData(int page, {String categoryId, String categorySubId}) async {
+getCategoryGoodsListData(int page,
+    {String categoryId, String categorySubId}) async {
   var data = {
     "categoryId": categoryId == null ? "" : categoryId,
     "categorySubId": categorySubId == null ? "" : categorySubId,
     'page': page,
   };
   return await postRequest("getMallGoods", formData: data);
+}
+
+getGoodsDetailById(String goodsId) async {
+  var data = {
+    "goodId": goodsId,
+  };
+  return await postRequest("getGoodsDetail", formData: data);
 }

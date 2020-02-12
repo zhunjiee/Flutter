@@ -8,12 +8,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import '../../config/common_api.dart';
 import '../../provider/category_provider.dart';
 import '../../model/category_goods_list_model.dart';
 import '../../provider/category_goods_list_provider.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import '../../routers/application.dart';
+import '../detail/detail_page.dart';
 
 /*
 * 分类商品列表,可以上拉加载
@@ -48,6 +51,10 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
       print('进入页面第一次初始化：$e');
     }
 
+    // 加载更多数据 是否显示 没有更多
+    _refreshController.finishLoad(
+        noMore: Provider.of<CategoryProvider>(context, listen: false).noMore);
+
     // 用Expanded解决 "The method '>' was called on null" 的bug
     if (list != null) {
       return Expanded(
@@ -56,7 +63,7 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
           child: EasyRefresh(
             child: ListView.builder(
               itemBuilder: (context, index) {
-                return _categoryGoodsItem(list, index);
+                return _categoryGoodsItem(context, list, index);
               },
               itemCount: list.length,
               controller: _scrollController,
@@ -73,7 +80,7 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
               refreshingText: "正在刷新中...",
               refreshedText: "刷新完成",
               refreshFailedText: "刷新失败",
-              noMoreText: Provider.of<CategoryProvider>(context).noMoreText,
+              noMoreText: "没有相关数据",
               showInfo: false, // 不显示时间
               enableHapticFeedback: false, // 取消震动反馈
             ),
@@ -84,7 +91,7 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
               loadingText: "正在加载中...",
               loadedText: "加载完成",
               loadFailedText: "加载失败",
-              noMoreText: Provider.of<CategoryProvider>(context).noMoreText,
+              noMoreText: "已经到底了",
               showInfo: false, // 不显示时间
               enableInfiniteLoad: false, // 取消无限加载,隐藏footer
               enableHapticFeedback: false, // 取消震动反馈
@@ -103,6 +110,7 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
   //  获取分类下的商品列表数据
   void _getNewCategoryGoodsListData() {
     Provider.of<CategoryProvider>(context, listen: false).reloadPage();
+    Provider.of<CategoryProvider>(context, listen: false).changeNoMore(false);
 
     // 网络请求
     getCategoryGoodsListData(
@@ -134,8 +142,8 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
       List goodsList = CategoryGoodsListModel.fromList(value).goodsList;
       if (goodsList == null) {
         Provider.of<CategoryProvider>(context, listen: false)
-            .changeNoMoreText("没有更多了");
-        _refreshController.finishLoad(noMore: true);
+            .changeNoMore(true);
+        Fluttertoast.showToast(msg: "已经到底啦");
       } else {
         Provider.of<CategoryGoodsListProvider>(context, listen: false)
             .exposeMoreGoodsList(goodsList);
@@ -145,7 +153,7 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
 
 // ------------------------ 子组件 ------------------------
 
-  Widget _categoryGoodsItem(List list, int index) {
+  Widget _categoryGoodsItem(BuildContext context, List list, int index) {
     CategoryGoodsModel model = list[index];
     String src = model.image;
     String name = model.goodsName;
@@ -153,7 +161,19 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
     double oldPrice = model.oriPrice;
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+//        // 自带路由
+//        Navigator.of(context).push(
+//          MaterialPageRoute(
+//            builder: (context) {
+//              return GoodsDetail(model.goodsId);
+//            },
+//          ),
+//        );
+
+        // fluro路由方式
+        Application.router.navigateTo(context, "/detail?id=${model.goodsId}");
+      },
       child: Container(
         padding: EdgeInsets.only(top: 5, bottom: 5),
         decoration: BoxDecoration(

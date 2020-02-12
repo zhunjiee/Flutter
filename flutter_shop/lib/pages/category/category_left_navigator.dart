@@ -74,6 +74,8 @@ class _LeftCategoryNavigatorState extends State<LeftCategoryNavigator> {
 
 //  获取分类下的商品列表数据
   void _getCategoryGoodsListData(int page, String categoryId) {
+    Provider.of<CategoryProvider>(context, listen: false).changeNoMore(false);
+    print("left_noMore = = = = = = ${Provider.of<CategoryProvider>(context, listen: false).noMore}");
     // 网络请求
     getCategoryGoodsListData(
       page,

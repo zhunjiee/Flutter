@@ -15,7 +15,7 @@ class CategoryProvider with ChangeNotifier {
   String _categoryId = "";  // 左侧大类ID
   String _categorySubId = ""; // 顶部子类ID
   int _page = 1; // 页码
-  String _noMoreText = ""; // 加载更多提示语
+  bool _noMore = false; // 是否没有更多了
 
 //  get方法
   List get childCategoryList => _childCategoryList;
@@ -23,7 +23,7 @@ class CategoryProvider with ChangeNotifier {
   String get categoryId => _categoryId;
   String get categorySubId => _categorySubId;
   int get page => _page;
-  String get noMoreText => _noMoreText;
+  bool get noMore => _noMore;
 
 //  曝光数据的方法
 
@@ -34,7 +34,7 @@ class CategoryProvider with ChangeNotifier {
     _categoryId = mallCategoryId;
     // 点击大类后页码和提示语都重置
     _page = 1;
-    _noMoreText = "";
+    _noMore = false;
 
     // 手动添加"全部"分类
     BxMallSubDto all = BxMallSubDto();
@@ -56,7 +56,7 @@ class CategoryProvider with ChangeNotifier {
     _categorySubId = mallSubId;
     // 点击子类后页码和提示语都重置
     _page = 1;
-    _noMoreText = "";
+    _noMore = false;
 
     notifyListeners();
   }
@@ -73,8 +73,8 @@ class CategoryProvider with ChangeNotifier {
   }
 
   // 改变 noMoreText 数据
-  changeNoMoreText(String text){
-    _noMoreText = text;
+  changeNoMore(bool noMore){
+    _noMore = noMore;
 
     notifyListeners();
   }
