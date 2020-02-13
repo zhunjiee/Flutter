@@ -117,8 +117,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   // 获取火爆专区数据
-  void _getHomePageHotGoodsContentData() {
-    getHomePageBelowContent(page).then((value) {
+  void _getHomePageHotGoodsContentData() async {
+    await getHomePageBelowContent(page).then((value) {
       if (value != null) {
         List<Map> newGoodsList = (value as List).cast();
         setState(() {

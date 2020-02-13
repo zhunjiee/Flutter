@@ -64,6 +64,7 @@ class _LeftCategoryNavigatorState extends State<LeftCategoryNavigator> {
         categoryModelList = listModel.categoryList;
         CategoryModel model = categoryModelList[0];
         // 2. 通过Provider曝光需要的值 - 曝光初始值
+        // listen: false表明此处不监听。
         Provider.of<CategoryProvider>(context, listen: false)
             .exposeChildCategoryList(model.bxMallSubDto, model.mallCategoryId);
         // 获取初始商品数据
@@ -73,11 +74,11 @@ class _LeftCategoryNavigatorState extends State<LeftCategoryNavigator> {
   }
 
 //  获取分类下的商品列表数据
-  void _getCategoryGoodsListData(int page, String categoryId) {
+  _getCategoryGoodsListData(int page, String categoryId) async {
     Provider.of<CategoryProvider>(context, listen: false).changeNoMore(false);
     print("left_noMore = = = = = = ${Provider.of<CategoryProvider>(context, listen: false).noMore}");
     // 网络请求
-    getCategoryGoodsListData(
+    await getCategoryGoodsListData(
       page,
       categoryId: categoryId,
     ).then((value) {

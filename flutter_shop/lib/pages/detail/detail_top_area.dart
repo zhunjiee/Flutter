@@ -17,14 +17,22 @@ class DetailTopArea extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<GoodsDetailProvider>(
       builder: (context, goodsDetailProvider, _) {
-        DetailModel detailModel = goodsDetailProvider.detailModel;
-        return Container(
-          child: Column(
-            children: <Widget>[
-              _goodsBigImage(detailModel.goodInfo.image1),
-            ],
-          ),
-        );
+        GoodInfo goodsInfo = goodsDetailProvider.detailModel.goodInfo;
+        if (goodsInfo != null) {
+          return Container(
+            color: Colors.white,
+            child: Column(
+              children: <Widget>[
+                _goodsBigImage(goodsInfo.image1),
+                _goodsName(goodsInfo.goodsName),
+                _goodsNumber(goodsInfo.goodsSerialNumber),
+                _goodsPrice(goodsInfo.presentPrice, goodsInfo.oriPrice),
+              ],
+            ),
+          );
+        } else {
+          return Text("正在加载中...");
+        }
       },
     );
   }
@@ -34,6 +42,66 @@ class DetailTopArea extends StatelessWidget {
     return Image.network(
       src,
       width: ScreenUtil().setWidth(740),
+    );
+  }
+
+  // 商品名称
+  Widget _goodsName(String name) {
+    return Container(
+      width: ScreenUtil().setWidth(730),
+      padding: EdgeInsets.only(left: 15),
+      child: Text(
+        name,
+        maxLines: 1,
+        style: TextStyle(
+          fontSize: ScreenUtil().setSp(30),
+        ),
+      ),
+    );
+  }
+
+  // 商品编号
+  Widget _goodsNumber(String number) {
+    return Container(
+      width: ScreenUtil().setWidth(730),
+      padding: EdgeInsets.only(left: 15),
+      margin: EdgeInsets.only(top: 8),
+      child: Text(
+        "编号:$number",
+        style: TextStyle(
+          color: Colors.black26,
+        ),
+      ),
+    );
+  }
+
+  // 商品价格
+  Widget _goodsPrice(double presentPrice, double oriPrice) {
+    return Container(
+      width: ScreenUtil().setWidth(730),
+      padding: EdgeInsets.only(left: 15),
+      margin: EdgeInsets.only(top: 8),
+      child: Row(
+        children: <Widget>[
+          Text(
+            "¥$presentPrice",
+            style: TextStyle(
+              color: Colors.pinkAccent,
+              fontSize: ScreenUtil().setSp(40),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 4),
+            child: Text(
+              "市场价:¥$oriPrice",
+              style: TextStyle(
+                color: Colors.black26,
+                decoration: TextDecoration.lineThrough,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

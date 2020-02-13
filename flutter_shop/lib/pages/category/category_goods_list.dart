@@ -108,12 +108,12 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
 // ------------------------ 网络请求 ------------------------
 
   //  获取分类下的商品列表数据
-  void _getNewCategoryGoodsListData() {
+  _getNewCategoryGoodsListData() async {
     Provider.of<CategoryProvider>(context, listen: false).reloadPage();
     Provider.of<CategoryProvider>(context, listen: false).changeNoMore(false);
 
     // 网络请求
-    getCategoryGoodsListData(
+    await getCategoryGoodsListData(
       Provider.of<CategoryProvider>(context, listen: false).page,
       categoryId:
           Provider.of<CategoryProvider>(context, listen: false).categoryId,
@@ -127,12 +127,12 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
   }
 
   //  获取分类下的商品列表数据
-  void _getMoreCategoryGoodsListData() async {
+  _getMoreCategoryGoodsListData() async {
     // page++
     Provider.of<CategoryProvider>(context, listen: false).addPage();
 
     // 网络请求
-    getCategoryGoodsListData(
+    await getCategoryGoodsListData(
       Provider.of<CategoryProvider>(context, listen: false).page,
       categoryId:
           Provider.of<CategoryProvider>(context, listen: false).categoryId,

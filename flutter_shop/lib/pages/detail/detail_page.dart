@@ -10,7 +10,13 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../provider/goods_detail_provider.dart';
+import 'detail_top_area.dart';
+import 'detail_explain.dart';
+import 'detail_bottom.dart';
+import 'detail_tab_bar.dart';
+import 'detail_web.dart';
 
 class GoodsDetail extends StatelessWidget {
   // 构造方法
@@ -36,11 +42,33 @@ class GoodsDetail extends StatelessWidget {
       body: FutureBuilder(
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return Container(
-              child: Text("商品ID为:$goodsId"),
+            return Stack(
+              children: <Widget>[
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  top: 0,
+                  bottom: ScreenUtil().setHeight(100),
+                  child: ListView(
+                    children: <Widget>[
+                      DetailTopArea(),
+                      DetailExplain(),
+                      DetailTabBar(),
+                      DetailWeb(),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  child: DetailBottom(),
+                ),
+              ],
             );
           } else {
-            return CircularProgressIndicator();
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           }
         },
         future: _getBackInfo(context),
