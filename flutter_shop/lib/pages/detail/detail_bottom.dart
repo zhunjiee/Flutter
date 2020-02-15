@@ -8,6 +8,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../cart/cart_page.dart';
+import '../../routers/application.dart';
 
 class DetailBottom extends StatelessWidget {
   @override
@@ -22,7 +24,9 @@ class DetailBottom extends StatelessWidget {
             width: ScreenUtil().setWidth(110),
             height: ScreenUtil().setHeight(100),
             child: RaisedButton(
-              onPressed: () {},
+              onPressed: () {
+                Application.router.navigateTo(context, "/cart");
+              },
               child: Icon(
                 Icons.shopping_cart,
                 color: Colors.red,

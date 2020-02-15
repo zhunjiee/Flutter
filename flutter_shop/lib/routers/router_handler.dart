@@ -9,6 +9,7 @@ import 'package:fluro/fluro.dart';
 
 import 'package:flutter/material.dart';
 import '../pages/detail/detail_page.dart';
+import '../pages/cart/cart_page.dart';
 
 Handler detailHandler = Handler(
   handlerFunc: (BuildContext context, Map<String, dynamic> params) {
@@ -16,4 +17,10 @@ Handler detailHandler = Handler(
     print("商品详情ID为: $goodsId");
     return GoodsDetail(goodsId);
   }
+);
+
+Handler cartHandler = Handler(
+  handlerFunc: (BuildContext context, Map<String, dynamic> params){
+    return CartPage();
+}
 );
