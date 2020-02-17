@@ -5,6 +5,7 @@ import 'provider/category_provider.dart';
 import 'provider/category_goods_list_provider.dart';
 import 'provider/goods_detail_provider.dart';
 import 'provider/cart_provider.dart';
+import 'provider/current_index_provider.dart';
 import 'package:fluro/fluro.dart';
 import 'routers/application.dart';
 import 'routers/router.dart';
@@ -17,6 +18,7 @@ void main() {
         ChangeNotifierProvider<CategoryGoodsListProvider>.value(value: CategoryGoodsListProvider()),
         ChangeNotifierProvider<GoodsDetailProvider>.value(value: GoodsDetailProvider()),
         ChangeNotifierProvider<CartProvider>.value(value: CartProvider()),
+        ChangeNotifierProvider<CurrentIndexProvider>.value(value: CurrentIndexProvider()),
       ],
       child: MyApp(),
     ),
@@ -39,7 +41,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.pink,
           platform: TargetPlatform.iOS, // 向右滑返回上一页
         ),
-        home: IndexPage(),
+        home: IndexPageWithProvider(),
         debugShowCheckedModeBanner: false, // 去除debug字样
       ),
     );
