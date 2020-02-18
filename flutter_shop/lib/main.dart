@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'pages/index_page.dart';
 import 'package:provider/provider.dart';
+import 'package:fluro/fluro.dart';
+import 'pages/index_page.dart';
 import 'provider/category_provider.dart';
 import 'provider/category_goods_list_provider.dart';
 import 'provider/goods_detail_provider.dart';
 import 'provider/cart_provider.dart';
 import 'provider/current_index_provider.dart';
-import 'package:fluro/fluro.dart';
 import 'routers/application.dart';
 import 'routers/router.dart';
 

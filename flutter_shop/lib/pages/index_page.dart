@@ -7,13 +7,13 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'home/home_page.dart';
 import 'category/category_page.dart';
 import 'cart/cart_page.dart';
 import 'member/member_page.dart';
-import 'package:flutter/cupertino.dart';
 import '../provider/current_index_provider.dart';
 
 // provider改造后

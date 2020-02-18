@@ -7,7 +7,9 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'member_header.dart';
+import 'member_order.dart';
+import 'member_list.dart';
 
 class MemberPage extends StatelessWidget {
   @override
@@ -18,16 +20,13 @@ class MemberPage extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
-          _topHeader(),
+          MemberHeader(),
+          MemberOrder(),
+          MemberList(),
         ],
       ),
     );
   }
 
-  // 顶部头像
-  Widget _topHeader() {
-    return Container(
-      width: ScreenUtil().setWidth(750),
-    );
-  }
+
 }
