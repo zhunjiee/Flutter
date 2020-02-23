@@ -22,11 +22,8 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
   @override
   void initState() {
     super.initState();
+    // 初始化AnimationController
     _logoController = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
-    Future.delayed(Duration(milliseconds: 500), (){
-      // 启动动画
-      _logoController.forward();
-    });
     // 使用弹性曲线
     _logoAnimation = CurvedAnimation(parent: _logoController, curve: Curves.easeOutQuart);
     // 监听动画状态的改变
@@ -37,6 +34,10 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
             _goPage();
           });
       }
+    });
+    Future.delayed(Duration(milliseconds: 500), (){
+      // 启动动画
+      _logoController.forward();
     });
   }
 

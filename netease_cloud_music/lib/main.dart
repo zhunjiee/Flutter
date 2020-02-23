@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Netease Cloud Music',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
         platform: TargetPlatform.iOS,
       ),
       debugShowCheckedModeBanner: false,  // 不显示debug字样

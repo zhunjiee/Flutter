@@ -2,12 +2,12 @@
 <!-- 你可以在这里设置启动页,从而解决白屏问题 -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <!--这一层是显示在下面的颜色,App启动时的白屏就是这个颜色, 如不需要可以注销-->
-    <item android:drawable="@android:color/white" />
+<!--    <item android:drawable="@android:color/white" />-->
 
     <!--这一层是启动页图片-->
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/launch_image" />
+            android:src="@mipmap/launch_image" />
     </item>
 </layer-list>

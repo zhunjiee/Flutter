@@ -27,7 +27,7 @@ class NetErrorWidget extends StatelessWidget {
               Icons.error_outline,
               size: ScreenUtil().setWidth(80),
             ),
-            VerticalPlaceholderView(height: 10),
+            VerticalPlaceholderView(10),
             Text(
               "点击重新请求",
               style: commonTextStyle,

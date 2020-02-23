@@ -29,7 +29,7 @@ class _TextFieldTestState extends State<TextFieldTest> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
       child: Column(
         children: <Widget>[
           TextField(
