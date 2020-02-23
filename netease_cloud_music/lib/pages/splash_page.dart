@@ -7,6 +7,8 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../utils/navigator_utils.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -32,7 +34,7 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
       // 动画完成后页面跳转
       if (status == AnimationStatus.completed) {
           Future.delayed(Duration(milliseconds: 500), (){
-            goPage();
+            _goPage();
           });
       }
     });
@@ -40,6 +42,9 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
+    // 屏幕适配初始化
+    ScreenUtil.init(context, width: 750, height: 1334);
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -61,7 +66,8 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
   }
 
   // 跳转到新页面
-  void goPage() {
+  void _goPage() {
     print("跳转到新页面");
+    NavigatorUtils.goLoginPage(context);
   }
 }

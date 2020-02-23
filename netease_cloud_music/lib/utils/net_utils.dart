@@ -6,14 +6,17 @@
  * @Version 1.0
  */
 
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:dio/dio.dart';
+import 'package:netease_cloud_music/routes/navigate_service.dart';
+import 'package:netease_cloud_music/utils/utils.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
-import 'package:netease_cloud_music/utils/custom_log_interceptor.dart';
-import 'package:netease_cloud_music/widgets/widget_loading.dart';
+import 'custom_log_interceptor.dart';
+import '../widgets/widget_loading.dart';
+import '../application.dart';
+import '../routes/routes.dart';
 import 'common_url.dart';
 
 enum RequestType {
@@ -60,7 +63,7 @@ class NetUtils {
 //    }
 //  }
 
-  // GET 请求
+  /// GET 请求
   static Future<Response> _get(
     BuildContext context,
     String url, {
@@ -76,7 +79,7 @@ class NetUtils {
     );
   }
 
-  // POST 请求
+  /// POST 请求
   static Future<Response> _post(
     BuildContext context,
     String url, {
@@ -113,7 +116,7 @@ class NetUtils {
       } else if (e.response != null) {
         if (e.response.statusCode >= 300 && e.response.statusCode < 400) {
           // 重新登录
-
+          _reLogin();
           return Future.error(Response(data: -1));
         } else {
           return Future.value(e.response);
@@ -126,6 +129,14 @@ class NetUtils {
     }
   }
 
-  // 重新登录
-  static void _relogin() {}
+  /// 重新登录
+  static void _reLogin() {
+    Application.getIt<NavigateService>().popAndPushNamed(Routes.loginPage);
+    Utils.showToast("登录失效，请重新登录");
+  }
+
+  /// 登录
+  static void login() {
+
+  }
 }

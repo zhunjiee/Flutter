@@ -24,7 +24,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   dio: ^3.0.8  # 网络请求
-  dio_cookie_manager: ^1.0.0  # dio cookie 工具
+  dio_cookie_manager: ^1.0.0  # dio cookie 管理
   cookie_jar: ^1.0.0  # Cookie 管理
   flutter_swiper: ^1.1.6  # 图片轮播
   flutter_screenutil: ^1.0.2  # 屏幕适配
@@ -39,6 +39,7 @@ dependencies:
   common_utils: ^1.1.3  # Dart常用工具类
   permission_handler: ^4.2.0+hotfix.3 # 权限处理
   extended_image: ^0.7.1  # 屌炸天的 Image 扩展
+  get_it: ^3.1.0  # 依赖注入
 
 
 dev_dependencies:
