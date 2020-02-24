@@ -29,7 +29,6 @@ class HttpRequest {
 
   // 单例
   static final HttpRequest _instance = HttpRequest._internal();
-
   factory HttpRequest() => _instance; // 工厂模式
   HttpRequest._internal() {
     // 初始化
@@ -38,12 +37,16 @@ class HttpRequest {
       getTemporaryDirectory().then((tempDir) {
         String tempPath = tempDir.path;
         CookieJar cookieJar = PersistCookieJar(dir: tempPath);
-
-        _dio = Dio(BaseOptions(baseUrl: baseUrl, followRedirects: false))
+        BaseOptions options = BaseOptions(
+          baseUrl: baseUrl,
+          followRedirects: false, // 重定向
+          receiveTimeout: 10000, // 接收超时10秒
+          connectTimeout: 30000, // 连接超时30秒
+        );
+        _dio = Dio(options)
           ..interceptors.add(CookieManager(cookieJar))
           ..interceptors
               .add(CustomLogInterceptor(responseBody: true, requestBody: true));
-        // followRedirects: 重定向
       });
     }
   }
