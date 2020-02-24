@@ -8,8 +8,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:netease_cloud_music/utils/utils.dart';
 import '../../widgets/v_placeholder_view.dart';
 import '../../widgets/common_button.dart';
+import '../../utils/net_utils.dart';
 
 class LoginAnimatedWidget extends AnimatedWidget {
   // 构造方法一定要继承父类,不然会不错
@@ -93,13 +95,40 @@ class LoginWidget extends StatelessWidget {
           VerticalPlaceholderView(120),
           CommonButton(
             onPressed: () {
-              print("登录");
+              print("收起键盘2");
+              // 触摸收起键盘
+              FocusScope.of(context).requestFocus(FocusNode());
+              _login(context);
             },
             title: "Login",
             width: double.infinity,
+            cornerRadius: 25,
           ),
         ],
       ),
     );
+  }
+
+  /// 登录
+  void _login(BuildContext context) {
+    String phone = _phoneController.text;
+    String password = _passwordController.text;
+
+    if (phone.length == 0) {
+      Utils.showToast("请输入手机号码");
+    } else if (password.length == 0) {
+      Utils.showToast("请输入密码");
+    } else {
+      NetUtils().login(context, phone, password).then((userModel) {
+        print("responseCode = = = = = ${userModel.code}");
+
+        if (userModel.code > 299) {
+          Utils.showToast(userModel.msg ?? "账号或密码错误");
+        } else {
+          Utils.showToast(userModel.msg ?? "登录成功");
+          // 存储用户信息
+        }
+      });
+    }
   }
 }

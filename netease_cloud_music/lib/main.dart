@@ -6,6 +6,7 @@ import 'application.dart';
 import 'routes/routes.dart';
 import 'routes/navigate_service.dart';
 import 'pages/splash_page.dart';
+import 'provider/user_provider.dart';
 
 void main() {
   // fluro全局注入
@@ -17,7 +18,14 @@ void main() {
   // log初始化
   LogUtils.init(tag: "NETEASE_MUSIC");
 
-  runApp(MyApp());
+  runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider<UserProvider>.value(value: UserProvider()),
+        ],
+        child: MyApp(),
+      ),
+  );
 }
 
 class MyApp extends StatelessWidget {

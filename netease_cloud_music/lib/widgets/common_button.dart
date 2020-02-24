@@ -17,7 +17,7 @@ class CommonButton extends StatelessWidget {
     this.fontSize = 18,
     this.width = 250,
     this.height = 50,
-    this.cornerRadius = 25,
+    this.cornerRadius = 0,
   });
 
   final VoidCallback onPressed;

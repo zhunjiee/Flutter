@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'login_animated_widget.dart';
+import '../../utils/net_utils.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -44,6 +45,7 @@ class _LoginPageState extends State<LoginPage>
       body: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: (){
+          print("收起键盘");
           // 触摸收起键盘
           FocusScope.of(context).requestFocus(FocusNode());
         },
