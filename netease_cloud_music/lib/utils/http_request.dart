@@ -1,6 +1,6 @@
 /**
  * @ClassName http_request
- * @Description TODO
+ * @Description 网络请求单例类
  * @Author HouGe
  * @Date 2020-02-24 15:19
  * @Version 1.0
@@ -27,10 +27,15 @@ enum RequestType {
 class HttpRequest {
   Dio _dio;
   // 单例
-  static final HttpRequest _instance = HttpRequest._internal();
-
-  factory HttpRequest() => _instance; // 工厂模式
-
+  static HttpRequest get instance => _getInstance();
+  static HttpRequest _instance;
+  factory HttpRequest() => _getInstance();  // 工厂模式
+  static HttpRequest _getInstance() {
+    if (_instance == null) {
+        _instance = HttpRequest._internal();
+    }
+    return _instance;
+  }
   HttpRequest._internal() {
     // 初始化
     if (null == _dio) {
@@ -39,7 +44,7 @@ class HttpRequest {
         String tempPath = tempDir.path;
         CookieJar cookieJar = PersistCookieJar(dir: tempPath);
         BaseOptions options = BaseOptions(
-          baseUrl: baseUrl,
+          baseUrl: CommonUrl.baseUrl,
           followRedirects: false, // 重定向
           receiveTimeout: 10000, // 接收超时10秒
           connectTimeout: 30000, // 连接超时30秒
@@ -51,6 +56,7 @@ class HttpRequest {
       });
     }
   }
+
 
   /// GET 请求
   Future<Response> get(

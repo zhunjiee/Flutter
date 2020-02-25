@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import '../utils/net_utils.dart';
 import 'discover/discover_page.dart';
 import '../utils/http_request.dart';
 import '../utils/common_url.dart';
@@ -26,11 +27,16 @@ class IndexPage extends StatelessWidget {
         bottom: false,
         child: RaisedButton(
           onPressed: () async {
-
+            await _getBanner(context);
           },
           child: Text("加载"),
         ),
       ),
     );
+  }
+
+  _getBanner(BuildContext context) async {
+    Response response = await NetUtils.getBanner(context);
+    print(response.data);
   }
 }

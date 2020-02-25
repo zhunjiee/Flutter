@@ -1,15 +1,24 @@
-/*
-* 网络请求接口
-* */
+/**
+ * @ClassName http_request
+ * @Description 网络请求接口
+ * @Author HouGe
+ * @Date 2020-02-24 15:19
+ * @Version 1.0
+ */
 
-// 服务器地址
-final String baseUrl = "http://118.24.63.15:1020";
+import 'package:flutter/material.dart';
 
-// 登录
-final String loginAPI = baseUrl + "/login/cellphone";
+class CommonUrl {
+  // 服务器地址
+  static const String baseUrl = "http://118.24.63.15:1020";
 
-// 重新登录
-final String refreshLoginAPI = baseUrl + "/login/refresh";
 
-// 首页广告轮播图
-final String bannerAPI = baseUrl + "/banner";
+  // 登录
+  static const String loginAPI = baseUrl + "/login/cellphone";
+
+  // 重新登录
+  static const String refreshLoginAPI = baseUrl + "/login/refresh";
+
+  // 首页广告轮播图
+  static const String bannerAPI = baseUrl + "/banner";
+}

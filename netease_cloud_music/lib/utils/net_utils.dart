@@ -12,6 +12,7 @@ import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'http_request.dart';
 import 'common_url.dart';
 import 'utils.dart';
 import 'custom_log_interceptor.dart';
@@ -29,7 +30,7 @@ class NetUtils {
     String tempPath = tempDir.path;
     CookieJar cj = PersistCookieJar(dir: tempPath);
     BaseOptions options = BaseOptions(
-      baseUrl: baseUrl,
+      baseUrl: CommonUrl.baseUrl,
       followRedirects: false, // 重定向
       receiveTimeout: 10000, // 接收超时10秒
       connectTimeout: 30000, // 连接超时30秒
@@ -90,25 +91,24 @@ class NetUtils {
       "phone": phone,
       "password": password,
     };
-    Response response = await _get(context, loginAPI, params: params);
+    Response response = await _get(context, CommonUrl.loginAPI, params: params);
     return UserModel.fromJson(response.data);
   }
 
   /// 重新登录
   static Future<Response> refreshLogin(BuildContext context) async {
-    return await _get(context, refreshLoginAPI, isShowLoading: false)
+    return await _get(context, CommonUrl.refreshLoginAPI, isShowLoading: false)
         .catchError((e) {
       Utils.showToast("网络错误!");
     });
   }
 
   /// 获取首页广告轮播图
-  static void getBanner(BuildContext context) async {
+  static Future<Response> getBanner(BuildContext context) async {
     var params = {
       "type": 1,
     };
-    Response response = await _get(context, bannerAPI, params: params);
-
-    print(response.data);
+    Response response = await HttpRequest.instance.get(context, CommonUrl.bannerAPI, params: params);
+    return response;
   }
 }
