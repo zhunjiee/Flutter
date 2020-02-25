@@ -45,7 +45,6 @@ class _LoginPageState extends State<LoginPage>
       body: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: (){
-          print("收起键盘");
           // 触摸收起键盘
           FocusScope.of(context).requestFocus(FocusNode());
         },

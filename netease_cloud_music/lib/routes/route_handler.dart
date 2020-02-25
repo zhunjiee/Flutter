@@ -9,8 +9,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
 import '../pages/splash_page.dart';
+import '../pages/index_page.dart';
 import '../pages/login/login_page.dart';
-import '../pages/home/home_page.dart';
+import '../pages/discover/discover_page.dart';
 
 /// 启动页
 Handler splashHandler = Handler(
@@ -29,6 +30,6 @@ Handler loginHandler = Handler(
 /// 首页
 Handler homeHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, dynamic> parameters) {
-      return HomePage();
+      return IndexPage();
     }
 );

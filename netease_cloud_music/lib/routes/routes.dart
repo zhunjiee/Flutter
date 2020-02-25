@@ -14,7 +14,7 @@ import 'package:netease_cloud_music/pages/login/login_page.dart';
 class Routes {
   static final String root = "/";
   static final String loginPage = "/login";
-  static final String homePage = "/home";
+  static final String homePage = "/index";
 
   static void configRoutes(Router router) {
     // 没有找到路由的统一配置

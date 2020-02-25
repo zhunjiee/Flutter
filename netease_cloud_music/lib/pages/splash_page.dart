@@ -13,6 +13,9 @@ import 'package:provider/provider.dart';
 import '../application.dart';
 import '../utils/navigator_utils.dart';
 import '../provider/user_provider.dart';
+import '../utils/net_utils.dart';
+import '../utils/utils.dart';
+import '../utils/http_request.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -33,18 +36,19 @@ class _SplashPageState extends State<SplashPage>
     // 使用弹性曲线
     _logoAnimation =
         CurvedAnimation(parent: _logoController, curve: Curves.easeOutQuart);
+    Future.delayed(Duration(milliseconds: 500), () {
+      // 启动动画
+      _logoController.forward();
+    });
     // 监听动画状态的改变
     _logoController.addStatusListener((status) {
-      // 动画完成后页面跳转
-      if (status == AnimationStatus.completed) {
+      if (status == AnimationStatus.forward) {
+        _globalConfig();
+      } else if (status == AnimationStatus.completed) {
         Future.delayed(Duration(milliseconds: 500), () {
           _goPage();
         });
       }
-    });
-    Future.delayed(Duration(milliseconds: 500), () {
-      // 启动动画
-      _logoController.forward();
     });
   }
 
@@ -72,23 +76,10 @@ class _SplashPageState extends State<SplashPage>
     _logoController.dispose();
   }
 
-  /// 跳转到新页面
-  void _goPage() async {
-    await _globalConfig();
-
-    UserModel userModel = Provider.of<UserProvider>(context, listen: false).user;
-
-    if (userModel != null) {
-      // 跳转到主页
-      NavigatorUtils.goHomePage(context);
-    } else {
-      // 跳转到登录页
-      NavigatorUtils.goLoginPage(context);
-    }
-  }
-
   /// 各种初始化配置
-  Future _globalConfig() async {
+  void _globalConfig() async {
+    // sharedPreferences
+    await Application.initSharedPreferences();
     // 屏幕适配
     ScreenUtil.init(context, width: 750, height: 1334);
     // 各种尺寸
@@ -97,9 +88,30 @@ class _SplashPageState extends State<SplashPage>
     Application.screenHeight = size.height;
     Application.statusBarHeight = MediaQuery.of(context).padding.top;
     Application.bottomBarHeight = MediaQuery.of(context).padding.bottom;
-    // sharedPreferences
-    await Application.initSharedPreferences();
-    // 本地存储用户信息
+    // 网络请求类初始化
+    NetUtils.init();
+    // 初始化本地存储用户信息
     Provider.of<UserProvider>(context, listen: false).initUserInfo();
+    HttpRequest();
+  }
+
+  /// 跳转到新页面
+  void _goPage() async {
+    // 获取用户信息
+    UserModel userModel =
+        Provider.of<UserProvider>(context, listen: false).user;
+
+    if (userModel != null) {
+      await NetUtils.refreshLogin(context).then((value){
+        print("重新登录--------:${value.data}");
+        if (value.data != -1) {
+          // 跳转到主页
+          NavigatorUtils.goHomePage(context);
+        }
+      });
+    } else {
+      // 跳转到登录页
+      NavigatorUtils.goLoginPage(context);
+    }
   }
 }

@@ -25,11 +25,12 @@ enum RequestType {
 }
 
 class HttpRequest {
-  static Dio _dio;
-
+  Dio _dio;
   // 单例
   static final HttpRequest _instance = HttpRequest._internal();
+
   factory HttpRequest() => _instance; // 工厂模式
+
   HttpRequest._internal() {
     // 初始化
     if (null == _dio) {
@@ -83,7 +84,7 @@ class HttpRequest {
     );
   }
 
-  static Future<Response> _request(
+  Future<Response> _request(
     BuildContext context,
     RequestType requestType,
     String url, {
@@ -91,7 +92,6 @@ class HttpRequest {
     bool isShowLoading = true,
   }) async {
     if (isShowLoading) Loading.showLoading(context);
-
     try {
       if (requestType == RequestType.GET) {
         return await _dio.get(url, queryParameters: params);
@@ -100,17 +100,17 @@ class HttpRequest {
       }
     } on DioError catch (e) {
       if (e == null) {
-        return Future.error(Response(data: -1));
+        return await Future.error(Response(data: -1));
       } else if (e.response != null) {
         if (e.response.statusCode >= 300 && e.response.statusCode < 400) {
           // 重新登录
           _reLogin();
-          return Future.error(Response(data: -1));
+          return await Future.error(Response(data: -1));
         } else {
-          return Future.value(e.response);
+          return await Future.value(e.response);
         }
       } else {
-        return Future.error(Response(data: -1));
+        return await Future.error(Response(data: -1));
       }
     } finally {
       Loading.hideLoading(context);

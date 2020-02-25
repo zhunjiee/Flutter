@@ -22,12 +22,16 @@ class UserProvider with ChangeNotifier {
       String userString = Application.sharedPreferences.getString("user");
       _user = UserModel.fromJson(json.decode(userString));
     } else {
-        print("没有用户信息");
+      print("没有用户信息");
     }
   }
 
   /// 存储用户信息
-  void saveUserInfo() {
-
+  void saveUserInfo(UserModel model) {
+    _user = model;
+    Application.sharedPreferences.setString(
+      "user",
+      json.encode(model.toJson()),
+    );
   }
 }
