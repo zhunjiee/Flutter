@@ -11,6 +11,8 @@ import '../../widgets/v_placeholder_view.dart';
 import 'discover_banner.dart';
 import 'discover_category.dart';
 import 'discover_recommend_playlist.dart';
+import 'discover_new_album.dart';
+import 'discover_top_mv.dart';
 
 class DiscoverPage extends StatefulWidget {
   @override
@@ -44,6 +46,8 @@ class _DiscoverPageState extends State<DiscoverPage> with AutomaticKeepAliveClie
             VerticalPlaceholderView(30),
             DiscoverCategory(categoryMap),
             DiscoverRecommendPlaylist(),
+            DiscoverNewAlbum(),
+            DiscoverTopMv(),
           ],
         ),
       ),

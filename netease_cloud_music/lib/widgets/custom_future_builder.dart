@@ -66,7 +66,6 @@ class _CustomFutureBuilderState<T> extends State<CustomFutureBuilder<T>> {
                 case ConnectionState.active:
                   return widget.loadingWidget;
                 case ConnectionState.done:
-                  print("snapshot.data-----:------: ${snapshot.error}");
                   if (snapshot.hasData) {
                     return widget.builder(context, snapshot.data);
                   } else if (snapshot.hasError) {

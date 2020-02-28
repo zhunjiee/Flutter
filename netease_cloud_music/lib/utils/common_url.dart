@@ -24,4 +24,10 @@ class CommonUrl {
 
   // 推荐歌单
   static const String recommendAPI = baseUrl + "/recommend/resource";
+
+  // 新碟上架
+  static const String newAlbumAPI = baseUrl + "/top/album";
+
+  // MV排行
+  static const String topMvAPI = baseUrl + "/top/mv";
 }

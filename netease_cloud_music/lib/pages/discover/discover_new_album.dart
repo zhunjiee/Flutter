@@ -1,8 +1,8 @@
 /**
- * @ClassName recommend_playlist
- * @Description 推荐歌单
+ * @ClassName discover_new_album
+ * @Description 新碟上架
  * @Author HouGe
- * @Date 2020-02-27 14:51
+ * @Date 2020-02-28 13:38
  * @Version 1.0
  */
 
@@ -11,22 +11,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../widgets/h_placeholder_view.dart';
 import '../../widgets/custom_future_builder.dart';
 import '../../utils/net_utils.dart';
-import '../../model/recommend_playlist_model.dart';
+import '../../model/album_model.dart';
 import '../../widgets/widget_playlist.dart';
-import '../../utils/common_text_style.dart';
 import '../../widgets/widget_common_title.dart';
 
-class DiscoverRecommendPlaylist extends StatelessWidget {
+class DiscoverNewAlbum extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         // 标题
-        CommonTitleWidget("推荐歌单", top: 0,),
-        // 歌单列表
-        CustomFutureBuilder<RecommendPlaylistModel>(
+        CommonTitleWidget("新碟上架", top: 0,),
+        // 新碟列表
+        CustomFutureBuilder<AlbumModel>(
           builder: (context, data) {
-            List<Recommend> recommend = data.recommend;
+            List<Albums> recommend = data.albums;
             return Container(
               height: ScreenUtil().setHeight(300),
               child: ListView.separated(
@@ -34,7 +33,6 @@ class DiscoverRecommendPlaylist extends StatelessWidget {
                   return PlaylistWidget(
                     title: recommend[index].name,
                     url: recommend[index].picUrl,
-                    playCount: recommend[index].playCount,
                     maxLines: 2,
                     onTap: () {
                       print("跳转到播放列表页:$index");
@@ -48,11 +46,11 @@ class DiscoverRecommendPlaylist extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 padding:
-                    EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30)),
+                EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30)),
               ),
             );
           },
-          future: NetUtils().getRecommendPlaylist,
+          future: NetUtils().getAlbumData,
         ),
       ],
     );
