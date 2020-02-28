@@ -26,16 +26,12 @@ enum RequestType {
 
 class HttpRequest {
   Dio _dio;
+
   // 单例
-  static HttpRequest get instance => _getInstance();
-  static HttpRequest _instance;
-  factory HttpRequest() => _getInstance();  // 工厂模式
-  static HttpRequest _getInstance() {
-    if (_instance == null) {
-        _instance = HttpRequest._internal();
-    }
-    return _instance;
-  }
+  static final HttpRequest _instance = HttpRequest._internal();
+
+  factory HttpRequest() => _instance;  // 工厂模式
+
   HttpRequest._internal() {
     // 初始化
     if (null == _dio) {

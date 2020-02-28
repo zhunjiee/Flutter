@@ -96,39 +96,25 @@ class LoginWidget extends StatelessWidget {
             controller: _passwordController,
           ),
           VerticalPlaceholderView(120),
-          CommonButton(
-            onPressed: () async {
-              await _login(context);
-            },
-            title: "Login",
-            width: double.infinity,
-            cornerRadius: 25,
-          ),
+          Consumer<UserProvider>(builder: (context, userProvider, child) {
+            return CommonButton(
+              onPressed: () {
+                userProvider.getUserInfo(
+                  context,
+                  _phoneController.text,
+                  _passwordController.text,
+                ).then((user) {
+                  // 跳转到首页
+                  NavigatorUtils.goHomePage(context);
+                });
+              },
+              title: "Login",
+              width: double.infinity,
+              cornerRadius: 25,
+            );
+          }),
         ],
       ),
     );
-  }
-
-  /// 登录
-  _login(BuildContext context) async {
-    String phone = _phoneController.text;
-    String password = _passwordController.text;
-
-    if (phone.length == 0) {
-      Utils.showToast("请输入手机号码");
-    } else if (password.length == 0) {
-      Utils.showToast("请输入密码");
-    } else {
-      await NetUtils.login(context, phone, password).then((userModel) {
-        if (userModel.code > 299) {
-          Utils.showToast(userModel.msg ?? "账号或密码错误");
-        } else {
-          Utils.showToast(userModel.msg ?? "登录成功");
-          // 存储用户信息
-          Provider.of<UserProvider>(context, listen: false).saveUserInfo(userModel);
-          NavigatorUtils.goHomePage(context);
-        }
-      });
-    }
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 /**
  * @ClassName net_utils
  * @Description 网路请求类
@@ -21,68 +23,26 @@ import '../routes/routes.dart';
 import '../widgets/widget_loading.dart';
 import '../application.dart';
 import '../model/user_model.dart';
+import '../model/banner_model.dart';
+import '../model/recommend_playlist_model.dart';
 
 class NetUtils {
-  static Dio _dio;
+  HttpRequest _request;
 
-  static void init() async {
-    Directory tempDir = await getTemporaryDirectory();
-    String tempPath = tempDir.path;
-    CookieJar cj = PersistCookieJar(dir: tempPath);
-    BaseOptions options = BaseOptions(
-      baseUrl: CommonUrl.baseUrl,
-      followRedirects: false, // 重定向
-      receiveTimeout: 10000, // 接收超时10秒
-      connectTimeout: 30000, // 连接超时30秒
-    );
-    _dio = Dio(options)
-      ..interceptors.add(CookieManager(cj))
-      ..interceptors
-          .add(CustomLogInterceptor(responseBody: true, requestBody: true));
-  }
+  // 单例
+  static final NetUtils _instance = NetUtils._internal();
 
-  static Future<Response> _get(
-    BuildContext context,
-    String url, {
-    Map<String, dynamic> params,
-    bool isShowLoading = true,
-  }) async {
-    if (isShowLoading) Loading.showLoading(context);
-    try {
-      if (params != null) {
-        return await _dio.get(url, queryParameters: params);
-      } else {
-        return await _dio.get(url);
-      }
-    } on DioError catch (e) {
-      if (e == null) {
-        return Future.error(Response(data: -1));
-      } else if (e.response != null) {
-        if (e.response.statusCode >= 300 && e.response.statusCode < 400) {
-          // 重新登录
-          _reLogin();
-          return Future.error(Response(data: -1));
-        } else {
-          return Future.value(e.response);
-        }
-      } else {
-        return Future.error(Response(data: -1));
-      }
-    } finally {
-      Loading.hideLoading(context);
+  factory NetUtils() => _instance; // 工厂模式
+
+  NetUtils._internal() {
+    // 初始化
+    if (null == _request) {
+      _request = HttpRequest();
     }
   }
 
-  /// 跳转到登录页面
-  static void _reLogin() {
-    Future.delayed(Duration(milliseconds: 200), () {
-      Application.getIt<NavigateService>().popAndPushNamed(Routes.loginPage);
-      Utils.showToast('登录失效，请重新登录');
-    });
-  }
-
   /// 登录
-  static Future<UserModel> login(
+  Future<UserModel> login(
     BuildContext context,
     String phone,
     String password,
@@ -91,24 +51,35 @@ class NetUtils {
       "phone": phone,
       "password": password,
     };
-    Response response = await _get(context, CommonUrl.loginAPI, params: params);
+    Response response =
+        await _request.get(context, CommonUrl.loginAPI, params: params);
     return UserModel.fromJson(response.data);
   }
 
   /// 重新登录
-  static Future<Response> refreshLogin(BuildContext context) async {
-    return await _get(context, CommonUrl.refreshLoginAPI, isShowLoading: false)
+  Future<Response> refreshLogin(BuildContext context) async {
+    return await _request
+        .get(context, CommonUrl.refreshLoginAPI, isShowLoading: false)
         .catchError((e) {
       Utils.showToast("网络错误!");
     });
   }
 
-  /// 获取首页广告轮播图
-  static Future<Response> getBanner(BuildContext context) async {
+  /// 首页广告轮播图
+  Future<BannerModel> getBanner(BuildContext context) async {
     var params = {
       "type": 1,
     };
-    Response response = await HttpRequest.instance.get(context, CommonUrl.bannerAPI, params: params);
-    return response;
+    Response response =
+        await _request.get(context, CommonUrl.bannerAPI, params: params, isShowLoading: false);
+    return BannerModel.fromJson(response.data);
+  }
+
+  /// 推荐歌单
+  Future<RecommendPlaylistModel> getRecommendPlaylist(BuildContext context) async {
+    Response response = await _request.get(context, CommonUrl.recommendAPI, isShowLoading: false);
+    RecommendPlaylistModel model = RecommendPlaylistModel.fromJson(response.data);
+    print("-------------$model");
+    return model;
   }
 }

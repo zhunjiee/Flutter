@@ -16,7 +16,7 @@ import 'cart/cart_page.dart';
 import 'member/member_page.dart';
 import '../provider/current_index_provider.dart';
 
-// provider改造后
+// provider改造后,状态保存
 class IndexPageWithProvider extends StatelessWidget {
   // 底部导航栏数组
   final List<BottomNavigationBarItem> bottomItems = [
@@ -75,7 +75,7 @@ class IndexPageWithProvider extends StatelessWidget {
 }
 
 
-// provider 该在前
+// provider 改造前
 class IndexPage extends StatefulWidget {
   @override
   _IndexPageState createState() => _IndexPageState();
@@ -118,6 +118,7 @@ class _IndexPageState extends State<IndexPage> with AutomaticKeepAliveClientMixi
 
   @override
   Widget build(BuildContext context) {
+    super.build(context); /// see AutomaticKeepAliveClientMixin
     // 屏幕适配控件初始化
     ScreenUtil.init(context, width: 750.0, height: 1334.0);
 

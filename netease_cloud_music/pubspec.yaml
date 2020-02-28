@@ -62,6 +62,15 @@ flutter:
   assets:
     - images/icon_logo.png
     - images/welcome.png
+    - images/icon_daily.png
+    - images/icon_playlist.png
+    - images/icon_rank.png
+    - images/icon_radio.png
+    - images/icon_look.png
+    - images/play.png
+    - images/pause.png
+    - images/list.png
+    - images/icon_triangle.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

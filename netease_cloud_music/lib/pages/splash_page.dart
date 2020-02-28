@@ -14,8 +14,6 @@ import '../application.dart';
 import '../utils/navigator_utils.dart';
 import '../provider/user_provider.dart';
 import '../utils/net_utils.dart';
-import '../utils/utils.dart';
-import '../utils/http_request.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -45,7 +43,7 @@ class _SplashPageState extends State<SplashPage>
       if (status == AnimationStatus.forward) {
         _globalConfig();
       } else if (status == AnimationStatus.completed) {
-        Future.delayed(Duration(milliseconds: 500), () {
+        Future.delayed(Duration(milliseconds: 200), () {
           _goPage();
         });
       }
@@ -78,8 +76,6 @@ class _SplashPageState extends State<SplashPage>
 
   /// 各种初始化配置
   void _globalConfig() async {
-    // sharedPreferences
-    await Application.initSharedPreferences();
     // 屏幕适配
     ScreenUtil.init(context, width: 750, height: 1334);
     // 各种尺寸
@@ -88,11 +84,12 @@ class _SplashPageState extends State<SplashPage>
     Application.screenHeight = size.height;
     Application.statusBarHeight = MediaQuery.of(context).padding.top;
     Application.bottomBarHeight = MediaQuery.of(context).padding.bottom;
-    // 网络请求类初始化
-    NetUtils.init();
+    // sharedPreferences
+    await Application.initSharedPreferences();
     // 初始化本地存储用户信息
     Provider.of<UserProvider>(context, listen: false).initUserInfo();
-    HttpRequest();
+    // 网络请求类初始化
+    NetUtils();
   }
 
   /// 跳转到新页面
@@ -102,8 +99,7 @@ class _SplashPageState extends State<SplashPage>
         Provider.of<UserProvider>(context, listen: false).user;
 
     if (userModel != null) {
-      await NetUtils.refreshLogin(context).then((value){
-        print("重新登录--------:${value.data}");
+      await NetUtils().refreshLogin(context).then((value){
         if (value.data != -1) {
           // 跳转到主页
           NavigatorUtils.goHomePage(context);

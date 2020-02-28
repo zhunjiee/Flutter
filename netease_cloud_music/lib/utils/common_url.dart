@@ -21,4 +21,7 @@ class CommonUrl {
 
   // 首页广告轮播图
   static const String bannerAPI = baseUrl + "/banner";
+
+  // 推荐歌单
+  static const String recommendAPI = baseUrl + "/recommend/resource";
 }

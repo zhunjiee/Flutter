@@ -9,7 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'v_placeholder_view.dart';
-import 'common_text_style.dart';
+import '../utils/common_text_style.dart';
 
 class NetErrorWidget extends StatelessWidget {
   NetErrorWidget({@required this.callback});
