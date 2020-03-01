@@ -31,7 +31,7 @@ class CustomFutureBuilder<T> extends StatefulWidget {
     Widget loadingWidget,
   }) : loadingWidget = loadingWidget ??
             Container(
-              height: ScreenUtil().setHeight(100),
+              height: ScreenUtil().setHeight(200),
               child: Center(
                 child: CupertinoActivityIndicator(),
               ),

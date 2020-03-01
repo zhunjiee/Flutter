@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 
+/// 暴露相关方法,实现无context页面跳转
 class NavigateService {
   final GlobalKey<NavigatorState> key = GlobalKey(debugLabel: "navigate_key");
 

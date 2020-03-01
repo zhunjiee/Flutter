@@ -8,7 +8,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
+import 'package:netease_cloud_music/model/recommend_playlist_model.dart';
 import 'package:netease_cloud_music/routes/routes.dart';
+import 'package:netease_cloud_music/utils/fluro_convert_utils.dart';
 import '../application.dart';
 
 class NavigatorUtils {
@@ -32,7 +34,6 @@ class NavigatorUtils {
     );
   }
 
-
   /// 跳转到登录页
   static void goLoginPage(BuildContext context) {
     _navigateTo(context, Routes.loginPage, clearStack: true);
@@ -41,5 +42,13 @@ class NavigatorUtils {
   /// 跳转到首页
   static void goHomePage(BuildContext context) {
     _navigateTo(context, Routes.homePage, clearStack: true);
+  }
+
+  /// 跳转到歌单详情
+  static void goPlaylistPage(BuildContext context, Recommend data) {
+    _navigateTo(
+      context,
+      "${Routes.playlistPage}?data=${FluroConvertUtils.object2string(data)}",
+    );
   }
 }
