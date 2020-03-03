@@ -21,6 +21,8 @@ import '../../widgets/widget_circular_image.dart';
 import '../../widgets/custom_sliver_future_builder.dart';
 import '../../utils/common_text_style.dart';
 import '../../widgets/widget_footer_tab.dart';
+import '../../widgets/widget_playlist_item.dart';
+import '../../model/music_model.dart';
 
 class PlaylistPage extends StatefulWidget {
   PlaylistPage(this.data);
@@ -46,25 +48,10 @@ class _PlaylistPageState extends State<PlaylistPage> {
             ),
             child: CustomScrollView(
               slivers: <Widget>[
+                // 歌单信息
                 _playlistInfo(),
                 // 歌曲列表
-                CustomSliverFutureBuilder<PlaylistModel>(
-                  futureFunc: NetUtils().getPlaylistDetailData,
-                  params: {"id": widget.data.id},
-                  builder: (context, value) {
-                    List<Tracks> trackList = value.playlist.tracks;
-                    return SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        (context, index) {
-                          return ListTile(
-                            title: Text(trackList[index].name),
-                          );
-                        },
-                        childCount: trackList.length,
-                      ),
-                    );
-                  },
-                ),
+                _musicList(),
               ],
             ),
           ),
@@ -111,7 +98,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
       title: widget.data.name,
       backgroundImg: widget.data.picUrl,
       sigma: 20,
-      playOnTap: (String zhanwei){
+      playOnTap: (String zhanwei) {
         print(zhanwei);
       },
     );
@@ -187,12 +174,52 @@ class _PlaylistPageState extends State<PlaylistPage> {
       alignment: Alignment.center,
       child: Row(
         children: <Widget>[
-          FooterTabItem("images/icon_comment.png", "评论",),
-          FooterTabItem("images/icon_share.png", "分享",),
-          FooterTabItem("images/icon_download.png", "下载",),
-          FooterTabItem("images/icon_multi_select.png", "多选",),
+          FooterTabItem(
+            "images/icon_comment.png",
+            "评论",
+          ),
+          FooterTabItem(
+            "images/icon_share.png",
+            "分享",
+          ),
+          FooterTabItem(
+            "images/icon_download.png",
+            "下载",
+          ),
+          FooterTabItem(
+            "images/icon_multi_select.png",
+            "多选",
+          ),
         ],
       ),
+    );
+  }
+
+  /// 歌单音乐
+  Widget _musicList() {
+    return CustomSliverFutureBuilder<PlaylistModel>(
+      futureFunc: NetUtils().getPlaylistDetailData,
+      params: {"id": widget.data.id},
+      builder: (context, value) {
+        List<Tracks> trackList = value.playlist.tracks;
+        return SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              Tracks track = trackList[index];
+              return PlaylistItem(
+                MusicData(
+                    mvId: track.mv,
+                    index: index + 1,
+                    songName: track.name,
+                    artists:
+                        "${track.ar.map((a) => a.name).toList().join("/")} - ${track.al.name}"),
+                onTap: () {},
+              );
+            },
+            childCount: trackList.length,
+          ),
+        );
+      },
     );
   }
 }

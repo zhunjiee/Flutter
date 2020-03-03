@@ -18,7 +18,7 @@ class PlaylistHeader extends StatelessWidget
   PlaylistHeader({this.count, this.tail, this.onTap});
 
   final int count;
-  final Widget tail;
+  final Widget tail;  // 尾部附加控件
   final PlayModelCallback onTap;
 
   @override

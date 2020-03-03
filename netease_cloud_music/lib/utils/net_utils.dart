@@ -106,9 +106,6 @@ class NetUtils {
       BuildContext context, {Map<String, dynamic> params}) async {
     Response response = await _request.get(context, CommonUrl.playlistDetailAPI,
         params: params);
-    print("response.data -----------------: ${response.data}");
-    PlaylistModel model = PlaylistModel.fromJson(response.data);
-    print("model-----------${model.code}");
-    return model;
+    return PlaylistModel.fromJson(response.data);
   }
 }

@@ -22,7 +22,7 @@ class FooterTabItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: GestureDetector(
-        onTap: onTap == null ? (){print("没有点击方法");} : onTap,
+        onTap: onTap,
         child: Column(
           children: <Widget>[
             Image.asset(
