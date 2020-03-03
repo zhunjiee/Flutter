@@ -30,4 +30,7 @@ class CommonUrl {
 
   // MV排行
   static const String topMvAPI = baseUrl + "/top/mv";
+
+  // 歌单详情
+  static const String playlistDetailAPI = baseUrl + "/playlist/detail";
 }

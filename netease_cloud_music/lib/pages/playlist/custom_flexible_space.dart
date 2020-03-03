@@ -9,8 +9,8 @@
 import 'package:flutter/material.dart';
 
 /// 类似 FlexibleSpaceBar
-class FlexibleDetailBar extends StatelessWidget {
-  FlexibleDetailBar({
+class CustomFlexibleSpace extends StatelessWidget {
+  CustomFlexibleSpace({
     @required this.content,
     @required this.background,
     this.builder,
@@ -119,7 +119,7 @@ class FlexShadowBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var t = FlexibleDetailBar.percentage(context);
+    var t = CustomFlexibleSpace.percentage(context);
     t = Curves.ease.transform(t) / 2 + 0.2;
 
     return Container(

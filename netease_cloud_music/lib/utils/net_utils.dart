@@ -18,6 +18,7 @@ import '../model/banner_model.dart';
 import '../model/recommend_playlist_model.dart';
 import '../model/album_model.dart';
 import '../model/mv_model.dart';
+import '../model/playlist_model.dart';
 
 class NetUtils {
   HttpRequest _request;
@@ -89,14 +90,25 @@ class NetUtils {
 
   /// MV排行
   Future<MvModel> getTopMvData(
-      BuildContext context, {
-        Map<String, dynamic> params = const {
-          "offset": 1,
-          "limit": 10,
-        },
-      }) async {
+    BuildContext context, {
+    Map<String, dynamic> params = const {
+      "offset": 1,
+      "limit": 10,
+    },
+  }) async {
     Response response = await _request.get(context, CommonUrl.topMvAPI,
         params: params, isShowLoading: false);
     return MvModel.fromJson(response.data);
+  }
+
+  /// 歌单详情
+  Future<PlaylistModel> getPlaylistDetailData(
+      BuildContext context, {Map<String, dynamic> params}) async {
+    Response response = await _request.get(context, CommonUrl.playlistDetailAPI,
+        params: params);
+    print("response.data -----------------: ${response.data}");
+    PlaylistModel model = PlaylistModel.fromJson(response.data);
+    print("model-----------${model.code}");
+    return model;
   }
 }

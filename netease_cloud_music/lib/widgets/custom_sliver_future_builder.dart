@@ -78,6 +78,7 @@ class _CustomFutureBuilderState<T> extends State<CustomSliverFutureBuilder<T>> {
                     ),
                   );
                 case ConnectionState.done:
+                  print("error = = = = ${snapshot.error}");
                   if (snapshot.hasData) {
                     return widget.builder(context, snapshot.data);
                   } else if (snapshot.hasError) {

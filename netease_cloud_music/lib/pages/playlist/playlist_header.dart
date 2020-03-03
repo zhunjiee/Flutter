@@ -22,15 +22,16 @@ class PlaylistHeader extends StatelessWidget
   final PlayModelCallback onTap;
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => Size.fromHeight(ScreenUtil().setHeight(100));
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return ClipRRect(
-      borderRadius: BorderRadius.circular(ScreenUtil().setWidth(30)),
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(ScreenUtil().setWidth(30)),
+      ),
       child: Container(
+        color: Colors.white,
         child: InkWell(
           onTap: () {
             onTap("haha");

@@ -11,7 +11,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../utils/utils.dart';
 
 class CircularImage extends StatelessWidget {
-  CircularImage(this.src, this.width, {this.fit});
+  CircularImage(
+    this.src,
+    this.width, {
+    this.fit = BoxFit.cover,
+  });
 
   final String src;
   final double width;

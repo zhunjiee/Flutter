@@ -45,10 +45,8 @@ class NavigatorUtils {
   }
 
   /// 跳转到歌单详情
-  static void goPlaylistPage(BuildContext context, Recommend data) {
-    _navigateTo(
-      context,
-      "${Routes.playlistPage}?data=${FluroConvertUtils.object2string(data)}",
-    );
+  static void goPlaylistDetailPage(BuildContext context, Recommend data) {
+    String recommend = FluroConvertUtils.object2string(data);
+    _navigateTo(context, "${Routes.playlistPage}?data=$recommend");
   }
 }

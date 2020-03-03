@@ -37,7 +37,7 @@ class DiscoverRecommendPlaylist extends StatelessWidget {
                     playCount: recommendList[index].playCount,
                     maxLines: 2,
                     onTap: () {
-                      NavigatorUtils.goPlaylistPage(context, recommendList[index]);
+                      NavigatorUtils.goPlaylistDetailPage(context, recommendList[index]);
                     },
                   );
                 },

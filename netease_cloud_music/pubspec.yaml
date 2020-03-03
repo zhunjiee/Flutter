@@ -71,6 +71,10 @@ flutter:
     - images/pause.png
     - images/list.png
     - images/icon_triangle.png
+    - images/icon_comment.png
+    - images/icon_share.png
+    - images/icon_download.png
+    - images/icon_multi_select.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

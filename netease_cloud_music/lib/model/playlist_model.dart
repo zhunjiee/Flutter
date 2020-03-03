@@ -8,14 +8,17 @@
 
 import 'package:flutter/material.dart';
 
-class MyPlaylistModel {
+class PlaylistModel {
   int code;
   Playlist playlist;
   List<Privileges> privileges;
 
-  MyPlaylistModel({this.code, this.playlist, this.privileges});
+  PlaylistModel(
+      {this.code,
+        this.playlist,
+        this.privileges});
 
-  MyPlaylistModel.fromJson(Map<String, dynamic> json) {
+  PlaylistModel.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     playlist = json['playlist'] != null
         ? new Playlist.fromJson(json['playlist'])
@@ -44,37 +47,37 @@ class MyPlaylistModel {
 class Playlist {
   List<Subscribers> subscribers;
   bool subscribed;
-  Subscribers creator;
+  Creator creator;
   List<Tracks> tracks;
   List<TrackIds> trackIds;
   String updateFrequency;
-  int backgroundCoverId;
+  num backgroundCoverId;
   String backgroundCoverUrl;
-  int titleImage;
+  num titleImage;
   String titleImageUrl;
   String englishTitle;
   bool opRecommend;
-  int userId;
-  bool ordered;
-  int playCount;
-  int trackNumberUpdateTime;
-  int createTime;
-  bool highQuality;
-  int privacy;
-  int trackUpdateTime;
-  int trackCount;
-  int updateTime;
-  bool newImported;
-  int coverImgId;
-  String coverImgUrl;
-  String commentThreadId;
-  int specialType;
   String description;
-  List<String> tags;
   int status;
-  int adType;
+  num createTime;
+  bool highQuality;
   int subscribedCount;
   int cloudTrackCount;
+  int playCount;
+  int trackCount;
+  List<String> tags;
+  num trackUpdateTime;
+  num trackNumberUpdateTime;
+  int adType;
+  num coverImgId;
+  String coverImgUrl;
+  num updateTime;
+  bool newImported;
+  bool ordered;
+  String commentThreadId;
+  int privacy;
+  int userId;
+  int specialType;
   String name;
   int id;
   int shareCount;
@@ -94,27 +97,27 @@ class Playlist {
         this.titleImageUrl,
         this.englishTitle,
         this.opRecommend,
-        this.userId,
-        this.ordered,
-        this.playCount,
-        this.trackNumberUpdateTime,
+        this.description,
+        this.status,
         this.createTime,
         this.highQuality,
-        this.privacy,
-        this.trackUpdateTime,
-        this.trackCount,
-        this.updateTime,
-        this.newImported,
-        this.coverImgId,
-        this.coverImgUrl,
-        this.commentThreadId,
-        this.specialType,
-        this.description,
-        this.tags,
-        this.status,
-        this.adType,
         this.subscribedCount,
         this.cloudTrackCount,
+        this.playCount,
+        this.trackCount,
+        this.tags,
+        this.trackUpdateTime,
+        this.trackNumberUpdateTime,
+        this.adType,
+        this.coverImgId,
+        this.coverImgUrl,
+        this.updateTime,
+        this.newImported,
+        this.ordered,
+        this.commentThreadId,
+        this.privacy,
+        this.userId,
+        this.specialType,
         this.name,
         this.id,
         this.shareCount,
@@ -129,9 +132,8 @@ class Playlist {
       });
     }
     subscribed = json['subscribed'];
-    creator = json['creator'] != null
-        ? new Subscribers.fromJson(json['creator'])
-        : null;
+    creator =
+    json['creator'] != null ? new Creator.fromJson(json['creator']) : null;
     if (json['tracks'] != null) {
       tracks = new List<Tracks>();
       json['tracks'].forEach((v) {
@@ -151,27 +153,29 @@ class Playlist {
     titleImageUrl = json['titleImageUrl'];
     englishTitle = json['englishTitle'];
     opRecommend = json['opRecommend'];
-    userId = json['userId'];
-    ordered = json['ordered'];
-    playCount = json['playCount'];
-    trackNumberUpdateTime = json['trackNumberUpdateTime'];
+    description = json['description'];
+    status = json['status'];
     createTime = json['createTime'];
     highQuality = json['highQuality'];
-    privacy = json['privacy'];
-    trackUpdateTime = json['trackUpdateTime'];
-    trackCount = json['trackCount'];
-    updateTime = json['updateTime'];
-    newImported = json['newImported'];
-    coverImgId = json['coverImgId'];
-    coverImgUrl = json['coverImgUrl'];
-    commentThreadId = json['commentThreadId'];
-    specialType = json['specialType'];
-    description = json['description'];
-    tags = json['tags'].cast<String>();
-    status = json['status'];
-    adType = json['adType'];
     subscribedCount = json['subscribedCount'];
     cloudTrackCount = json['cloudTrackCount'];
+    playCount = json['playCount'];
+    trackCount = json['trackCount'];
+    if ((json['tags'] as List).length > 0) {
+      tags = (json['tags'] as List).cast<String>();
+    }
+    trackUpdateTime = json['trackUpdateTime'];
+    trackNumberUpdateTime = json['trackNumberUpdateTime'];
+    adType = json['adType'];
+    coverImgId = json['coverImgId'];
+    coverImgUrl = json['coverImgUrl'];
+    updateTime = json['updateTime'];
+    newImported = json['newImported'];
+    ordered = json['ordered'];
+    commentThreadId = json['commentThreadId'];
+    privacy = json['privacy'];
+    userId = json['userId'];
+    specialType = json['specialType'];
     name = json['name'];
     id = json['id'];
     shareCount = json['shareCount'];
@@ -201,27 +205,27 @@ class Playlist {
     data['titleImageUrl'] = this.titleImageUrl;
     data['englishTitle'] = this.englishTitle;
     data['opRecommend'] = this.opRecommend;
-    data['userId'] = this.userId;
-    data['ordered'] = this.ordered;
-    data['playCount'] = this.playCount;
-    data['trackNumberUpdateTime'] = this.trackNumberUpdateTime;
+    data['description'] = this.description;
+    data['status'] = this.status;
     data['createTime'] = this.createTime;
     data['highQuality'] = this.highQuality;
-    data['privacy'] = this.privacy;
-    data['trackUpdateTime'] = this.trackUpdateTime;
-    data['trackCount'] = this.trackCount;
-    data['updateTime'] = this.updateTime;
-    data['newImported'] = this.newImported;
-    data['coverImgId'] = this.coverImgId;
-    data['coverImgUrl'] = this.coverImgUrl;
-    data['commentThreadId'] = this.commentThreadId;
-    data['specialType'] = this.specialType;
-    data['description'] = this.description;
-    data['tags'] = this.tags;
-    data['status'] = this.status;
-    data['adType'] = this.adType;
     data['subscribedCount'] = this.subscribedCount;
     data['cloudTrackCount'] = this.cloudTrackCount;
+    data['playCount'] = this.playCount;
+    data['trackCount'] = this.trackCount;
+    data['tags'] = this.tags;
+    data['trackUpdateTime'] = this.trackUpdateTime;
+    data['trackNumberUpdateTime'] = this.trackNumberUpdateTime;
+    data['adType'] = this.adType;
+    data['coverImgId'] = this.coverImgId;
+    data['coverImgUrl'] = this.coverImgUrl;
+    data['updateTime'] = this.updateTime;
+    data['newImported'] = this.newImported;
+    data['ordered'] = this.ordered;
+    data['commentThreadId'] = this.commentThreadId;
+    data['privacy'] = this.privacy;
+    data['userId'] = this.userId;
+    data['specialType'] = this.specialType;
     data['name'] = this.name;
     data['id'] = this.id;
     data['shareCount'] = this.shareCount;
@@ -240,15 +244,15 @@ class Subscribers {
   int accountStatus;
   int gender;
   int city;
-  int birthday;
+  num birthday;
   int userId;
   int userType;
   String nickname;
   String signature;
   String description;
   String detailDescription;
-  int avatarImgId;
-  int backgroundImgId;
+  num avatarImgId;
+  num backgroundImgId;
   String backgroundUrl;
   int authority;
   bool mutual;
@@ -340,6 +344,115 @@ class Subscribers {
   }
 }
 
+class Creator {
+  bool defaultAvatar;
+  int province;
+  int authStatus;
+  bool followed;
+  String avatarUrl;
+  int accountStatus;
+  int gender;
+  int city;
+  num birthday;
+  int userId;
+  int userType;
+  String nickname;
+  String signature;
+  String description;
+  String detailDescription;
+  num avatarImgId;
+  num backgroundImgId;
+  String backgroundUrl;
+  int authority;
+  bool mutual;
+  int djStatus;
+  int vipType;
+  String avatarImgIdStr;
+  String backgroundImgIdStr;
+
+  Creator(
+      {this.defaultAvatar,
+        this.province,
+        this.authStatus,
+        this.followed,
+        this.avatarUrl,
+        this.accountStatus,
+        this.gender,
+        this.city,
+        this.birthday,
+        this.userId,
+        this.userType,
+        this.nickname,
+        this.signature,
+        this.description,
+        this.detailDescription,
+        this.avatarImgId,
+        this.backgroundImgId,
+        this.backgroundUrl,
+        this.authority,
+        this.mutual,
+        this.djStatus,
+        this.vipType,
+        this.avatarImgIdStr,
+        this.backgroundImgIdStr});
+
+  Creator.fromJson(Map<String, dynamic> json) {
+    defaultAvatar = json['defaultAvatar'];
+    province = json['province'];
+    authStatus = json['authStatus'];
+    followed = json['followed'];
+    avatarUrl = json['avatarUrl'];
+    accountStatus = json['accountStatus'];
+    gender = json['gender'];
+    city = json['city'];
+    birthday = json['birthday'];
+    userId = json['userId'];
+    userType = json['userType'];
+    nickname = json['nickname'];
+    signature = json['signature'];
+    description = json['description'];
+    detailDescription = json['detailDescription'];
+    avatarImgId = json['avatarImgId'];
+    backgroundImgId = json['backgroundImgId'];
+    backgroundUrl = json['backgroundUrl'];
+    authority = json['authority'];
+    mutual = json['mutual'];
+    djStatus = json['djStatus'];
+    vipType = json['vipType'];
+    avatarImgIdStr = json['avatarImgIdStr'];
+    backgroundImgIdStr = json['backgroundImgIdStr'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['defaultAvatar'] = this.defaultAvatar;
+    data['province'] = this.province;
+    data['authStatus'] = this.authStatus;
+    data['followed'] = this.followed;
+    data['avatarUrl'] = this.avatarUrl;
+    data['accountStatus'] = this.accountStatus;
+    data['gender'] = this.gender;
+    data['city'] = this.city;
+    data['birthday'] = this.birthday;
+    data['userId'] = this.userId;
+    data['userType'] = this.userType;
+    data['nickname'] = this.nickname;
+    data['signature'] = this.signature;
+    data['description'] = this.description;
+    data['detailDescription'] = this.detailDescription;
+    data['avatarImgId'] = this.avatarImgId;
+    data['backgroundImgId'] = this.backgroundImgId;
+    data['backgroundUrl'] = this.backgroundUrl;
+    data['authority'] = this.authority;
+    data['mutual'] = this.mutual;
+    data['djStatus'] = this.djStatus;
+    data['vipType'] = this.vipType;
+    data['avatarImgIdStr'] = this.avatarImgIdStr;
+    data['backgroundImgIdStr'] = this.backgroundImgIdStr;
+    return data;
+  }
+}
+
 class Tracks {
   String name;
   int id;
@@ -351,6 +464,7 @@ class Tracks {
   String rt;
   int fee;
   int v;
+  String crbt;
   String cf;
   Al al;
   int dt;
@@ -359,15 +473,15 @@ class Tracks {
   H l;
   String cd;
   int no;
-  int fType;
+  int ftype;
   int djId;
   int copyright;
   int sId;
   int mark;
+  int rtype;
   int mst;
   int cp;
   int mv;
-  int rType;
   int publishTime;
   String alg;
 
@@ -382,6 +496,7 @@ class Tracks {
         this.rt,
         this.fee,
         this.v,
+        this.crbt,
         this.cf,
         this.al,
         this.dt,
@@ -390,15 +505,15 @@ class Tracks {
         this.l,
         this.cd,
         this.no,
-        this.fType,
+        this.ftype,
         this.djId,
         this.copyright,
         this.sId,
         this.mark,
+        this.rtype,
         this.mst,
         this.cp,
         this.mv,
-        this.rType,
         this.publishTime,
         this.alg});
 
@@ -418,6 +533,7 @@ class Tracks {
     rt = json['rt'];
     fee = json['fee'];
     v = json['v'];
+    crbt = json['crbt'];
     cf = json['cf'];
     al = json['al'] != null ? new Al.fromJson(json['al']) : null;
     dt = json['dt'];
@@ -426,15 +542,15 @@ class Tracks {
     l = json['l'] != null ? new H.fromJson(json['l']) : null;
     cd = json['cd'];
     no = json['no'];
-    fType = json['ftype'];
+    ftype = json['ftype'];
     djId = json['djId'];
     copyright = json['copyright'];
     sId = json['s_id'];
     mark = json['mark'];
+    rtype = json['rtype'];
     mst = json['mst'];
     cp = json['cp'];
     mv = json['mv'];
-    rType = json['rtype'];
     publishTime = json['publishTime'];
     alg = json['alg'];
   }
@@ -453,6 +569,7 @@ class Tracks {
     data['rt'] = this.rt;
     data['fee'] = this.fee;
     data['v'] = this.v;
+    data['crbt'] = this.crbt;
     data['cf'] = this.cf;
     if (this.al != null) {
       data['al'] = this.al.toJson();
@@ -469,15 +586,15 @@ class Tracks {
     }
     data['cd'] = this.cd;
     data['no'] = this.no;
-    data['ftype'] = this.fType;
+    data['ftype'] = this.ftype;
     data['djId'] = this.djId;
     data['copyright'] = this.copyright;
     data['s_id'] = this.sId;
     data['mark'] = this.mark;
+    data['rtype'] = this.rtype;
     data['mst'] = this.mst;
     data['cp'] = this.cp;
     data['mv'] = this.mv;
-    data['rtype'] = this.rType;
     data['publishTime'] = this.publishTime;
     data['alg'] = this.alg;
     return data;
@@ -507,17 +624,17 @@ class Al {
   int id;
   String name;
   String picUrl;
+  num pic;
   String picStr;
-  int pic;
 
-  Al({this.id, this.name, this.picUrl, this.picStr, this.pic});
+  Al({this.id, this.name, this.picUrl, this.pic, this.picStr});
 
   Al.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     picUrl = json['picUrl'];
-    picStr = json['pic_str'];
     pic = json['pic'];
+    picStr = json['pic_str'];
   }
 
   Map<String, dynamic> toJson() {
@@ -525,8 +642,8 @@ class Al {
     data['id'] = this.id;
     data['name'] = this.name;
     data['picUrl'] = this.picUrl;
-    data['pic_str'] = this.picStr;
     data['pic'] = this.pic;
+    data['pic_str'] = this.picStr;
     return data;
   }
 }
@@ -650,3 +767,4 @@ class Privileges {
     return data;
   }
 }
+

@@ -36,8 +36,7 @@ Handler homeHandler = Handler(
 /// 播放列表
 Handler playlistHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
-  String data = parameters["data"].first;
-  // String 转 Map
-  Map recommend = FluroConvertUtils.string2map(data);
-  return PlaylistPage(Recommend.fromJson(recommend));
+  String dataString = parameters["data"].first;
+  Map dataMap = FluroConvertUtils.string2map(dataString);
+  return PlaylistPage(Recommend.fromJson(dataMap));
 });

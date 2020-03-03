@@ -11,13 +11,13 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:netease_cloud_music/utils/utils.dart';
 import 'playlist_header.dart';
-import 'flexible_detail_bar.dart';
+import 'custom_flexible_space.dart';
 
 class PlaylistAppBar extends StatelessWidget {
   PlaylistAppBar({
+    @required this.content,
     @required this.expandedHeight,
     @required this.title,
-    @required this.content,
     @required this.backgroundImg,
     this.sigma = 5,
     this.playOnTap,
@@ -39,7 +39,7 @@ class PlaylistAppBar extends StatelessWidget {
         title,
         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       ),
-      flexibleSpace: FlexibleDetailBar(
+      flexibleSpace: CustomFlexibleSpace(
         content: content,
         background: Stack(
           children: <Widget>[
@@ -76,8 +76,8 @@ class PlaylistAppBar extends StatelessWidget {
         onTap: playOnTap,
       ),
       centerTitle: true,
-      expandedHeight: expandedHeight, // 合并的高度，默认是状态栏的高度加AppBar的高度
-      pinned: true, // 标题栏是否固定
+      expandedHeight: expandedHeight, // AppBar 展开时候的高度
+      pinned: true, // appBar 收缩到最小高度的时候 appBar 是否可见
       elevation: 0, // 阴影(分割线)
       brightness: Brightness.dark,
       iconTheme: IconThemeData(color: Colors.white),
