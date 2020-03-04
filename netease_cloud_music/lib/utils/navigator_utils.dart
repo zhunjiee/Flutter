@@ -49,4 +49,9 @@ class NavigatorUtils {
     String recommend = FluroConvertUtils.object2string(data);
     _navigateTo(context, "${Routes.playlistPage}?data=$recommend");
   }
+
+  /// 跳转到每日推荐
+  static void goDailySongsPage(BuildContext context) {
+    _navigateTo(context, Routes.dailySongsPage);
+  }
 }

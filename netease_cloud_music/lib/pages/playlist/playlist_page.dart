@@ -35,7 +35,7 @@ class PlaylistPage extends StatefulWidget {
 
 class _PlaylistPageState extends State<PlaylistPage> {
   double _expandedHeight = ScreenUtil().setHeight(630);
-  PlaylistModel _playlist;
+  Playlist _playlist;
 
   @override
   Widget build(BuildContext context) {
@@ -148,12 +148,14 @@ class _PlaylistPageState extends State<PlaylistPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: Text(
-                    widget.data.creator.description,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: smallWhite70TextStyle,
-                  ),
+                  child: _playlist == null
+                      ? Container()
+                      : Text(
+                          widget.data.creator.description,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: smallWhite70TextStyle,
+                        ),
                 ),
                 Icon(
                   Icons.keyboard_arrow_right,
@@ -221,5 +223,15 @@ class _PlaylistPageState extends State<PlaylistPage> {
         );
       },
     );
+  }
+
+  void _setData(Playlist data) {
+    Future.delayed(Duration(milliseconds: 50), () {
+      if (mounted) {
+        setState(() {
+          _playlist = data;
+        });
+      }
+    });
   }
 }

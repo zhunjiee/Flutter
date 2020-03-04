@@ -75,6 +75,7 @@ flutter:
     - images/icon_share.png
     - images/icon_download.png
     - images/icon_multi_select.png
+    - images/bg_daily.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

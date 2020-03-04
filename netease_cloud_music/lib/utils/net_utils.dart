@@ -19,6 +19,7 @@ import '../model/recommend_playlist_model.dart';
 import '../model/album_model.dart';
 import '../model/mv_model.dart';
 import '../model/playlist_model.dart';
+import '../model/daily_songs_model.dart';
 
 class NetUtils {
   HttpRequest _request;
@@ -107,5 +108,12 @@ class NetUtils {
     Response response = await _request.get(context, CommonUrl.playlistDetailAPI,
         params: params);
     return PlaylistModel.fromJson(response.data);
+  }
+
+  /// 每日推荐
+  Future<DailySongsModel> getRecommendDailyData(
+      BuildContext context, {Map<String, dynamic> params}) async {
+    Response response = await _request.get(context, CommonUrl.recommendSongsAPI, isShowLoading: false);
+    return DailySongsModel.fromJson(response.data);
   }
 }

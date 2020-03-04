@@ -13,6 +13,7 @@ import '../pages/splash_page.dart';
 import '../pages/index_page.dart';
 import '../pages/login/login_page.dart';
 import '../pages/playlist/playlist_page.dart';
+import '../pages/daily_songs/daily_songs_page.dart';
 import '../model/recommend_playlist_model.dart';
 
 /// 启动页
@@ -39,4 +40,10 @@ Handler playlistHandler = Handler(
   String dataString = parameters["data"].first;
   Map dataMap = FluroConvertUtils.string2map(dataString);
   return PlaylistPage(Recommend.fromJson(dataMap));
+});
+
+/// 每日推荐
+Handler dailySongsHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
+  return DailySongsPage();
 });

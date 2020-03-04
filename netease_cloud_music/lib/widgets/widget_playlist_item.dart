@@ -39,7 +39,7 @@ class PlaylistItem extends StatelessWidget {
                     "${_data.picUrl}?param=150y150",
                     width: 100,
                     height: 100,
-                    radius: 5,
+                    radius: 10,
                   ),
             _data.index == null
                 ? Container()

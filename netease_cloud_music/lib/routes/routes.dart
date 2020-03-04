@@ -16,6 +16,7 @@ class Routes {
   static final String loginPage = "/login";
   static final String homePage = "/index";
   static final String playlistPage = "/playlist";
+  static final String dailySongsPage = "/dailySongs";
 
   static void configRoutes(Router router) {
     // 没有找到路由的统一配置
@@ -30,5 +31,6 @@ class Routes {
     router.define(loginPage, handler: loginHandler);
     router.define(homePage, handler: homeHandler);
     router.define(playlistPage, handler: playlistHandler);
+    router.define(dailySongsPage, handler: dailySongsHandler);
   }
 }

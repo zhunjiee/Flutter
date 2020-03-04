@@ -58,7 +58,7 @@ class CustomFlexibleSpace extends StatelessWidget {
 
     //为content 添加 底部的 padding
     double bottomPadding = 0;
-    SliverAppBar sliverBar = context.findAncestorRenderObjectOfType();
+    SliverAppBar sliverBar = context.findAncestorWidgetOfExactType<SliverAppBar>();
     if (sliverBar != null && sliverBar.bottom != null) {
       bottomPadding = sliverBar.bottom.preferredSize.height;
     }

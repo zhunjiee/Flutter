@@ -11,6 +11,7 @@ import 'package:common_utils/common_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../widgets/v_placeholder_view.dart';
 import '../../utils/common_color.dart';
+import '../../utils/navigator_utils.dart';
 
 class DiscoverCategory extends StatelessWidget {
   DiscoverCategory(this.category);
@@ -34,7 +35,9 @@ class DiscoverCategory extends StatelessWidget {
           return GestureDetector(
             behavior: HitTestBehavior.translucent, // 点击事件自己也可以处理
             onTap: () {
-              print(index);
+              if (index == 0) {
+                NavigatorUtils.goDailySongsPage(context);
+              }
             },
             child: _gridItem(categoryKeys[index], index),
           );
