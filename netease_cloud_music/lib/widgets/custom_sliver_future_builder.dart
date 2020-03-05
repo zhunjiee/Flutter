@@ -70,6 +70,7 @@ class _CustomFutureBuilderState<T> extends State<CustomSliverFutureBuilder<T>> {
                 case ConnectionState.none:
                 case ConnectionState.waiting:
                 case ConnectionState.active:
+                  // 显示"加载中"组件
                   return SliverToBoxAdapter(
                     child: Container(
                       alignment: Alignment.center,
@@ -78,10 +79,12 @@ class _CustomFutureBuilderState<T> extends State<CustomSliverFutureBuilder<T>> {
                     ),
                   );
                 case ConnectionState.done:
-                  print("error = = = = ${snapshot.error}");
                   if (snapshot.hasData) {
+                    // 获取到数据
                     return widget.builder(context, snapshot.data);
                   } else if (snapshot.hasError) {
+                    print("ERROR =================> ${snapshot.error}");
+                    // 显示"错误"组件
                     return SliverToBoxAdapter(
                       child: NetErrorWidget(
                         callback: () {

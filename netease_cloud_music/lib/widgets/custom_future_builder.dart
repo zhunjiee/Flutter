@@ -20,21 +20,20 @@ typedef ValueWidgetBuilder<T> = Widget Function(
 /// 错误时返回定义好的错误 Widget，例如点击重新请求
 class CustomFutureBuilder<T> extends StatefulWidget {
   final ValueWidgetBuilder<T> builder;
-  final Function future;
+  final Function futureFunc;
   final Map<String, dynamic> params;
   final Widget loadingWidget;
 
   CustomFutureBuilder({
     @required this.builder,
-    @required this.future,
+    @required this.futureFunc,
     this.params,
     Widget loadingWidget,
   }) : loadingWidget = loadingWidget ??
             Container(
+              alignment: Alignment.center,
               height: ScreenUtil().setHeight(200),
-              child: Center(
-                child: CupertinoActivityIndicator(),
-              ),
+              child: CupertinoActivityIndicator(),
             );
 
   @override
@@ -69,9 +68,12 @@ class _CustomFutureBuilderState<T> extends State<CustomFutureBuilder<T>> {
                   if (snapshot.hasData) {
                     return widget.builder(context, snapshot.data);
                   } else if (snapshot.hasError) {
-                    return NetErrorWidget(callback: () {
-                      _request();
-                    });
+                    print("ERROR =================> ${snapshot.error}");
+                    return NetErrorWidget(
+                      callback: () {
+                        _request();
+                      },
+                    );
                   }
               }
               return Container();
@@ -81,14 +83,16 @@ class _CustomFutureBuilderState<T> extends State<CustomFutureBuilder<T>> {
   @override
   void didUpdateWidget(CustomFutureBuilder<T> oldWidget) {
     // 如果方法不一样了,那么重新请求
-    if (oldWidget.future != widget.future) {
+    if (oldWidget.futureFunc != widget.futureFunc) {
       print("function not");
       WidgetsBinding.instance.addPostFrameCallback((call) {
         _request();
       });
     }
     // 如果方法还一样，但是参数不一样了，则重新请求
-    if ((oldWidget.future == widget.future) && (oldWidget.params != null) && (widget.params != null)) {
+    if ((oldWidget.futureFunc == widget.futureFunc) &&
+        (oldWidget.params != null) &&
+        (widget.params != null)) {
       if (oldParams != widget.params.values.join()) {
         print("params not");
         oldParams = widget.params.values.join();
@@ -103,9 +107,9 @@ class _CustomFutureBuilderState<T> extends State<CustomFutureBuilder<T>> {
   void _request() {
     setState(() {
       if (widget.params == null) {
-        _future = widget.future(context);
+        _future = widget.futureFunc(context);
       } else {
-        _future = widget.future(context, params: widget.params);
+        _future = widget.futureFunc(context, params: widget.params);
         oldParams = widget.params.values.join();
       }
     });

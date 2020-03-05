@@ -6,6 +6,7 @@ import 'application.dart';
 import 'routes/routes.dart';
 import 'routes/navigate_service.dart';
 import 'pages/splash_page.dart';
+import 'utils/common_color.dart';
 import 'provider/user_provider.dart';
 
 void main() {
@@ -19,28 +20,36 @@ void main() {
   LogUtils.init(tag: "NETEASE_MUSIC");
 
   runApp(
-      MultiProvider(
-        providers: [
-          ChangeNotifierProvider<UserProvider>.value(value: UserProvider()),
-        ],
-        child: MyApp(),
-      ),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<UserProvider>.value(value: UserProvider()),
+      ],
+      child: MyApp(),
+    ),
   );
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Netease Cloud Music',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+//        primarySwatch: Colors.red,
+        // 自定义主体色
+        primaryColor: themeColor,
+        appBarTheme: AppBarTheme(
+          textTheme: TextTheme(
+            title: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+          ),
+        ),
+        // 设置导航跳转样式类似iOS
         platform: TargetPlatform.iOS,
       ),
-      debugShowCheckedModeBanner: false,  // 不显示debug字样
-      onGenerateRoute: Application.router.generator,  // 生成路由
-      navigatorKey: Application.getIt<NavigateService>().key, // 导航键,用于无context实现跳转
+      debugShowCheckedModeBanner: false, // 不显示debug字样
+      onGenerateRoute: Application.router.generator, // 生成路由
+      navigatorKey:
+          Application.getIt<NavigateService>().key, // 导航键,用于无context实现跳转
       home: SplashPage(),
     );
   }

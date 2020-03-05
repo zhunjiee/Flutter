@@ -52,7 +52,7 @@ class DiscoverRecommendPlaylist extends StatelessWidget {
               ),
             );
           },
-          future: NetUtils().getRecommendPlaylist,
+          futureFunc: NetUtils().getRecommendPlaylist,
         ),
       ],
     );

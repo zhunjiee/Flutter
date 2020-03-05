@@ -20,20 +20,29 @@ class NetErrorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: callback,
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            Icon(
-              Icons.error_outline,
-              size: ScreenUtil().setWidth(80),
-            ),
-            VerticalPlaceholderView(10),
-            Text(
-              "点击重新请求",
-              style: commonTextStyle,
-            )
-          ],
-        ),
+      child: Column(  // 用Column占满屏幕并且居中
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          _errorChildView(),
+        ],
+      ),
+    );
+  }
+
+  Widget _errorChildView() {
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Icon(
+            Icons.error_outline,
+            size: ScreenUtil().setWidth(80),
+          ),
+          VerticalPlaceholderView(10),
+          Text(
+            "点击重新请求",
+            style: commonTextStyle,
+          )
+        ],
       ),
     );
   }

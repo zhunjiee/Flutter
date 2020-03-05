@@ -148,14 +148,12 @@ class _PlaylistPageState extends State<PlaylistPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: _playlist == null
-                      ? Container()
-                      : Text(
-                          widget.data.creator.description,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: smallWhite70TextStyle,
-                        ),
+                  child: Text(
+                    widget.data.creator.description,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: smallWhite70TextStyle,
+                  ),
                 ),
                 Icon(
                   Icons.keyboard_arrow_right,

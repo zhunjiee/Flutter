@@ -36,7 +36,11 @@ class DiscoverCategory extends StatelessWidget {
             behavior: HitTestBehavior.translucent, // 点击事件自己也可以处理
             onTap: () {
               if (index == 0) {
+                // 每日推荐
                 NavigatorUtils.goDailySongsPage(context);
+              } else if (index == 2) {
+                // 排行榜
+                NavigatorUtils.goTopListPage(context);
               }
             },
             child: _gridItem(categoryKeys[index], index),

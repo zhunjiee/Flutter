@@ -9,7 +9,7 @@
 import 'package:flutter/material.dart';
 
 class PlaylistModel {
-  int code;
+  num code;
   Playlist playlist;
   List<Privileges> privileges;
 
@@ -58,31 +58,31 @@ class Playlist {
   String englishTitle;
   bool opRecommend;
   String description;
-  int status;
+  num status;
   num createTime;
   bool highQuality;
-  int subscribedCount;
-  int cloudTrackCount;
-  int playCount;
-  int trackCount;
+  num subscribedCount;
+  num cloudTrackCount;
+  num playCount;
+  num trackCount;
   List<String> tags;
   num trackUpdateTime;
   num trackNumberUpdateTime;
-  int adType;
+  num adType;
   num coverImgId;
   String coverImgUrl;
   num updateTime;
   bool newImported;
   bool ordered;
   String commentThreadId;
-  int privacy;
-  int userId;
-  int specialType;
+  num privacy;
+  num userId;
+  num specialType;
   String name;
-  int id;
-  int shareCount;
+  num id;
+  num shareCount;
   String coverImgIdStr;
-  int commentCount;
+  num commentCount;
 
   Playlist(
       {this.subscribers,
@@ -237,16 +237,16 @@ class Playlist {
 
 class Subscribers {
   bool defaultAvatar;
-  int province;
-  int authStatus;
+  num province;
+  num authStatus;
   bool followed;
   String avatarUrl;
-  int accountStatus;
-  int gender;
-  int city;
+  num accountStatus;
+  num gender;
+  num city;
   num birthday;
-  int userId;
-  int userType;
+  num userId;
+  num userType;
   String nickname;
   String signature;
   String description;
@@ -254,10 +254,10 @@ class Subscribers {
   num avatarImgId;
   num backgroundImgId;
   String backgroundUrl;
-  int authority;
+  num authority;
   bool mutual;
-  int djStatus;
-  int vipType;
+  num djStatus;
+  num vipType;
   String avatarImgIdStr;
   String backgroundImgIdStr;
 
@@ -346,16 +346,16 @@ class Subscribers {
 
 class Creator {
   bool defaultAvatar;
-  int province;
-  int authStatus;
+  num province;
+  num authStatus;
   bool followed;
   String avatarUrl;
-  int accountStatus;
-  int gender;
-  int city;
+  num accountStatus;
+  num gender;
+  num city;
   num birthday;
-  int userId;
-  int userType;
+  num userId;
+  num userType;
   String nickname;
   String signature;
   String description;
@@ -363,10 +363,10 @@ class Creator {
   num avatarImgId;
   num backgroundImgId;
   String backgroundUrl;
-  int authority;
+  num authority;
   bool mutual;
-  int djStatus;
-  int vipType;
+  num djStatus;
+  num vipType;
   String avatarImgIdStr;
   String backgroundImgIdStr;
 
@@ -455,34 +455,34 @@ class Creator {
 
 class Tracks {
   String name;
-  int id;
-  int pst;
-  int t;
+  num id;
+  num pst;
+  num t;
   List<Ar> ar;
-  int pop;
-  int st;
+  num pop;
+  num st;
   String rt;
-  int fee;
-  int v;
+  num fee;
+  num v;
   String crbt;
   String cf;
   Al al;
-  int dt;
+  num dt;
   H h;
   H m;
   H l;
   String cd;
-  int no;
-  int ftype;
-  int djId;
-  int copyright;
-  int sId;
-  int mark;
-  int rtype;
-  int mst;
-  int cp;
-  int mv;
-  int publishTime;
+  num no;
+  num ftype;
+  num djId;
+  num copyright;
+  num sId;
+  num mark;
+  num rtype;
+  num mst;
+  num cp;
+  num mv;
+  num publishTime;
   String alg;
 
   Tracks(
@@ -602,7 +602,7 @@ class Tracks {
 }
 
 class Ar {
-  int id;
+  num id;
   String name;
 
   Ar({this.id, this.name});
@@ -621,7 +621,7 @@ class Ar {
 }
 
 class Al {
-  int id;
+  num id;
   String name;
   String picUrl;
   num pic;
@@ -649,10 +649,10 @@ class Al {
 }
 
 class H {
-  int br;
-  int fid;
-  int size;
-  int vd;
+  num br;
+  num fid;
+  num size;
+  num vd;
 
   H({this.br, this.fid, this.size, this.vd});
 
@@ -674,8 +674,8 @@ class H {
 }
 
 class TrackIds {
-  int id;
-  int v;
+  num id;
+  num v;
   String alg;
 
   TrackIds({this.id, this.v, this.alg});
@@ -696,20 +696,20 @@ class TrackIds {
 }
 
 class Privileges {
-  int id;
-  int fee;
-  int payed;
-  int st;
-  int pl;
-  int dl;
-  int sp;
-  int cp;
-  int subp;
+  num id;
+  num fee;
+  num payed;
+  num st;
+  num pl;
+  num dl;
+  num sp;
+  num cp;
+  num subp;
   bool cs;
-  int maxbr;
-  int fl;
+  num maxbr;
+  num fl;
   bool toast;
-  int flag;
+  num flag;
   bool preSell;
 
   Privileges(

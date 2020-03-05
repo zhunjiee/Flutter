@@ -50,7 +50,7 @@ class DiscoverNewAlbum extends StatelessWidget {
               ),
             );
           },
-          future: NetUtils().getAlbumData,
+          futureFunc: NetUtils().getAlbumData,
         ),
       ],
     );

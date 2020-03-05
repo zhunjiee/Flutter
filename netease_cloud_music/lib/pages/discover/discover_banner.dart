@@ -24,7 +24,7 @@ class DiscoverBanner extends StatelessWidget {
           data.banners.map((e) => "${e.pic}?param=540y210").toList(),
         );
       },
-      future: NetUtils().getBanner,
+      futureFunc: NetUtils().getBanner,
     );
   }
 

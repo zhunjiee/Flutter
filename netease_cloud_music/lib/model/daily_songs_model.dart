@@ -398,7 +398,7 @@ class BMusic {
   int dfsId;
   int bitrate;
   int playTime;
-  int volumeDelta;
+  num volumeDelta;
 
   BMusic(
       {this.name,

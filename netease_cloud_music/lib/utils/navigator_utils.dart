@@ -54,4 +54,9 @@ class NavigatorUtils {
   static void goDailySongsPage(BuildContext context) {
     _navigateTo(context, Routes.dailySongsPage);
   }
+
+  /// 跳转到排行榜
+  static void goTopListPage(BuildContext context) {
+    _navigateTo(context, Routes.topListPage);
+  }
 }

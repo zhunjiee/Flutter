@@ -20,6 +20,7 @@ import '../model/album_model.dart';
 import '../model/mv_model.dart';
 import '../model/playlist_model.dart';
 import '../model/daily_songs_model.dart';
+import '../model/top_list_model.dart';
 
 class NetUtils {
   HttpRequest _request;
@@ -111,9 +112,16 @@ class NetUtils {
   }
 
   /// 每日推荐
-  Future<DailySongsModel> getRecommendDailyData(
+  Future<DailySongsModel> getDailySongsData(
       BuildContext context, {Map<String, dynamic> params}) async {
     Response response = await _request.get(context, CommonUrl.recommendSongsAPI, isShowLoading: false);
     return DailySongsModel.fromJson(response.data);
+  }
+
+  /// 排行榜
+  Future<TopListModel> getTopListData(
+      BuildContext context, {Map<String, dynamic> params}) async {
+    Response response = await _request.get(context, CommonUrl.topListAPI, isShowLoading: false);
+    return TopListModel.fromJson(response.data);
   }
 }

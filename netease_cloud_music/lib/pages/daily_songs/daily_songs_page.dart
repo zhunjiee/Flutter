@@ -9,14 +9,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:common_utils/common_utils.dart';
+import 'package:netease_cloud_music/pages/daily_songs/daily_songs_list.dart';
+import 'package:netease_cloud_music/widgets/widget_net_error.dart';
 import '../../utils/net_utils.dart';
 import '../../application.dart';
 import '../play/play_widget.dart';
-import '../playlist/playlist_app_bar.dart';
+import '../../model/daily_songs_model.dart';
+import 'daily_songs_navigator.dart';
 import '../../widgets/custom_sliver_future_builder.dart';
 import '../../widgets/widget_playlist_item.dart';
 import '../../model/daily_songs_model.dart';
 import '../../model/music_model.dart';
+import '../playlist/playlist_app_bar.dart';
+import '../../widgets/widget_net_error.dart';
 
 class DailySongsPage extends StatefulWidget {
   @override
@@ -24,8 +29,7 @@ class DailySongsPage extends StatefulWidget {
 }
 
 class _DailySongsPageState extends State<DailySongsPage> {
-  DailySongsModel _data;
-  int _count;
+  Future<DailySongsModel> future;
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +43,9 @@ class _DailySongsPageState extends State<DailySongsPage> {
             child: CustomScrollView(
               slivers: <Widget>[
                 // 导航栏
-                _playlistNavigatorBar(),
+                _dailySongsNavigateBar(),
                 // 歌曲列表
-                _musicListView(),
+                _songListView(),
               ],
             ),
           ),
@@ -51,12 +55,13 @@ class _DailySongsPageState extends State<DailySongsPage> {
     );
   }
 
-  Widget _playlistNavigatorBar() {
+  /// 导航栏
+  Widget _dailySongsNavigateBar() {
     return PlaylistAppBar(
       expandedHeight: ScreenUtil().setHeight(340),
       title: "每日推荐",
       backgroundImg: "images/bg_daily.png",
-      count: _count,
+      count: 1,
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -94,39 +99,37 @@ class _DailySongsPageState extends State<DailySongsPage> {
     );
   }
 
-  Widget _musicListView() {
+  /// 歌曲列表
+  Widget _songListView() {
     return CustomSliverFutureBuilder<DailySongsModel>(
-        futureFunc: NetUtils().getRecommendDailyData,
-        builder: (context, value) {
-          _setCount(value.recommend.length);
-          return SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                var d = value.recommend[index];
-                return PlaylistItem(
-                  MusicData(
-                      mvId: d.mvid,
-                      picUrl: d.album.picUrl,
-                      songName: d.name,
-                      artists:
-                      "${d.artists.map((a) => a.name).toList().join('/')} - ${d.album.name}",
-                  ),
-                  onTap: (){},
-                );
-              },
-              childCount: value.recommend.length,
-            ),
-          );
-        });
+      futureFunc: NetUtils().getDailySongsData,
+      builder: (context, value) {
+        List<Recommend> list = value.recommend;
+        return SliverList(
+          delegate: SliverChildBuilderDelegate(
+                (context, index) {
+              var d = list[index];
+              return PlaylistItem(
+                MusicData(
+                  mvId: d.mvid,
+                  picUrl: d.album.picUrl,
+                  songName: d.name,
+                  artists:
+                  "${d.artists.map((a) => a.name).toList().join('/')} - ${d.album.name}",
+                ),
+                onTap: () {},
+              );
+            },
+            childCount: list.length,
+          ),
+        );
+      },
+    );
   }
 
-  void _setCount(int count){
-    Future.delayed(Duration(milliseconds: 50), (){
-      if (mounted) {
-          setState(() {
-            _count = count;
-          });
-      }
+  void _setCount(int count) {
+    setState(() {
+      future = NetUtils().getDailySongsData(context);
     });
   }
 }

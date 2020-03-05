@@ -46,7 +46,7 @@ class DiscoverTopMv extends StatelessWidget {
               ),
             );
           },
-          future: NetUtils().getTopMvData,
+          futureFunc: NetUtils().getTopMvData,
         ),
       ],
     );
