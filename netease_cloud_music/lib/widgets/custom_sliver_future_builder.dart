@@ -39,6 +39,7 @@ class _CustomFutureBuilderState<T> extends State<CustomSliverFutureBuilder<T>> {
   @override
   void initState() {
     super.initState();
+    // 是 StatefulWidget 渲染结束的回调，只会被调用一次，之后 StatefulWidget 需要刷新 UI 也不会被调用
     WidgetsBinding.instance.addPostFrameCallback((call) {
       _request();
     });

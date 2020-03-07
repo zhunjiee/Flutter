@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
             title: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
           ),
         ),
-        // 设置导航跳转样式类似iOS
+        // 设置导航跳转样式类似iOS,并且自带向右滑返回前一页
         platform: TargetPlatform.iOS,
       ),
       debugShowCheckedModeBanner: false, // 不显示debug字样

@@ -11,7 +11,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../utils/utils.dart';
 
 class CornerRadiusImage extends StatelessWidget {
-  CornerRadiusImage(this.src, {this.width, this.height, this.radius, this.fit});
+  CornerRadiusImage(
+    this.src, {
+    this.width,
+    this.height,
+    this.radius,
+    this.fit = BoxFit.cover,
+  });
 
   final String src;
   final double width;
@@ -25,17 +31,17 @@ class CornerRadiusImage extends StatelessWidget {
       borderRadius: BorderRadius.circular(ScreenUtil().setWidth(radius)),
       child: src.startsWith("http")
           ? Utils.showNetImage(
-        src,
-        width: width == null ? null : ScreenUtil().setWidth(width),
-        height: height == null ? null : ScreenUtil().setHeight(height),
-        fit: fit,
-      )
+              src,
+              width: width == null ? null : ScreenUtil().setWidth(width),
+              height: height == null ? null : ScreenUtil().setHeight(height),
+              fit: fit,
+            )
           : Image.asset(
-        src,
-        width: width == null ? null : ScreenUtil().setWidth(width),
-        height: height == null ? null : ScreenUtil().setHeight(height),
-        fit: fit,
-      ),
+              src,
+              width: width == null ? null : ScreenUtil().setWidth(width),
+              height: height == null ? null : ScreenUtil().setHeight(height),
+              fit: fit,
+            ),
     );
   }
 }

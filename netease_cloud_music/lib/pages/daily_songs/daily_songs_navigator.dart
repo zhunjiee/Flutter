@@ -12,7 +12,7 @@ import 'package:common_utils/common_utils.dart';
 import '../playlist/playlist_app_bar.dart';
 
 class DailySongsNavigator extends StatelessWidget {
-  DailySongsNavigator(this.count);
+  DailySongsNavigator({this.count});
 
   final int count;
 
@@ -21,8 +21,8 @@ class DailySongsNavigator extends StatelessWidget {
     return PlaylistAppBar(
       expandedHeight: ScreenUtil().setHeight(340),
       title: "每日推荐",
-      backgroundImg: "images/bg_daily.png",
       count: count,
+      backgroundImg: "images/bg_daily.png",
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

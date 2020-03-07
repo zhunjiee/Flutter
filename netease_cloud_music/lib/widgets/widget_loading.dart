@@ -33,7 +33,7 @@ class Loading {
             ),
           );
         },
-        barrierDismissible: false, // 是否可以点击背景关闭
+        barrierDismissible: false, // 点击背景不关闭
         barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
         transitionDuration: Duration(milliseconds: 150),  // 从开始到完全显示的时间
       ).then((v){

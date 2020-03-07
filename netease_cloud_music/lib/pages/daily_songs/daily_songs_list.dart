@@ -14,30 +14,31 @@ import '../../widgets/custom_sliver_future_builder.dart';
 import '../../utils/net_utils.dart';
 
 class DailySongsList extends StatelessWidget {
+  DailySongsList(this.songsList);
+
+  final List<Recommend> songsList;
+
   @override
   Widget build(BuildContext context) {
-    return CustomSliverFutureBuilder<DailySongsModel>(
-      futureFunc: NetUtils().getTopListData,
-      builder: (context, value) {
-        return SliverList(
-          delegate: SliverChildBuilderDelegate(
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
             (context, index) {
-              var d = value.recommend[index];
-              return PlaylistItem(
-                MusicData(
-                  mvId: d.mvid,
-                  picUrl: d.album.picUrl,
-                  songName: d.name,
-                  artists:
-                      "${d.artists.map((a) => a.name).toList().join('/')} - ${d.album.name}",
-                ),
-                onTap: () {},
-              );
+          var d = songsList[index];
+          return PlaylistItem(
+            MusicData(
+              mvId: d.mvid,
+              picUrl: d.album.picUrl,
+              songName: d.name,
+              artists:
+              "${d.artists.map((a) => a.name).toList().join('/')} - ${d.album.name}",
+            ),
+            onTap: () {
+              print("播放音乐");
             },
-            childCount: value.recommend.length,
-          ),
-        );
-      },
+          );
+        },
+        childCount: songsList.length,
+      ),
     );
   }
 }

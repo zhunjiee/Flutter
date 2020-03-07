@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 /**
  * @ClassName daily_songs
  * @Description TODO
@@ -22,6 +23,7 @@ import '../../model/daily_songs_model.dart';
 import '../../model/music_model.dart';
 import '../playlist/playlist_app_bar.dart';
 import '../../widgets/widget_net_error.dart';
+import '../../widgets/widget_loading.dart';
 
 class DailySongsPage extends StatefulWidget {
   @override
@@ -29,8 +31,6 @@ class DailySongsPage extends StatefulWidget {
 }
 
 class _DailySongsPageState extends State<DailySongsPage> {
-  Future<DailySongsModel> future;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,13 +40,48 @@ class _DailySongsPageState extends State<DailySongsPage> {
             padding: EdgeInsets.only(
                 bottom:
                     ScreenUtil().setHeight(110) + Application.bottomBarHeight),
-            child: CustomScrollView(
-              slivers: <Widget>[
-                // 导航栏
-                _dailySongsNavigateBar(),
-                // 歌曲列表
-                _songListView(),
-              ],
+            child: FutureBuilder<DailySongsModel>(
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return CustomScrollView(
+                    slivers: <Widget>[
+                      // 导航栏
+                      DailySongsNavigator(
+                        count: snapshot.data.recommend.length,
+                      ),
+                      // 歌曲列表
+                      DailySongsList(snapshot.data.recommend),
+                    ],
+                  );
+                } else if (snapshot.hasError) {
+                  return CustomScrollView(
+                    slivers: <Widget>[
+                      // 导航栏
+                      DailySongsNavigator(),
+                      SliverToBoxAdapter(
+                        child: NetErrorWidget(
+                          callback: () {},
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return CustomScrollView(
+                    slivers: <Widget>[
+                      // 导航栏
+                      DailySongsNavigator(),
+                      SliverToBoxAdapter(
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: ScreenUtil().setWidth(400),
+                          child: CupertinoActivityIndicator(),
+                        ),
+                      ),
+                    ],
+                  );
+                }
+              },
+              future: NetUtils().getDailySongsData(context),
             ),
           ),
           BottomPlayWidget(),
@@ -55,81 +90,4 @@ class _DailySongsPageState extends State<DailySongsPage> {
     );
   }
 
-  /// 导航栏
-  Widget _dailySongsNavigateBar() {
-    return PlaylistAppBar(
-      expandedHeight: ScreenUtil().setHeight(340),
-      title: "每日推荐",
-      backgroundImg: "images/bg_daily.png",
-      count: 1,
-      content: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Spacer(),
-          Container(
-            padding: EdgeInsets.only(left: ScreenUtil().setWidth(40)),
-            margin: EdgeInsets.only(bottom: ScreenUtil().setWidth(5)),
-            child: RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text:
-                        "${DateUtil.formatDate(DateTime.now(), format: "dd")}",
-                    style: TextStyle(fontSize: 30),
-                  ),
-                  TextSpan(
-                    text:
-                        "/ ${DateUtil.formatDate(DateTime.now(), format: "MM")}",
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.only(left: ScreenUtil().setWidth(40)),
-            margin: EdgeInsets.only(bottom: ScreenUtil().setWidth(20)),
-            child: Text(
-              '根据你的音乐口味，为你推荐好音乐。',
-              style: TextStyle(fontSize: 14, color: Colors.white70),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// 歌曲列表
-  Widget _songListView() {
-    return CustomSliverFutureBuilder<DailySongsModel>(
-      futureFunc: NetUtils().getDailySongsData,
-      builder: (context, value) {
-        List<Recommend> list = value.recommend;
-        return SliverList(
-          delegate: SliverChildBuilderDelegate(
-                (context, index) {
-              var d = list[index];
-              return PlaylistItem(
-                MusicData(
-                  mvId: d.mvid,
-                  picUrl: d.album.picUrl,
-                  songName: d.name,
-                  artists:
-                  "${d.artists.map((a) => a.name).toList().join('/')} - ${d.album.name}",
-                ),
-                onTap: () {},
-              );
-            },
-            childCount: list.length,
-          ),
-        );
-      },
-    );
-  }
-
-  void _setCount(int count) {
-    setState(() {
-      future = NetUtils().getDailySongsData(context);
-    });
-  }
 }

@@ -35,7 +35,6 @@ class PlaylistPage extends StatefulWidget {
 
 class _PlaylistPageState extends State<PlaylistPage> {
   double _expandedHeight = ScreenUtil().setHeight(630);
-  Playlist _playlist;
 
   @override
   Widget build(BuildContext context) {
@@ -221,15 +220,5 @@ class _PlaylistPageState extends State<PlaylistPage> {
         );
       },
     );
-  }
-
-  void _setData(Playlist data) {
-    Future.delayed(Duration(milliseconds: 50), () {
-      if (mounted) {
-        setState(() {
-          _playlist = data;
-        });
-      }
-    });
   }
 }

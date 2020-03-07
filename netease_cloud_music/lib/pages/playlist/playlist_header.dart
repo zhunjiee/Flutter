@@ -39,15 +39,16 @@ class PlaylistHeader extends StatelessWidget
           child: SizedBox.fromSize(
             size: preferredSize,
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 HorizontalPlaceholderView(20),
                 Icon(
                   Icons.play_circle_outline,
                   size: ScreenUtil().setWidth(50),
                 ),
-                HorizontalPlaceholderView(10),
+                HorizontalPlaceholderView(6),
                 Padding(
-                  padding: const EdgeInsets.only(top: 3.0),
+                  padding: const EdgeInsets.only(bottom: 2.0),
                   child: Text(
                     "播放全部",
                     style: mCommonTextStyle,

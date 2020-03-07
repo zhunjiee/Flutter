@@ -35,7 +35,7 @@ class CommonUrl {
   static const String playlistDetailAPI = baseUrl + "/playlist/detail";
 
   // 每日推荐
-  static const String recommendSongsAPI = baseUrl + "/recommend/songs";
+  static const String dailySongsAPI = baseUrl + "/recommend/songs";
 
   // 排行榜
   static const String topListAPI = baseUrl + "/toplist/detail";

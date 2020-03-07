@@ -104,24 +104,25 @@ class NetUtils {
   }
 
   /// 歌单详情
-  Future<PlaylistModel> getPlaylistDetailData(
-      BuildContext context, {Map<String, dynamic> params}) async {
+  Future<PlaylistModel> getPlaylistDetailData(BuildContext context,
+      {Map<String, dynamic> params}) async {
     Response response = await _request.get(context, CommonUrl.playlistDetailAPI,
-        params: params);
+        params: params, isShowLoading: false);
     return PlaylistModel.fromJson(response.data);
   }
 
   /// 每日推荐
-  Future<DailySongsModel> getDailySongsData(
-      BuildContext context, {Map<String, dynamic> params}) async {
-    Response response = await _request.get(context, CommonUrl.recommendSongsAPI, isShowLoading: false);
-    return DailySongsModel.fromJson(response.data);
+  Future<DailySongsModel> getDailySongsData(BuildContext context) async {
+    Response response = await _request.get(context, CommonUrl.dailySongsAPI, isShowLoading: false);
+    DailySongsModel model = DailySongsModel.fromJson(response.data);
+    return model;
   }
 
   /// 排行榜
-  Future<TopListModel> getTopListData(
-      BuildContext context, {Map<String, dynamic> params}) async {
-    Response response = await _request.get(context, CommonUrl.topListAPI, isShowLoading: false);
+  Future<TopListModel> getTopListData(BuildContext context,
+      {Map<String, dynamic> params}) async {
+    Response response =
+        await _request.get(context, CommonUrl.topListAPI, isShowLoading: false);
     return TopListModel.fromJson(response.data);
   }
 }

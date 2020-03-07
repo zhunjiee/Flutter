@@ -10,16 +10,16 @@ import 'package:flutter/material.dart';
 
 class TopListModel {
   int code;
-  List<TopList> list;
+  List<TopList> topList;
 
-  TopListModel({this.code, this.list});
+  TopListModel({this.code, this.topList});
 
   TopListModel.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     if (json['list'] != null) {
-      list = new List<TopList>();
+      topList = new List<TopList>();
       json['list'].forEach((v) {
-        list.add(new TopList.fromJson(v));
+        topList.add(new TopList.fromJson(v));
       });
     }
   }
@@ -27,8 +27,8 @@ class TopListModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['code'] = this.code;
-    if (this.list != null) {
-      data['list'] = this.list.map((v) => v.toJson()).toList();
+    if (this.topList != null) {
+      data['list'] = this.topList.map((v) => v.toJson()).toList();
     }
     return data;
   }
