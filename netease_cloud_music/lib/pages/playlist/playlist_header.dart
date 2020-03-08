@@ -8,10 +8,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:netease_cloud_music/provider/play_music_provider.dart';
 import '../../utils/common_text_style.dart';
 import '../../widgets/h_placeholder_view.dart';
 
-typedef PlayModelCallback = void Function(String zhanwei);
+typedef PlayMusicCallback = void Function(PlayMusicProvider provider);
 
 class PlaylistHeader extends StatelessWidget
     implements PreferredSizeWidget {
@@ -19,7 +20,7 @@ class PlaylistHeader extends StatelessWidget
 
   final int count;
   final Widget tail;  // 尾部附加控件
-  final PlayModelCallback onTap;
+  final VoidCallback onTap;
 
   @override
   Size get preferredSize => Size.fromHeight(ScreenUtil().setHeight(100));
@@ -33,9 +34,7 @@ class PlaylistHeader extends StatelessWidget
       child: Container(
         color: Colors.white,
         child: InkWell(
-          onTap: () {
-            onTap("haha");
-          },
+          onTap: onTap,
           child: SizedBox.fromSize(
             size: preferredSize,
             child: Row(

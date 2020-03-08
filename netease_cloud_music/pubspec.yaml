@@ -40,6 +40,7 @@ dependencies:
   permission_handler: ^4.2.0+hotfix.3 # 权限处理
   extended_image: ^0.7.1  # 屌炸天的 Image 扩展
   get_it: ^3.1.0  # 依赖注入
+  flutter_easyloading: ^1.1.1 # loading遮罩
 
 
 dev_dependencies:
@@ -77,6 +78,7 @@ flutter:
     - images/icon_multi_select.png
     - images/bg_daily.png
     - images/ck.9.png
+    - images/icon_line_1.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

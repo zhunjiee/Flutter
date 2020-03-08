@@ -1,6 +1,6 @@
 /**
  * @ClassName mine
- * @Description 顶部轮播图
+ * @Description 我的页面
  * @Author HouGe
  * @Date 2020-02-25 21:01
  * @Version 1.0

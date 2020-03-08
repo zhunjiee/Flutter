@@ -13,9 +13,10 @@ import '../pages/splash_page.dart';
 import '../pages/index_page.dart';
 import '../pages/login/login_page.dart';
 import '../pages/playlist/playlist_page.dart';
-import '../model/recommend_playlist_model.dart';
+import '../model/recommend_model.dart';
 import '../pages/daily_songs/daily_songs_page.dart';
 import '../pages/top_list/top_list_page.dart';
+import '../pages/play_music/play_music_page.dart';
 
 /// 启动页
 Handler splashHandler = Handler(
@@ -54,3 +55,10 @@ Handler topListHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
   return TopListPage();
 });
+
+/// 播放页面
+Handler playMusicHandler = Handler(
+  handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
+    return PlayMusicPage();
+  }
+);

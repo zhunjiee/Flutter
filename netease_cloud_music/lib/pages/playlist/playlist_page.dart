@@ -1,28 +1,33 @@
 /**
  * @ClassName play_list
- * @Description TODO
+ * @Description 歌单页面
  * @Author HouGe
  * @Date 2020-02-26 11:04
  * @Version 1.0
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:netease_cloud_music/model/playlist_model.dart';
+import 'package:netease_cloud_music/provider/play_music_provider.dart';
 import 'package:netease_cloud_music/utils/net_utils.dart';
 import '../../application.dart';
-import '../play/play_widget.dart';
+import '../bottom_play/bottom_play_widget.dart';
 import 'playlist_app_bar.dart';
-import '../../model/recommend_playlist_model.dart';
+import '../../model/recommend_model.dart';
 import '../../widgets/v_placeholder_view.dart';
 import '../../widgets/h_placeholder_view.dart';
 import '../../widgets/widget_playlist_cover.dart';
 import '../../widgets/widget_circular_image.dart';
-import '../../widgets/custom_sliver_future_builder.dart';
+import '../../utils/navigator_utils.dart';
 import '../../utils/common_text_style.dart';
 import '../../widgets/widget_footer_tab.dart';
 import '../../widgets/widget_playlist_item.dart';
 import '../../model/music_model.dart';
+import '../../widgets/widget_net_error.dart';
+import '../../utils/number_utils.dart';
+import 'playlist_desc_dialog.dart';
 
 class PlaylistPage extends StatefulWidget {
   PlaylistPage(this.data);
@@ -45,13 +50,55 @@ class _PlaylistPageState extends State<PlaylistPage> {
             padding: EdgeInsets.only(
               bottom: ScreenUtil().setHeight(110) + Application.bottomBarHeight,
             ),
-            child: CustomScrollView(
-              slivers: <Widget>[
-                // 歌单信息
-                _playlistInfo(),
-                // 歌曲列表
-                _musicList(),
-              ],
+            child: FutureBuilder<PlaylistModel>(
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  /// 加载完成...
+                  Playlist playlist = snapshot.data.playlist;
+                  List<Tracks> trackList = playlist.tracks;
+                  return CustomScrollView(
+                    slivers: <Widget>[
+                      // 歌单信息
+                      _playlistInfoView(playlist: playlist),
+                      // 歌曲列表
+                      _musicList(trackList),
+                    ],
+                  );
+                } else if (snapshot.hasError) {
+                  /// 错误...
+                  return CustomScrollView(
+                    slivers: <Widget>[
+                      _playlistInfoView(),
+                      SliverToBoxAdapter(
+                        child: NetErrorWidget(
+                          callback: () {
+                            // 重新请求数据
+                            setState(() {});
+                          },
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  /// 加载中...
+                  return CustomScrollView(
+                    slivers: <Widget>[
+                      _playlistInfoView(),
+                      SliverToBoxAdapter(
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: ScreenUtil().setWidth(400),
+                          child: CupertinoActivityIndicator(),
+                        ),
+                      ),
+                    ],
+                  );
+                }
+              },
+              future: NetUtils().getPlaylistDetailData(
+                context,
+                params: {"id": widget.data.id},
+              ),
             ),
           ),
           // 底部播放栏
@@ -61,8 +108,15 @@ class _PlaylistPageState extends State<PlaylistPage> {
     );
   }
 
+  /// 播放音乐
+  void _playMusic() {
+    NavigatorUtils.goPlayMusicPage(context);
+  }
+
+  // --------------- Widgets --------------------
+
   /// 歌单信息
-  Widget _playlistInfo() {
+  Widget _playlistInfoView({Playlist playlist}) {
     return PlaylistAppBar(
       content: SafeArea(
         child: Padding(
@@ -83,12 +137,12 @@ class _PlaylistPageState extends State<PlaylistPage> {
                   ),
                   HorizontalPlaceholderView(20),
                   // 右侧歌单信息
-                  _playlistRightInfo(),
+                  _playlistRightInfoView(playlist),
                 ],
               ),
               VerticalPlaceholderView(15),
               // 评论/分享/下载/多选
-              _commentWidget(),
+              _commentWidget(playlist),
             ],
           ),
         ),
@@ -96,17 +150,19 @@ class _PlaylistPageState extends State<PlaylistPage> {
       expandedHeight: _expandedHeight,
       title: widget.data.name,
       backgroundImg: widget.data.picUrl,
+      count: playlist == null ? null : playlist.trackCount,
       sigma: 20,
-      playOnTap: (String zhanwei) {
-        print(zhanwei);
+      playOnTap: () {
+        // 播放全部
       },
     );
   }
 
   /// 歌单信息: 右侧歌单信息
-  Widget _playlistRightInfo() {
+  Widget _playlistRightInfoView(Playlist playlist) {
     return Expanded(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           // 标题
           Text(
@@ -119,55 +175,100 @@ class _PlaylistPageState extends State<PlaylistPage> {
           // 创建者
           GestureDetector(
             onTap: () {},
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                CircularImage(
-                    "${widget.data.creator.avatarUrl}?param=50y50", 40),
-                HorizontalPlaceholderView(5),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 4),
-                  child: Text(
-                    widget.data.creator.nickname,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: commonWhite70TextStyle,
+            child: playlist == null
+                ? Container(
+                    height: ScreenUtil().setHeight(40),
+                  )
+                : Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      CircularImage(
+                          "${playlist.creator.avatarUrl}?param=50y50", 40),
+                      HorizontalPlaceholderView(5),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 4),
+                        child: Text(
+                          playlist.creator.nickname,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: commonWhite70TextStyle,
+                        ),
+                      ),
+                      Icon(
+                        Icons.keyboard_arrow_right,
+                        color: Colors.white70,
+                      ),
+                    ],
                   ),
-                ),
-                Icon(
-                  Icons.keyboard_arrow_right,
-                  color: Colors.white70,
-                ),
-              ],
-            ),
           ),
           // 歌单描述
           GestureDetector(
-            onTap: () {},
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Text(
-                    widget.data.creator.description,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: smallWhite70TextStyle,
+            onTap: () {
+              // 弹出歌单详情对话框
+//              showDialog(
+//                context: context,
+//                builder: (context){
+//                  return PlaylistDescDialog(playlist);
+//                }
+//              );
+            // 自定义弹出对话框
+              _showCustomDialog(playlist);
+            },
+            child: playlist == null
+                ? Container(
+                    height: ScreenUtil().setHeight(70),
+                  )
+                : Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Text(
+                          playlist.description,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: smallWhite70TextStyle,
+                        ),
+                      ),
+                      Icon(
+                        Icons.keyboard_arrow_right,
+                        color: Colors.white70,
+                      ),
+                    ],
                   ),
-                ),
-                Icon(
-                  Icons.keyboard_arrow_right,
-                  color: Colors.white70,
-                ),
-              ],
-            ),
           ),
         ],
       ),
     );
   }
 
+  /// 弹出歌单详情
+  _showCustomDialog(Playlist playlist) {
+    showGeneralDialog(
+      context: context,
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return PlaylistDescDialog(playlist);
+      },
+      barrierDismissible: true, // 点击遮罩对话框消失
+      barrierLabel:
+      MaterialLocalizations.of(context).modalBarrierDismissLabel,
+      transitionDuration: Duration(milliseconds: 100),
+      transitionBuilder: _buildMaterialDialogTransitions,
+    );
+  }
+
+  /// 自定义Dialog动画效果
+  Widget _buildMaterialDialogTransitions(
+      BuildContext context,
+      Animation<double> animation,
+      Animation<double> secondaryAnimation,
+      Widget child) {
+    return ScaleTransition(
+      scale: CurvedAnimation(parent: animation, curve: Curves.easeOut),
+      child: child,
+    );
+  }
+
   /// 评论/分享 等
-  Widget _commentWidget() {
+  Widget _commentWidget(Playlist playlist) {
     return Container(
       margin: EdgeInsets.only(top: ScreenUtil().setHeight(12)),
       alignment: Alignment.center,
@@ -175,11 +276,15 @@ class _PlaylistPageState extends State<PlaylistPage> {
         children: <Widget>[
           FooterTabItem(
             "images/icon_comment.png",
-            "评论",
+            playlist == null
+                ? "评论"
+                : NumberUtils.amountConversion(playlist.commentCount),
           ),
           FooterTabItem(
             "images/icon_share.png",
-            "分享",
+            playlist == null
+                ? "分享"
+                : NumberUtils.amountConversion(playlist.shareCount),
           ),
           FooterTabItem(
             "images/icon_download.png",
@@ -195,30 +300,26 @@ class _PlaylistPageState extends State<PlaylistPage> {
   }
 
   /// 歌单音乐
-  Widget _musicList() {
-    return CustomSliverFutureBuilder<PlaylistModel>(
-      futureFunc: NetUtils().getPlaylistDetailData,
-      params: {"id": widget.data.id},
-      builder: (context, value) {
-        List<Tracks> trackList = value.playlist.tracks;
-        return SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              Tracks track = trackList[index];
-              return PlaylistItem(
-                MusicData(
-                    mvId: track.mv,
-                    index: index + 1,
-                    songName: track.name,
-                    artists:
-                        "${track.ar.map((a) => a.name).toList().join("/")} - ${track.al.name}"),
-                onTap: () {},
-              );
+  Widget _musicList(List<Tracks> trackList) {
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          Tracks track = trackList[index];
+          return PlaylistItem(
+            MusicData(
+                mvId: track.mv,
+                index: index + 1,
+                name: track.name,
+                artists:
+                    "${track.ar.map((a) => a.name).toList().join("/")} - ${track.al.name}"),
+            onTap: () {
+              // 播放音乐
+              _playMusic();
             },
-            childCount: trackList.length,
-          ),
-        );
-      },
+          );
+        },
+        childCount: trackList.length,
+      ),
     );
   }
 }

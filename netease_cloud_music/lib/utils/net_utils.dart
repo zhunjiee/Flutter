@@ -15,7 +15,7 @@ import 'common_url.dart';
 import 'utils.dart';
 import '../model/user_model.dart';
 import '../model/banner_model.dart';
-import '../model/recommend_playlist_model.dart';
+import '../model/recommend_model.dart';
 import '../model/album_model.dart';
 import '../model/mv_model.dart';
 import '../model/playlist_model.dart';
@@ -108,13 +108,17 @@ class NetUtils {
       {Map<String, dynamic> params}) async {
     Response response = await _request.get(context, CommonUrl.playlistDetailAPI,
         params: params, isShowLoading: false);
-    return PlaylistModel.fromJson(response.data);
+    PlaylistModel model = PlaylistModel.fromJson(response.data);
+    print("Playlist ================> $model");
+    return model;
   }
 
   /// 每日推荐
   Future<DailySongsModel> getDailySongsData(BuildContext context) async {
-    Response response = await _request.get(context, CommonUrl.dailySongsAPI, isShowLoading: false);
+    Response response = await _request.get(context, CommonUrl.dailySongsAPI,
+        isShowLoading: false);
     DailySongsModel model = DailySongsModel.fromJson(response.data);
+    print("DailySongs ================> $model");
     return model;
   }
 

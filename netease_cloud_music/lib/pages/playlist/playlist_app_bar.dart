@@ -29,7 +29,7 @@ class PlaylistAppBar extends StatelessWidget {
   final Widget content;
   final String backgroundImg;
   final double sigma;
-  final PlayModelCallback playOnTap;
+  final VoidCallback playOnTap;
   final int count;
 
   @override

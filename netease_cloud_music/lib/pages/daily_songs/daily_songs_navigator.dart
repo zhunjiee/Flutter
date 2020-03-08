@@ -1,6 +1,6 @@
 /**
  * @ClassName daily_songs_navigator
- * @Description TODO
+ * @Description 每日歌单 - 导航栏
  * @Author HouGe
  * @Date 2020-03-05 13:58
  * @Version 1.0
@@ -9,7 +9,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:common_utils/common_utils.dart';
+import 'package:netease_cloud_music/provider/play_music_provider.dart';
 import '../playlist/playlist_app_bar.dart';
+import '../../utils/navigator_utils.dart';
 
 class DailySongsNavigator extends StatelessWidget {
   DailySongsNavigator({this.count});
@@ -57,6 +59,10 @@ class DailySongsNavigator extends StatelessWidget {
           ),
         ],
       ),
+      playOnTap: (){
+        // 播放全部
+        NavigatorUtils.goPlayMusicPage(context);
+      },
     );
   }
 }

@@ -13,7 +13,7 @@ import '../../widgets/v_placeholder_view.dart';
 import '../../widgets/widget_corner_radius_image.dart';
 import '../../model/top_list_model.dart';
 import '../../utils/navigator_utils.dart';
-import '../../model/recommend_playlist_model.dart';
+import '../../model/recommend_model.dart';
 
 class MoreTopList extends StatelessWidget {
   MoreTopList(this.moreList);
@@ -25,7 +25,8 @@ class MoreTopList extends StatelessWidget {
     if (moreList.length != 0) {
       return Container(
         child: Wrap(
-          spacing: 24,
+          spacing: 24,  // 主轴间距
+          runSpacing: 30, // 纵轴间距
           children: moreList.map((topList) {
             return _moreTopListItem(context, topList);
           }).toList(),
@@ -59,7 +60,6 @@ class MoreTopList extends StatelessWidget {
         _toPlayListPage(context, top);
       },
       child: Container(
-        padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(50)),
         width: ScreenUtil().setWidth(200),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,6 +94,7 @@ class MoreTopList extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: common13TextStyle,
             ),
+            VerticalPlaceholderView(10),
           ],
         ),
       ),

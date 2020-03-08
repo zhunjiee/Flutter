@@ -1,6 +1,6 @@
 /**
  * @ClassName play_widget
- * @Description TODO
+ * @Description App底部的播放条
  * @Author HouGe
  * @Date 2020-02-26 11:10
  * @Version 1.0

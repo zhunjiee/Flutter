@@ -1,6 +1,6 @@
 /**
  * @ClassName home_page
- * @Description TODO
+ * @Description 发现页
  * @Author HouGe
  * @Date 2020-02-19 23:07
  * @Version 1.0
@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import '../../widgets/v_placeholder_view.dart';
 import 'discover_banner.dart';
 import 'discover_category.dart';
-import 'discover_recommend_playlist.dart';
+import 'discover_recommend.dart';
 import 'discover_new_album.dart';
 import 'discover_top_mv.dart';
 

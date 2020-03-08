@@ -1,6 +1,6 @@
 /**
  * @ClassName event_page
- * @Description TODO
+ * @Description 动态页
  * @Author HouGe
  * @Date 2020-02-25 21:02
  * @Version 1.0

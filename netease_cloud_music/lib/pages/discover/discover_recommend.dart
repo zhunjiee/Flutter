@@ -11,7 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../widgets/h_placeholder_view.dart';
 import '../../widgets/custom_future_builder.dart';
 import '../../utils/net_utils.dart';
-import '../../model/recommend_playlist_model.dart';
+import '../../model/recommend_model.dart';
 import '../../widgets/widget_playlist.dart';
 import '../../widgets/widget_common_title.dart';
 import '../../utils/navigator_utils.dart';

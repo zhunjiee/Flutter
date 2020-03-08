@@ -8,7 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
-import 'package:netease_cloud_music/model/recommend_playlist_model.dart';
+import 'package:netease_cloud_music/model/recommend_model.dart';
 import 'package:netease_cloud_music/routes/routes.dart';
 import 'package:netease_cloud_music/utils/fluro_convert_utils.dart';
 import '../application.dart';
@@ -58,5 +58,10 @@ class NavigatorUtils {
   /// 跳转到排行榜
   static void goTopListPage(BuildContext context) {
     _navigateTo(context, Routes.topListPage);
+  }
+
+  /// 跳转到播放音乐页面
+  static void goPlayMusicPage(BuildContext context) {
+    _navigateTo(context, Routes.playMusicPage);
   }
 }

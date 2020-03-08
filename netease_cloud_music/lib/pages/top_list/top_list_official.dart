@@ -14,7 +14,7 @@ import '../../widgets/widget_corner_radius_image.dart';
 import '../../model/top_list_model.dart';
 import '../../utils/common_text_style.dart';
 import '../../utils/navigator_utils.dart';
-import '../../model/recommend_playlist_model.dart';
+import '../../model/recommend_model.dart';
 
 class OfficialTopList extends StatelessWidget {
   OfficialTopList(this.officialList);

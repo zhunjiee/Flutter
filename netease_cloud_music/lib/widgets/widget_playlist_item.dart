@@ -58,7 +58,7 @@ class PlaylistItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    _data.songName,
+                    _data.name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: commonTextStyle,

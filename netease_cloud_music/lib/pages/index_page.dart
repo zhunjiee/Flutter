@@ -15,7 +15,7 @@ import '../utils/net_utils.dart';
 import '../utils/http_request.dart';
 import '../utils/common_url.dart';
 import '../utils/common_color.dart';
-import 'play/play_widget.dart';
+import 'bottom_play/bottom_play_widget.dart';
 import 'discover/discover_page.dart';
 import 'event/event_page.dart';
 import 'mine/mine_page.dart';
