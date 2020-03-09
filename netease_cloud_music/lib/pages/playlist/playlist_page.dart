@@ -39,7 +39,7 @@ class PlaylistPage extends StatefulWidget {
 }
 
 class _PlaylistPageState extends State<PlaylistPage> {
-  double _expandedHeight = ScreenUtil().setHeight(630);
+  double _expandedHeight = ScreenUtil().setWidth(630);
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(
-              bottom: ScreenUtil().setHeight(110) + Application.bottomBarHeight,
+              bottom: ScreenUtil().setWidth(110) + Application.bottomBarHeight,
             ),
             child: FutureBuilder<PlaylistModel>(
               builder: (context, snapshot) {
@@ -122,7 +122,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
         child: Padding(
           padding: EdgeInsets.only(
             left: ScreenUtil().setWidth(35),
-            top: ScreenUtil().setHeight(120),
+            top: ScreenUtil().setWidth(120),
             right: ScreenUtil().setWidth(35),
           ),
           child: Column(
@@ -140,7 +140,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
                   _playlistRightInfoView(playlist),
                 ],
               ),
-              VerticalPlaceholderView(15),
+              VerticalPlaceholderView(30),
               // 评论/分享/下载/多选
               _commentWidget(playlist),
             ],
@@ -177,7 +177,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
             onTap: () {},
             child: playlist == null
                 ? Container(
-                    height: ScreenUtil().setHeight(40),
+                    height: ScreenUtil().setWidth(40),
                   )
                 : Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -216,7 +216,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
             },
             child: playlist == null
                 ? Container(
-                    height: ScreenUtil().setHeight(70),
+                    height: ScreenUtil().setWidth(70),
                   )
                 : Row(
                     children: <Widget>[
@@ -270,7 +270,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
   /// 评论/分享 等
   Widget _commentWidget(Playlist playlist) {
     return Container(
-      margin: EdgeInsets.only(top: ScreenUtil().setHeight(12)),
+      margin: EdgeInsets.only(top: ScreenUtil().setWidth(12)),
       alignment: Alignment.center,
       child: Row(
         children: <Widget>[

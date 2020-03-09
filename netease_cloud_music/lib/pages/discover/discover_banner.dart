@@ -30,7 +30,7 @@ class DiscoverBanner extends StatelessWidget {
 
   Widget _customSwipe(List bannerList) {
     return Container(
-      height: ScreenUtil().setHeight((750 - 30*2) / 540 * 210), // 图片高度
+      height: ScreenUtil().setWidth((750 - 30*2) / 540 * 210), // 图片高度
       child: Swiper(
         itemCount: bannerList.length,
         itemBuilder: (context, index) {

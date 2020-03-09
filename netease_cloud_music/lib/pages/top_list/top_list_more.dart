@@ -64,28 +64,37 @@ class MoreTopList extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Stack(
-              children: <Widget>[
-                CornerRadiusImage("$picUrl?param=150y150",
-                    width: 200, height: 200, radius: 10),
-                Positioned(
-                  bottom: 0,
-                  child: Image.asset(
-                    "images/ck.9.png",
-                    width: ScreenUtil().setWidth(200),
-                    height: ScreenUtil().setHeight(80),
-                    fit: BoxFit.fill,
-                  ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Container(
+                width: ScreenUtil().setWidth(200),
+                child: Stack(
+                  children: <Widget>[
+                    Image.network(
+                      "$picUrl?param=150y150",
+                      width: ScreenUtil().setWidth(200),
+                      height: ScreenUtil().setWidth(200),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      child: Image.asset(
+                        "images/ck.9.png",
+                        width: ScreenUtil().setWidth(200),
+                        height: ScreenUtil().setWidth(80),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    Positioned(
+                      left: ScreenUtil().setWidth(10),
+                      bottom: ScreenUtil().setWidth(10),
+                      child: Text(
+                        updateTime,
+                        style: smallWhiteTextStyle,
+                      ),
+                    ),
+                  ],
                 ),
-                Positioned(
-                  left: ScreenUtil().setWidth(10),
-                  bottom: ScreenUtil().setWidth(10),
-                  child: Text(
-                    updateTime,
-                    style: smallWhiteTextStyle,
-                  ),
-                ),
-              ],
+              ),
             ),
             VerticalPlaceholderView(10),
             Text(

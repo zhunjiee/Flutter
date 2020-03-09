@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage>
                   child: Image.asset(
                     "images/icon_logo.png",
                     width: ScreenUtil().setWidth(90),
-                    height: ScreenUtil().setHeight(90),
+                    height: ScreenUtil().setWidth(90),
                   ),
                 ),
                 LoginAnimatedWidget(animation: _animation),

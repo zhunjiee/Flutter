@@ -32,7 +32,7 @@ class CustomFutureBuilder<T> extends StatefulWidget {
   }) : loadingWidget = loadingWidget ??
             Container(
               alignment: Alignment.center,
-              height: ScreenUtil().setHeight(200),
+              height: ScreenUtil().setWidth(200),
               child: CupertinoActivityIndicator(),
             );
 

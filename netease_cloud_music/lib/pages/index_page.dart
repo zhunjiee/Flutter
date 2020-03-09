@@ -70,7 +70,7 @@ class _IndexPageState extends State<IndexPage>
               ),
               padding: EdgeInsets.only(
                   bottom:
-                      ScreenUtil().setHeight(110) + Application.bottomBarHeight),
+                      ScreenUtil().setWidth(110) + Application.bottomBarHeight),
             ),
             BottomPlayWidget(), // 底部播放条
           ],

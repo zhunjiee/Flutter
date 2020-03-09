@@ -18,7 +18,7 @@ class VerticalPlaceholderView extends StatelessWidget {
   Widget build(BuildContext context) {
     double h = height == null ? 10 : height;
     return Container(
-      height: ScreenUtil().setHeight(h),
+      height: ScreenUtil().setWidth(h),
     );
   }
 }

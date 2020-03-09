@@ -27,7 +27,7 @@ class PlaylistItem extends StatelessWidget {
       onTap: onTap,
       child: Container(
         color: Colors.white,
-        height: ScreenUtil().setHeight(120),
+        height: ScreenUtil().setWidth(120),
         child: Row(
           children: <Widget>[
             _data.index == null && _data.picUrl == null
@@ -46,7 +46,7 @@ class PlaylistItem extends StatelessWidget {
                 : Container(
                     alignment: Alignment.center,
                     width: ScreenUtil().setWidth(60),
-                    height: ScreenUtil().setHeight(50),
+                    height: ScreenUtil().setWidth(50),
                     child: Text(_data.index.toString(), style: mGrayTextStyle),
                   ),
             _data.index == null && _data.picUrl == null

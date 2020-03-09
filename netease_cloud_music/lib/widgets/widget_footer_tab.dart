@@ -28,7 +28,7 @@ class FooterTabItem extends StatelessWidget {
             Image.asset(
               img,
               width: ScreenUtil().setWidth(50),
-              height: ScreenUtil().setHeight(50),
+              height: ScreenUtil().setWidth(50),
             ),
             VerticalPlaceholderView(8),
             Text(

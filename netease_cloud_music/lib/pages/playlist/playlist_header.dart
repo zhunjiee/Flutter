@@ -23,7 +23,7 @@ class PlaylistHeader extends StatelessWidget
   final VoidCallback onTap;
 
   @override
-  Size get preferredSize => Size.fromHeight(ScreenUtil().setHeight(100));
+  Size get preferredSize => Size.fromHeight(ScreenUtil().setWidth(100));
 
   @override
   Widget build(BuildContext context) {

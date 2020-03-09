@@ -33,13 +33,13 @@ class CornerRadiusImage extends StatelessWidget {
           ? Utils.showNetImage(
               src,
               width: width == null ? null : ScreenUtil().setWidth(width),
-              height: height == null ? null : ScreenUtil().setHeight(height),
+              height: height == null ? null : ScreenUtil().setWidth(height),
               fit: fit,
             )
           : Image.asset(
               src,
               width: width == null ? null : ScreenUtil().setWidth(width),
-              height: height == null ? null : ScreenUtil().setHeight(height),
+              height: height == null ? null : ScreenUtil().setWidth(height),
               fit: fit,
             ),
     );

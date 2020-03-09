@@ -24,7 +24,7 @@ class TagWidget extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(ScreenUtil().setWidth(20)),
         child: Container(
-          height: ScreenUtil().setHeight(40),
+          height: ScreenUtil().setWidth(40),
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
             child: Container(

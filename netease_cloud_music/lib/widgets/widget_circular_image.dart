@@ -29,13 +29,13 @@ class CircularImage extends StatelessWidget {
           ? Utils.showNetImage(
               src,
               width: ScreenUtil().setWidth(width),
-              height: ScreenUtil().setHeight(width),
+              height: ScreenUtil().setWidth(width),
               fit: fit,
             )
           : Image.asset(
               src,
               width: ScreenUtil().setWidth(width),
-              height: ScreenUtil().setHeight(width),
+              height: ScreenUtil().setWidth(width),
               fit: fit,
             ),
     );

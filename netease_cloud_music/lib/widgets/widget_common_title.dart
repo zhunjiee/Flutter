@@ -27,9 +27,9 @@ class CommonTitleWidget extends StatelessWidget {
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.only(
           left: ScreenUtil().setWidth(30),
-          top: ScreenUtil().setHeight(top),
+          top: ScreenUtil().setWidth(top),
           right: ScreenUtil().setWidth(30),
-          bottom: ScreenUtil().setHeight(bottom),
+          bottom: ScreenUtil().setWidth(bottom),
       ),
       child: Text(title, style: mBlackBoldTextStyle),
     );

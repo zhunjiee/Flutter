@@ -21,7 +21,7 @@ class DailySongsNavigator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlaylistAppBar(
-      expandedHeight: ScreenUtil().setHeight(340),
+      expandedHeight: ScreenUtil().setWidth(340),
       title: "每日推荐",
       count: count,
       backgroundImg: "images/bg_daily.png",

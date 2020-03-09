@@ -27,7 +27,7 @@ class OfficialTopList extends StatelessWidget {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       padding: EdgeInsets.only(
-        top: ScreenUtil().setHeight(20),
+        top: ScreenUtil().setWidth(20),
       ),
       itemBuilder: (context, index) {
         return _officialTopItem(context, index);
@@ -63,32 +63,41 @@ class OfficialTopList extends StatelessWidget {
         _toPlayListPage(context, officialList[index]);
       },
       child: Container(
-        height: ScreenUtil().setHeight(200),
+        height: ScreenUtil().setWidth(200),
         padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30)),
         child: Row(
           children: <Widget>[
-            Stack(
-              children: <Widget>[
-                CornerRadiusImage("$picUrl?param=150y150",
-                    width: 200, height: 200, radius: 10),
-                Positioned(
-                  bottom: 0,
-                  child: Image.asset(
-                    "images/ck.9.png",
-                    width: ScreenUtil().setWidth(200),
-                    height: ScreenUtil().setHeight(80),
-                    fit: BoxFit.fill,
-                  ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Container(
+                width: ScreenUtil().setWidth(200),
+                child: Stack(
+                  children: <Widget>[
+                    Image.network(
+                      "$picUrl?param=150y150",
+                      width: ScreenUtil().setWidth(200),
+                      height: ScreenUtil().setWidth(200),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      child: Image.asset(
+                        "images/ck.9.png",
+                        width: ScreenUtil().setWidth(200),
+                        height: ScreenUtil().setWidth(80),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    Positioned(
+                      left: ScreenUtil().setWidth(10),
+                      bottom: ScreenUtil().setWidth(10),
+                      child: Text(
+                        updateTime,
+                        style: smallWhiteTextStyle,
+                      ),
+                    ),
+                  ],
                 ),
-                Positioned(
-                  left: ScreenUtil().setWidth(10),
-                  bottom: ScreenUtil().setWidth(10),
-                  child: Text(
-                    updateTime,
-                    style: smallWhiteTextStyle,
-                  ),
-                ),
-              ],
+              ),
             ),
             HorizontalPlaceholderView(20),
             Expanded(
@@ -96,7 +105,7 @@ class OfficialTopList extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: tracks.map((track) {
                   return Container(
-                    height: ScreenUtil().setHeight(65),
+                    height: ScreenUtil().setWidth(65),
                     alignment: Alignment.centerLeft,
                     child: Text(
                       "${i++}. ${track.first} - ${track.second}",

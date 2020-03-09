@@ -32,7 +32,7 @@ class PlaylistCover extends StatelessWidget {
       borderRadius: BorderRadius.circular(ScreenUtil().setWidth(radius)),
       child: Container(
         width: ScreenUtil().setWidth(width),
-        height: ScreenUtil().setHeight(height ?? width),
+        height: ScreenUtil().setWidth(height ?? width),
         child: Stack(
           alignment: Alignment.topRight,
           children: <Widget>[
@@ -49,7 +49,7 @@ class PlaylistCover extends StatelessWidget {
     return Utils.showNetImage(
       "$url?param=200y200",
       width: ScreenUtil().setWidth(width),
-      height: ScreenUtil().setHeight(height ?? width),
+      height: ScreenUtil().setWidth(height ?? width),
       fit: BoxFit.cover,
     );
   }
@@ -67,7 +67,7 @@ class PlaylistCover extends StatelessWidget {
           Image.asset(
             "images/icon_triangle.png",
             width: ScreenUtil().setWidth(30),
-            height: ScreenUtil().setHeight(30),
+            height: ScreenUtil().setWidth(30),
           ),
           Text(
             "${NumberUtils.amountConversion(playCount)}",

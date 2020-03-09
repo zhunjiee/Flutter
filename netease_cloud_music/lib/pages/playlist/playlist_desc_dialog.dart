@@ -65,7 +65,7 @@ class PlaylistDescDialog extends StatelessWidget {
   Widget _closeButton(BuildContext context) {
     return Positioned(
       right: ScreenUtil().setWidth(40),
-      top: ScreenUtil().setHeight(20),
+      top: ScreenUtil().setWidth(20),
       child: IconButton(icon: Icon(
         Icons.close,
         color: Colors.white,

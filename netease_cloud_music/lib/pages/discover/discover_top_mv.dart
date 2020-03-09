@@ -36,7 +36,7 @@ class DiscoverTopMv extends StatelessWidget {
                   return _topMvItem(mvData, index);
                 },
                 separatorBuilder: (context, index) {
-                  return VerticalPlaceholderView(ScreenUtil().setHeight(100));
+                  return VerticalPlaceholderView(ScreenUtil().setWidth(100));
                 },
                 itemCount: mvData.length,
                 shrinkWrap: true,

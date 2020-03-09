@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 /**
  * @ClassName play_songs_page
  * @Description 音乐播放界面
@@ -9,9 +7,14 @@ import 'dart:ui';
  */
 
 import 'package:flutter/material.dart';
-import '../../utils/common_text_style.dart';
-import '../../utils/utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:netease_cloud_music/pages/play_music/play_music_gramophone.dart';
 import '../../application.dart';
+import '../../widgets/v_placeholder_view.dart';
+import 'play_music_navigate_bar.dart';
+import 'play_music_option.dart';
+import 'play_music_progress.dart';
+import 'play_music_bottom_menu.dart';
 
 class PlayMusicPage extends StatefulWidget {
   @override
@@ -19,49 +22,35 @@ class PlayMusicPage extends StatefulWidget {
 }
 
 class _PlayMusicPageState extends State<PlayMusicPage> {
+  bool play = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-//          Utils.showNetImage(
-//            "url",
-//            width: double.infinity,
-//            height: double.infinity,
-//            fit: BoxFit.fitHeight,
-//          ),
-          Image.asset("images/welcome.png"),
-          BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 100, sigmaY: 100),
-            child: Container(
-              color: Colors.black38,
-              width: double.infinity,
-              height: double.infinity,
-            ),
-          ),
-          // 透明导航栏, 放在这而不是最上面是为了防遮挡
-          AppBar(
-            centerTitle: true,
-            backgroundColor: Colors.transparent,
-            brightness: Brightness.dark,
-            iconTheme: IconThemeData(color: Colors.white),
-            title: Column(
+          // 导航栏+模糊背景
+          PlayMusicNavigateBar("雅俗共赏", "许嵩"),
+          Container(
+            margin: EdgeInsets.only(
+                top: kToolbarHeight + Application.statusBarHeight),
+            child: Column(
               children: <Widget>[
-                Text(
-                  "雅俗共赏",
-                  style: mWhiteBoldTextStyle,
+                // 唱片机
+                PlayMusicGramophone(true),
+                // 歌曲相关操作
+                PlayMusicOptionWidget(),
+                // 进度条
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: ScreenUtil().setWidth(20)),
+                  child: PlayMusicProgressWidget(),
                 ),
-                Text(
-                  "许嵩",
-                  style: smallWhite70TextStyle,
-                ),
+                // 底部暂停等按钮
+                PlayMusicBottomMenu(),
+                VerticalPlaceholderView(20),
               ],
             ),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: kToolbarHeight + Application.statusBarHeight),
-            color: Colors.red,
-            child: ,
           ),
         ],
       ),

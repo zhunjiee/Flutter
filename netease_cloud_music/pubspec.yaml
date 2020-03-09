@@ -79,6 +79,19 @@ flutter:
     - images/bg_daily.png
     - images/ck.9.png
     - images/icon_line_1.png
+    - images/icon_dislike.png
+    - images/icon_song_download.png
+    - images/bfc.png
+    - images/icon_song_comment.png
+    - images/icon_song_more.png
+    - images/icon_song_play_type_1.png
+    - images/icon_song_left.png
+    - images/icon_song_pause.png
+    - images/icon_song_play.png
+    - images/icon_song_right.png
+    - images/icon_play_songs.png
+    - images/bet.png
+    - images/bgm.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

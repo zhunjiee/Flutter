@@ -27,7 +27,7 @@ class DiscoverNewAlbum extends StatelessWidget {
           builder: (context, data) {
             List<Albums> recommend = data.albums;
             return Container(
-              height: ScreenUtil().setHeight(300),
+              height: ScreenUtil().setWidth(300),
               child: ListView.separated(
                 itemBuilder: (context, index) {
                   return PlaylistWidget(

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 /**
  * @ClassName playlist_app_bar
  * @Description TODO
@@ -8,6 +6,7 @@ import 'dart:ui';
  * @Version 1.0
  */
 
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:netease_cloud_music/utils/utils.dart';
 import 'playlist_header.dart';

@@ -28,7 +28,7 @@ class DiscoverRecommendPlaylist extends StatelessWidget {
           builder: (context, data) {
             List<Recommend> recommendList = data.recommend;
             return Container(
-              height: ScreenUtil().setHeight(300),
+              height: ScreenUtil().setWidth(300),
               child: ListView.separated(
                 itemBuilder: (context, index) {
                   return PlaylistWidget(

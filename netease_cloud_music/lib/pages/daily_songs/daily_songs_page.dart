@@ -32,7 +32,7 @@ class _DailySongsPageState extends State<DailySongsPage> {
           Padding(
             padding: EdgeInsets.only(
                 bottom:
-                    ScreenUtil().setHeight(110) + Application.bottomBarHeight),
+                    ScreenUtil().setWidth(110) + Application.bottomBarHeight),
             child: FutureBuilder<DailySongsModel>(
               builder: (context, snapshot) {
                 /// 加载完成...

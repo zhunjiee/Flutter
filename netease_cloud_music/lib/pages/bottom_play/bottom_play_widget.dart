@@ -21,14 +21,14 @@ class BottomPlayWidget extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-        height: ScreenUtil().setHeight(110) + Application.bottomBarHeight,
+        height: ScreenUtil().setWidth(110) + Application.bottomBarHeight,
         decoration: BoxDecoration(
           border: Border(top: BorderSide(color: separateColor)),
           color: Colors.white,
         ),
-        padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
+        padding: EdgeInsets.symmetric(vertical: ScreenUtil().setWidth(10)),
         child: Container(
-          height: ScreenUtil().setHeight(110),
+          height: ScreenUtil().setWidth(110),
           padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30)),
           alignment: Alignment.center,
           child: GestureDetector(
