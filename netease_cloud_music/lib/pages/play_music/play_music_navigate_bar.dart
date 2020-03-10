@@ -9,24 +9,25 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import '../../utils/common_text_style.dart';
+import '../../utils/utils.dart';
 
 class PlayMusicNavigateBar extends StatelessWidget {
-  PlayMusicNavigateBar(this.musicName, this.artist);
+  PlayMusicNavigateBar(this.musicName, this.artist, this.bgcImgUrl);
 
   final String musicName;
   final String artist;
+  final String bgcImgUrl;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        //          Utils.showNetImage(
-//            "url",
-//            width: double.infinity,
-//            height: double.infinity,
-//            fit: BoxFit.fitHeight,
-//          ),
-        Image.asset("images/welcome.png"),
+        Utils.showNetImage(
+            "$bgcImgUrl?param=200y200",
+            width: double.infinity,
+            height: double.infinity,
+            fit: BoxFit.fitHeight,
+          ),
         BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 100, sigmaY: 100),
           child: Container(

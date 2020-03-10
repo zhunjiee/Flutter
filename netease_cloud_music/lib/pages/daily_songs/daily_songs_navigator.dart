@@ -11,12 +11,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:netease_cloud_music/provider/play_music_provider.dart';
 import '../playlist/playlist_app_bar.dart';
-import '../../utils/navigator_utils.dart';
 
 class DailySongsNavigator extends StatelessWidget {
-  DailySongsNavigator({this.count});
+  DailySongsNavigator({this.count, this.playAllOnTap});
 
   final int count;
+  final VoidCallback playAllOnTap;
 
   @override
   Widget build(BuildContext context) {
@@ -59,10 +59,7 @@ class DailySongsNavigator extends StatelessWidget {
           ),
         ],
       ),
-      playOnTap: (){
-        // 播放全部
-        NavigatorUtils.goPlayMusicPage(context);
-      },
+      playOnTap: playAllOnTap,
     );
   }
 }

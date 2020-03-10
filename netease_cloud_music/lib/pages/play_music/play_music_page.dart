@@ -9,12 +9,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:netease_cloud_music/pages/play_music/play_music_gramophone.dart';
+import 'package:provider/provider.dart';
 import '../../application.dart';
 import '../../widgets/v_placeholder_view.dart';
 import 'play_music_navigate_bar.dart';
 import 'play_music_option.dart';
 import 'play_music_progress.dart';
 import 'play_music_bottom_menu.dart';
+import '../../provider/play_music_provider.dart';
 
 class PlayMusicPage extends StatefulWidget {
   @override
@@ -27,33 +29,42 @@ class _PlayMusicPageState extends State<PlayMusicPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          // 导航栏+模糊背景
-          PlayMusicNavigateBar("雅俗共赏", "许嵩"),
-          Container(
-            margin: EdgeInsets.only(
-                top: kToolbarHeight + Application.statusBarHeight),
-            child: Column(
-              children: <Widget>[
-                // 唱片机
-                PlayMusicGramophone(true),
-                // 歌曲相关操作
-                PlayMusicOptionWidget(),
-                // 进度条
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: ScreenUtil().setWidth(20)),
-                  child: PlayMusicProgressWidget(),
-                ),
-                // 底部暂停等按钮
-                PlayMusicBottomMenu(),
-                VerticalPlaceholderView(20),
-              ],
+      body: Consumer<PlayMusicProvider>(builder: (context, provider, child) {
+        return Stack(
+          children: <Widget>[
+            // 导航栏+模糊背景
+            PlayMusicNavigateBar(
+              provider.song.name,
+              provider.song.artists,
+              provider.song.picUrl,
             ),
-          ),
-        ],
-      ),
+            Container(
+              margin: EdgeInsets.only(
+                  top: kToolbarHeight + Application.statusBarHeight),
+              child: Column(
+                children: <Widget>[
+                  // 唱片机
+                  PlayMusicGramophone(
+                    provider.playState,
+                    provider.song.picUrl,
+                  ),
+                  // 歌曲相关操作
+                  PlayMusicOptionWidget(),
+                  // 进度条
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: ScreenUtil().setWidth(20)),
+                    child: PlayMusicProgressWidget(),
+                  ),
+                  // 底部暂停等按钮
+                  PlayMusicBottomMenu(provider),
+                  VerticalPlaceholderView(20),
+                ],
+              ),
+            ),
+          ],
+        );
+      }),
     );
   }
 }

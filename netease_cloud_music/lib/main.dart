@@ -21,11 +21,12 @@ void main() {
   // log初始化
   LogUtils.init(tag: "NETEASE_MUSIC");
 
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider<UserProvider>.value(value: UserProvider()),
-        ChangeNotifierProvider<PlayMusicProvider>.value(value: PlayMusicProvider()),
+        ChangeNotifierProvider<PlayMusicProvider>.value(value: PlayMusicProvider()..init()),
       ],
       child: MyApp(),
     ),

@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 /**
  * @ClassName play_music_gramophone
  * @Description 音乐播放界面 - 唱片机视图
@@ -11,9 +12,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../widgets/widget_circular_image.dart';
 
 class PlayMusicGramophone extends StatefulWidget {
-  PlayMusicGramophone(this.play);
+  PlayMusicGramophone(this.playState, this.coverImgUrl);
 
-  final bool play;
+  final AudioPlayerState playState;
+  final String coverImgUrl;
 
   @override
   _PlayMusicGramophoneState createState() => _PlayMusicGramophoneState();
@@ -37,26 +39,23 @@ class _PlayMusicGramophoneState extends State<PlayMusicGramophone>
         _recordController.forward(); // 重新开始
       }
     });
-    if (widget.play) {
-
-    }
 
     _stylusController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 300));
     _stylusAnimation =
         Tween(begin: -0.03, end: -0.10).animate(_stylusController);
-
   }
 
   @override
   Widget build(BuildContext context) {
-    if (widget.play) {
+    if (widget.playState == AudioPlayerState.PLAYING) {
       _recordController.forward();  // 碟片转动
       _stylusController.reverse();  // 唱针反向在唱片上
     } else {
       _recordController.stop(); // 唱片停止
       _stylusController.forward();  // 移除状态
     }
+
     return Expanded(
       child: GestureDetector(
         behavior: HitTestBehavior.translucent,
@@ -94,7 +93,7 @@ class _PlayMusicGramophoneState extends State<PlayMusicGramophone>
             ),
             // 专辑图片
             CircularImage(
-                "http://p1.music.126.net/HdSDvsZbngXLgehNmBfjmg==/109951163897119665.jpg?param=200y200",
+                "${widget.coverImgUrl}?param=200y200",
                 370),
           ],
         ),
