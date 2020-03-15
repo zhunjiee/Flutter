@@ -1,4 +1,3 @@
-import 'package:audioplayers/audioplayers.dart';
 /**
  * @ClassName play_music_gramophone
  * @Description 音乐播放界面 - 唱片机视图
@@ -8,14 +7,17 @@ import 'package:audioplayers/audioplayers.dart';
  */
 
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../provider/play_music_provider.dart';
 import '../../widgets/widget_circular_image.dart';
+import 'play_music_option.dart';
+import 'lyric_page.dart';
 
 class PlayMusicGramophone extends StatefulWidget {
-  PlayMusicGramophone(this.playState, this.coverImgUrl);
+  PlayMusicGramophone(this.provider);
 
-  final AudioPlayerState playState;
-  final String coverImgUrl;
+  final PlayMusicProvider provider;
 
   @override
   _PlayMusicGramophoneState createState() => _PlayMusicGramophoneState();
@@ -26,6 +28,7 @@ class _PlayMusicGramophoneState extends State<PlayMusicGramophone>
   AnimationController _recordController; // 碟片旋转动画
   AnimationController _stylusController; // 唱针控制器
   Animation _stylusAnimation; // 唱针动画
+  int switchIndex = 0;
 
   @override
   void initState() {
@@ -48,7 +51,7 @@ class _PlayMusicGramophoneState extends State<PlayMusicGramophone>
 
   @override
   Widget build(BuildContext context) {
-    if (widget.playState == AudioPlayerState.PLAYING) {
+    if (widget.provider.playState == AudioPlayerState.PLAYING) {
       _recordController.forward();  // 碟片转动
       _stylusController.reverse();  // 唱针反向在唱片上
     } else {
@@ -61,15 +64,28 @@ class _PlayMusicGramophoneState extends State<PlayMusicGramophone>
         behavior: HitTestBehavior.translucent,
         onTap: () {
           // 切换到歌词
-          _recordController.stop();
-          _stylusController.forward();
+          setState(() {
+            switchIndex = switchIndex == 0 ? 1 : 0;
+          });
         },
-        child: Stack(
+        child: IndexedStack(
+          index: switchIndex,
           children: <Widget>[
-            // 唱片
-            _recordWidget(),
-            // 唱针
-            _stylusWidget(),
+            Column(
+              children: <Widget>[
+                Stack(
+                  children: <Widget>[
+                    // 唱片
+                    _recordWidget(),
+                    // 唱针
+                    _stylusWidget(),
+                  ],
+                ),
+                // 歌曲相关操作
+                PlayMusicOptionWidget(),
+              ],
+            ),
+            LyricPage(),
           ],
         ),
       ),
@@ -93,7 +109,7 @@ class _PlayMusicGramophoneState extends State<PlayMusicGramophone>
             ),
             // 专辑图片
             CircularImage(
-                "${widget.coverImgUrl}?param=200y200",
+                "${widget.provider.song.picUrl}?param=200y200",
                 370),
           ],
         ),

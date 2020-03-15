@@ -14,6 +14,7 @@ import '../application.dart';
 import '../utils/navigator_utils.dart';
 import '../provider/user_provider.dart';
 import '../utils/net_utils.dart';
+import '../provider/mine_playlist_provider.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -97,9 +98,10 @@ class _SplashPageState extends State<SplashPage>
     // 获取用户信息
     UserModel userModel =
         Provider.of<UserProvider>(context, listen: false).user;
+    Provider.of<MinePlaylistProvider>(context, listen: false).user = userModel;
 
     if (userModel != null) {
-      await NetUtils().refreshLogin(context).then((value){
+      await NetUtils().refreshLogin().then((value){
         if (value.data != -1) {
           // 跳转到主页
           NavigatorUtils.goHomePage(context);

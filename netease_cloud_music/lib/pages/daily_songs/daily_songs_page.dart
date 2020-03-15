@@ -88,7 +88,7 @@ class _DailySongsPageState extends State<DailySongsPage> {
                   );
                 }
               },
-              future: NetUtils().getDailySongsData(context),
+              future: NetUtils().getDailySongsData(),
             ),
           ),
           BottomPlayWidget(),

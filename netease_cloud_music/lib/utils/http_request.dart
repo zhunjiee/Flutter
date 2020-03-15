@@ -30,7 +30,7 @@ class HttpRequest {
   // 单例
   static final HttpRequest _instance = HttpRequest._internal();
 
-  factory HttpRequest() => _instance;  // 工厂模式
+  factory HttpRequest() => _instance; // 工厂模式
 
   HttpRequest._internal() {
     // 初始化
@@ -53,45 +53,44 @@ class HttpRequest {
     }
   }
 
-
   /// GET 请求
   Future<Response> get(
-    BuildContext context,
     String url, {
     Map<String, dynamic> params,
-    bool isShowLoading = true,
+    BuildContext context,
+    bool isShowLoading = false,
   }) async {
     return await _request(
-      context,
       RequestType.GET,
       url,
       params: params,
+      context: context,
       isShowLoading: isShowLoading,
     );
   }
 
   /// POST 请求
   Future<Response> post(
-    BuildContext context,
     String url, {
     Map<String, dynamic> params,
-    bool isShowLoading = true,
+    BuildContext context,
+    bool isShowLoading = false,
   }) async {
     return await _request(
-      context,
       RequestType.POST,
       url,
       params: params,
+      context: context,
       isShowLoading: isShowLoading,
     );
   }
 
   Future<Response> _request(
-    BuildContext context,
     RequestType requestType,
     String url, {
     Map<String, dynamic> params,
-    bool isShowLoading = true,
+    BuildContext context,
+    bool isShowLoading = false, // 不好用
   }) async {
     if (isShowLoading) Loading.showLoading(context);
     try {

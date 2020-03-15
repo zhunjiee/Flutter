@@ -95,10 +95,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
                   );
                 }
               },
-              future: NetUtils().getPlaylistDetailData(
-                context,
-                params: {"id": widget.data.id},
-              ),
+              future: NetUtils().getPlaylistDetailData(widget.data.id),
             ),
           ),
           // 底部播放栏
@@ -211,7 +208,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
 //                  return PlaylistDescDialog(playlist);
 //                }
 //              );
-            // 自定义弹出对话框
+              // 自定义弹出对话框
               _showCustomDialog(playlist);
             },
             child: playlist == null
@@ -248,8 +245,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
         return PlaylistDescDialog(playlist);
       },
       barrierDismissible: true, // 点击遮罩对话框消失
-      barrierLabel:
-      MaterialLocalizations.of(context).modalBarrierDismissLabel,
+      barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
       transitionDuration: Duration(milliseconds: 100),
       transitionBuilder: _buildMaterialDialogTransitions,
     );

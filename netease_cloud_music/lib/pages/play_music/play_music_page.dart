@@ -24,8 +24,6 @@ class PlayMusicPage extends StatefulWidget {
 }
 
 class _PlayMusicPageState extends State<PlayMusicPage> {
-  bool play = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,28 +31,19 @@ class _PlayMusicPageState extends State<PlayMusicPage> {
         return Stack(
           children: <Widget>[
             // 导航栏+模糊背景
-            PlayMusicNavigateBar(
-              provider.song.name,
-              provider.song.artists,
-              provider.song.picUrl,
-            ),
+            PlayMusicNavigateBar(provider),
             Container(
               margin: EdgeInsets.only(
                   top: kToolbarHeight + Application.statusBarHeight),
               child: Column(
                 children: <Widget>[
-                  // 唱片机
-                  PlayMusicGramophone(
-                    provider.playState,
-                    provider.song.picUrl,
-                  ),
-                  // 歌曲相关操作
-                  PlayMusicOptionWidget(),
+                  // 唱片机/歌词
+                  PlayMusicGramophone(provider),
                   // 进度条
                   Padding(
                     padding: EdgeInsets.symmetric(
                         vertical: ScreenUtil().setWidth(20)),
-                    child: PlayMusicProgressWidget(),
+                    child: PlayMusicProgressWidget(provider),
                   ),
                   // 底部暂停等按钮
                   PlayMusicBottomMenu(provider),

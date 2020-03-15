@@ -10,6 +10,7 @@ import 'pages/splash_page.dart';
 import 'utils/common_color.dart';
 import 'provider/user_provider.dart';
 import 'provider/play_music_provider.dart';
+import 'provider/mine_playlist_provider.dart';
 
 void main() {
   // fluro全局注入
@@ -26,7 +27,19 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider<UserProvider>.value(value: UserProvider()),
-        ChangeNotifierProvider<PlayMusicProvider>.value(value: PlayMusicProvider()..init()),
+        ChangeNotifierProvider<PlayMusicProvider>.value(
+            value: PlayMusicProvider()..init()),
+        ChangeNotifierProvider<MinePlaylistProvider>.value(
+            value: MinePlaylistProvider()),
+//        ChangeNotifierProvider(
+//          create: (_) => UserProvider(),
+//        ),
+//        ChangeNotifierProvider(
+//          create: (_) => PlayMusicProvider()..init(),
+//        ),
+//        ChangeNotifierProvider(
+//          create: (_) => MinePlaylistProvider(),
+//        ),
       ],
       child: MyApp(),
     ),

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 /**
  * @ClassName net_utils
  * @Description 网路请求类
@@ -21,6 +19,8 @@ import '../model/mv_model.dart';
 import '../model/playlist_model.dart';
 import '../model/daily_songs_model.dart';
 import '../model/top_list_model.dart';
+import '../model/lyric_model.dart';
+import '../model/mine_playlist_model.dart';
 
 class NetUtils {
   HttpRequest _request;
@@ -45,88 +45,92 @@ class NetUtils {
       "phone": phone,
       "password": password,
     };
-    Response response =
-        await _request.get(context, CommonUrl.loginAPI, params: params);
+    Response response = await _request.get(CommonUrl.loginAPI,
+        params: params, context: context, isShowLoading: true);
     return UserModel.fromJson(response.data);
   }
 
   /// 重新登录
-  Future<Response> refreshLogin(BuildContext context) async {
-    return await _request
-        .get(context, CommonUrl.refreshLoginAPI, isShowLoading: false)
-        .catchError((e) {
+  Future<Response> refreshLogin() async {
+    return await _request.get(CommonUrl.refreshLoginAPI).catchError((e) {
       Utils.showToast("网络错误!");
     });
   }
 
   /// 首页广告轮播图
-  Future<BannerModel> getBanner(BuildContext context) async {
+  Future<BannerModel> getBanner() async {
     var params = {
       "type": 1,
     };
-    Response response = await _request.get(context, CommonUrl.bannerAPI,
-        params: params, isShowLoading: false);
+    Response response = await _request.get(CommonUrl.bannerAPI, params: params);
     return BannerModel.fromJson(response.data);
   }
 
   /// 推荐歌单
-  Future<RecommendPlaylistModel> getRecommendPlaylist(
-      BuildContext context) async {
-    Response response = await _request.get(context, CommonUrl.recommendAPI,
-        isShowLoading: false);
+  Future<RecommendPlaylistModel> getRecommendPlaylist() async {
+    Response response = await _request.get(CommonUrl.recommendAPI);
     return RecommendPlaylistModel.fromJson(response.data);
   }
 
   /// 新碟上架
-  Future<AlbumModel> getAlbumData(
-    BuildContext context, {
+  Future<AlbumModel> getAlbumData({
     Map<String, dynamic> params = const {
       "offset": 1,
       "limit": 10,
     },
   }) async {
-    Response response = await _request.get(context, CommonUrl.newAlbumAPI,
-        params: params, isShowLoading: false);
+    Response response =
+        await _request.get(CommonUrl.newAlbumAPI, params: params);
     return AlbumModel.fromJson(response.data);
   }
 
   /// MV排行
-  Future<MvModel> getTopMvData(
-    BuildContext context, {
+  Future<MvModel> getTopMvData({
     Map<String, dynamic> params = const {
       "offset": 1,
       "limit": 10,
     },
   }) async {
-    Response response = await _request.get(context, CommonUrl.topMvAPI,
-        params: params, isShowLoading: false);
+    Response response = await _request.get(CommonUrl.topMvAPI, params: params);
     return MvModel.fromJson(response.data);
   }
 
   /// 歌单详情
-  Future<PlaylistModel> getPlaylistDetailData(BuildContext context,
-      {Map<String, dynamic> params}) async {
-    Response response = await _request.get(context, CommonUrl.playlistDetailAPI,
-        params: params, isShowLoading: false);
+  Future<PlaylistModel> getPlaylistDetailData(int playlistId) async {
+    var params = {"id": playlistId};
+    Response response =
+        await _request.get(CommonUrl.playlistDetailAPI, params: params);
     PlaylistModel model = PlaylistModel.fromJson(response.data);
-    print("Playlist ================> $model");
     return model;
   }
 
   /// 每日推荐
-  Future<DailySongsModel> getDailySongsData(BuildContext context) async {
-    Response response = await _request.get(context, CommonUrl.dailySongsAPI,
-        isShowLoading: false);
+  Future<DailySongsModel> getDailySongsData() async {
+    Response response = await _request.get(CommonUrl.dailySongsAPI);
     DailySongsModel model = DailySongsModel.fromJson(response.data);
-    print("DailySongs ================> $model");
     return model;
   }
 
   /// 排行榜
-  Future<TopListModel> getTopListData(BuildContext context,
-      {Map<String, dynamic> params}) async {
-    Response response =
-        await _request.get(context, CommonUrl.topListAPI, isShowLoading: false);
+  Future<TopListModel> getTopListData() async {
+    Response response = await _request.get(CommonUrl.topListAPI);
     return TopListModel.fromJson(response.data);
+  }
+
+  /// 歌词
+  Future<LyricModel> getLyricData(int id) async {
+    var params = {'id': id};
+    Response response = await _request.get(CommonUrl.lyricAPI, params: params);
+    LyricModel model = LyricModel.fromJson(response.data);
+    return model;
+  }
+
+  /// 我的 - 歌单
+  Future<MinePlaylistModel> getMinePlaylistData(int userId) async {
+    var params = {'uid': userId};
+    Response response =
+        await _request.get(CommonUrl.minePlaylistAPI, params: params);
+    MinePlaylistModel model = MinePlaylistModel.fromJson(response.data);
+    return model;
   }
 }

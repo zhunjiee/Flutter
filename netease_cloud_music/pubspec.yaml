@@ -93,6 +93,13 @@ flutter:
     - images/icon_play_songs.png
     - images/bet.png
     - images/bgm.png
+    - images/icon_music.png
+    - images/icon_late_play.png
+    - images/icon_download_black.png
+    - images/icon_broadcast.png
+    - images/icon_collect.png
+    - images/icon_down.png
+    - images/icon_up.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -48,9 +48,9 @@ class _CustomFutureBuilderState<T> extends State<CustomSliverFutureBuilder<T>> {
   void _request() {
     setState(() {
       if (widget.params == null)
-        _future = widget.futureFunc(context);
+        _future = widget.futureFunc();
       else
-        _future = widget.futureFunc(context, params: widget.params);
+        _future = widget.futureFunc(params: widget.params);
     });
   }
 

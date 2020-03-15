@@ -8,22 +8,21 @@
 
 import 'package:flutter/material.dart';
 import 'dart:ui';
+import '../../provider/play_music_provider.dart';
 import '../../utils/common_text_style.dart';
 import '../../utils/utils.dart';
 
 class PlayMusicNavigateBar extends StatelessWidget {
-  PlayMusicNavigateBar(this.musicName, this.artist, this.bgcImgUrl);
+  PlayMusicNavigateBar(this.provider);
 
-  final String musicName;
-  final String artist;
-  final String bgcImgUrl;
+  final PlayMusicProvider provider;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
         Utils.showNetImage(
-            "$bgcImgUrl?param=200y200",
+            "${provider.song.name}?param=200y200",
             width: double.infinity,
             height: double.infinity,
             fit: BoxFit.fitHeight,
@@ -45,11 +44,11 @@ class PlayMusicNavigateBar extends StatelessWidget {
           title: Column(
             children: <Widget>[
               Text(
-                musicName,
+                provider.song.name,
                 style: mWhiteBoldTextStyle,
               ),
               Text(
-                artist,
+                provider.song.artists,
                 style: smallWhite70TextStyle,
               ),
             ],

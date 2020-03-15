@@ -8,13 +8,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:netease_cloud_music/utils/utils.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/v_placeholder_view.dart';
 import '../../widgets/common_button.dart';
-import '../../utils/net_utils.dart';
 import '../../provider/user_provider.dart';
 import '../../utils/navigator_utils.dart';
+import '../../provider/mine_playlist_provider.dart';
 
 class LoginAnimatedWidget extends AnimatedWidget {
   // 构造方法一定要继承父类,不然会不错
@@ -104,6 +103,7 @@ class LoginWidget extends StatelessWidget {
                   _phoneController.text,
                   _passwordController.text,
                 ).then((user) {
+                  Provider.of<MinePlaylistProvider>(context, listen: false).user = user;
                   // 跳转到首页
                   NavigatorUtils.goHomePage(context);
                 });

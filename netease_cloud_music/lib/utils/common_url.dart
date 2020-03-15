@@ -39,4 +39,10 @@ class CommonUrl {
 
   // 排行榜
   static const String topListAPI = baseUrl + "/toplist/detail";
+
+  // 歌词
+  static const String lyricAPI = baseUrl + "/lyric";
+
+  // 我的-歌单
+  static const String minePlaylistAPI = baseUrl + "/user/playlist";
 }

@@ -31,6 +31,10 @@ class PlayMusicBottomMenu extends StatelessWidget {
           ImageMenuWidget(
             "images/icon_song_left.png",
             size: 80,
+            onTap: (){
+              // 上一首
+              provider.prePlay();
+            },
           ),
           ImageMenuWidget(
             provider.playState == AudioPlayerState.PLAYING
@@ -38,12 +42,17 @@ class PlayMusicBottomMenu extends StatelessWidget {
                 : "images/icon_song_play.png",
             size: 150,
             onTap: () {
+              // 播放/暂停
               provider.togglePlay();
             },
           ),
           ImageMenuWidget(
             "images/icon_song_right.png",
             size: 80,
+            onTap: (){
+              // 下一首
+              provider.nextPlay();
+            },
           ),
           ImageMenuWidget(
             "images/icon_play_songs.png",
