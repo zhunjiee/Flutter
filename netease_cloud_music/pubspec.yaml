@@ -100,6 +100,8 @@ flutter:
     - images/icon_collect.png
     - images/icon_down.png
     - images/icon_up.png
+    - images/icon_edit.png
+    - images/icon_del.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

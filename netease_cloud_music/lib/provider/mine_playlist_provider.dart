@@ -26,9 +26,10 @@ class MinePlaylistProvider extends ChangeNotifier {
   List<Playlist> get allPlaylist => _allPlaylist;
 
   /// 获取我的歌单
-  Future getMinePlaylistData() async {
+  Future<MinePlaylistModel> getMinePlaylistData() async {
     MinePlaylistModel model = await NetUtils().getMinePlaylistData(user.account.id);
     setPlayList(model.playlist);
+    return model;
   }
 
   void setPlayList(List<Playlist> playlist) {

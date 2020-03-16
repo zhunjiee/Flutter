@@ -10,11 +10,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../../utils/common_text_style.dart';
-import 'mine_playlist_title.dart';
+import 'mine_playlist_tile.dart';
 import '../../widgets/widget_net_error.dart';
 import '../../model/playlist_model.dart';
 import '../../widgets/widget_corner_radius_image.dart';
 import '../../provider/mine_playlist_provider.dart';
+import '../../model/mine_playlist_model.dart';
+import 'create_playlist_dialog.dart';
+import 'playlist_manage_sheet.dart';
 
 class MinePage extends StatefulWidget {
   @override
@@ -31,9 +34,10 @@ class _MinePageState extends State<MinePage>
     '我的收藏': 'images/icon_collect.png',
   };
   List<String> topMenuKeys;
+  bool selfPlaylistOffstage = true;
+  bool collectPlaylistOffstage = true;
   MinePlaylistProvider _provider;
-  bool selfPlaylistOffstage = false;
-  bool collectPlaylistOffstage = false;
+  Future _future;
 
   @override
   // TODO: implement wantKeepAlive
@@ -41,61 +45,52 @@ class _MinePageState extends State<MinePage>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     topMenuKeys = topMenuData.keys.toList();
-    // build完成后调用此方法,只会调用一次
-//    WidgetsBinding.instance.addPostFrameCallback((callback) {
-//      print("加载完成");
-//      if (mounted) {
-//        _provider = Provider.of<MinePlaylistProvider>(context);
-//        _provider.getMinePlaylistData(context);
-//      }
-//    });
+    _provider = Provider.of<MinePlaylistProvider>(context, listen: false);
+    _future = _provider.getMinePlaylistData();
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
 
-    return FutureBuilder(
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                _buildTopMenu(),
-                Container(
-                  height: ScreenUtil().setWidth(20),
-                  color: Color(0xfff5f5f5),
-                ),
-                _realBuildPlaylist(),
-              ],
-            ),
-          );
-        } else if (snapshot.hasError) {
-          return Container(
-            child: Center(
-              child: NetErrorWidget(callback: () {
-                setState(() {});
-              }),
-            ),
-          );
-        } else {
-          return Container(
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }
-      },
-      future: _getMinePlaylistData(context),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: FutureBuilder<MinePlaylistModel>(
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  _buildTopMenu(),
+                  Container(
+                    height: ScreenUtil().setWidth(20),
+                    color: Color(0xfff5f5f5),
+                  ),
+                  _realBuildPlaylist(snapshot.data.playlist),
+                ],
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return Container(
+              child: Center(
+                child: NetErrorWidget(callback: () {
+                  setState(() {});
+                }),
+              ),
+            );
+          } else {
+            return Container(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+        },
+        future: _future,
+      ),
     );
-  }
-
-  Future _getMinePlaylistData(BuildContext context) async {
-    await Provider.of<MinePlaylistProvider>(context).getMinePlaylistData();
-    return "获取我的歌单完成";
   }
 
   /// 上半部分菜单
@@ -146,51 +141,69 @@ class _MinePageState extends State<MinePage>
   }
 
   /// 歌单部分
-  Widget _realBuildPlaylist() {
-    List createList = Provider.of<MinePlaylistProvider>(context, listen: false)
-        .selfCreatePlaylist;
-    List collectList = Provider.of<MinePlaylistProvider>(context, listen: false)
-        .collectPlaylist;
+  Widget _realBuildPlaylist(List<Playlist> allPlaylist) {
+    List<Playlist> _createdPlaylist = _provider.selfCreatePlaylist;
+    List<Playlist> _collectPlaylist = _provider.collectPlaylist;
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(40)),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           MinePlaylistTile(
             "创建的歌单",
-            createList.length,
-            trailing: SizedBox(
-              child: IconButton(
-                icon: Icon(
-                  Icons.add,
-                  color: Colors.black87,
-                ),
-                onPressed: () {},
-              ),
-            ),
+            _createdPlaylist.length,
             onSwitchTap: () {
               setState(() {
                 selfPlaylistOffstage = !selfPlaylistOffstage;
               });
             },
-            onMoreTap: () {},
+            onMoreTap: (){
+              print("创建的歌单");
+            },
+            trailing: SizedBox(
+              width: ScreenUtil().setWidth(70),
+              height: ScreenUtil().setWidth(50),
+              child: IconButton(
+                padding: EdgeInsets.zero,
+                icon: Icon(
+                  Icons.add,
+                  color: Colors.black87,
+                ),
+                onPressed: () {
+                  // 创建新歌单
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return CreatePlaylistDialog(
+                          submitCallback: (String name, bool isPrivate) {
+                        print("$name --- $isPrivate");
+                      });
+                    },
+                  );
+                },
+              ),
+            ),
           ),
           Offstage(
             offstage: selfPlaylistOffstage,
-            child: _buildPlaylistItem(createList),
+            child: _buildPlaylistItem(_createdPlaylist),
           ),
           MinePlaylistTile(
             "收藏的歌单",
-            10,
+            _collectPlaylist.length,
             onSwitchTap: () {
               setState(() {
                 collectPlaylistOffstage = !collectPlaylistOffstage;
               });
             },
-            onMoreTap: () {},
+            onMoreTap: (){
+              print("收藏的歌单");
+            },
           ),
           Offstage(
             offstage: collectPlaylistOffstage,
-            child: _buildPlaylistItem(collectList),
+            child: _buildPlaylistItem(_collectPlaylist),
           ),
         ],
       ),
@@ -226,7 +239,15 @@ class _MinePageState extends State<MinePage>
                 Icons.more_vert,
                 color: Colors.grey,
               ),
-              onPressed: () {},
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return PlaylistManageSheet(model);
+                  },
+                  backgroundColor: Colors.transparent,
+                ).then((value) {});
+              },
             ),
           ),
         );

@@ -131,6 +131,7 @@ class NetUtils {
     Response response =
         await _request.get(CommonUrl.minePlaylistAPI, params: params);
     MinePlaylistModel model = MinePlaylistModel.fromJson(response.data);
+    print("请求数据到了");
     return model;
   }
 }

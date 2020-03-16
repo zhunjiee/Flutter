@@ -27,8 +27,8 @@ class MinePlaylistTile extends StatefulWidget {
 
 class _MinePlaylistTileState extends State<MinePlaylistTile> {
   List<String> arrows = [
-    'images/icon_down.png',
-    'images/icon_up.png',
+    'images/icon_up.png', // 闭合
+    'images/icon_down.png', // 展开
   ];
   String arrow;
 
@@ -36,7 +36,7 @@ class _MinePlaylistTileState extends State<MinePlaylistTile> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    arrow = arrows[0];
+    arrow = arrows[0];  // 默认闭合
   }
 
   @override
@@ -44,16 +44,17 @@ class _MinePlaylistTileState extends State<MinePlaylistTile> {
     return Container(
       height: ScreenUtil().setWidth(80),
       child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
         onTap: () {
           setState(() {
             if (arrow == arrows[0]) {
-              // 闭合
+              // 展开
               arrow = arrows[1];
             } else {
-              // 展开
+              // 闭合
               arrow = arrows[0];
-              widget.onSwitchTap();
             }
+            widget.onSwitchTap();
           });
         },
         child: Row(
