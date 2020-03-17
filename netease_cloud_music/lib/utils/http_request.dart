@@ -27,11 +27,7 @@ enum RequestType {
 class HttpRequest {
   Dio _dio;
 
-  // 单例
-  static final HttpRequest _instance = HttpRequest._internal();
-
-  factory HttpRequest() => _instance; // 工厂模式
-
+  // 1. 私有构造函数
   HttpRequest._internal() {
     // 初始化
     if (null == _dio) {
@@ -52,6 +48,15 @@ class HttpRequest {
       });
     }
   }
+
+  // 2. 保存单例
+  static final HttpRequest _instance = HttpRequest._internal();
+
+  // 3. 工厂构造函数
+  factory HttpRequest() => _instance;
+
+  // Dart中实现单例模式的标准做法就是使用static变量+工厂构造函数的方式，
+  // 这样就可以保证new HttpRequest()始终返回都是同一个实例
 
   /// GET 请求
   Future<Response> get(

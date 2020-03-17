@@ -74,11 +74,17 @@ class _FormTestState extends State<FormTest> {
 //                      ),
 //                    ),
                     Expanded(
+                      // 注意，登录按钮的onPressed方法中不能通过Form.of(context)来获取，
+                      // 原因是，此处的context为FormTestRoute的context，
+                      // 而Form.of(context)是根据所指定context向根去查找，
+                      // 而FormState是在FormTestRoute的子树中，所以不行。
+                      // 正确的做法是通过Builder来构建登录按钮，
+                      // Builder会将widget节点的context作为回调参数
                       child: Builder(builder: (context) {
                         return RaisedButton(
                           padding: EdgeInsets.all(10.0),
                           child: Text("登录"),
-                          color: Theme.of(context).primaryColor,
+                          color: Theme.of(context).primaryColor,  // 
                           textColor: Colors.white,
                           onPressed: () {
                             if (Form.of(context).validate()) {

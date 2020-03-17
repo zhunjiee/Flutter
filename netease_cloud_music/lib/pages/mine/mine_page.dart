@@ -18,6 +18,7 @@ import '../../provider/mine_playlist_provider.dart';
 import '../../model/mine_playlist_model.dart';
 import 'create_playlist_dialog.dart';
 import 'playlist_manage_sheet.dart';
+import '../../widgets/widget_loading.dart';
 
 class MinePage extends StatefulWidget {
   @override
