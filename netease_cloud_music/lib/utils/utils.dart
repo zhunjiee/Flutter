@@ -21,7 +21,7 @@ class Utils {
   static Widget showNetImage(String url,
       {double width, double height, BoxFit fit}) {
     return Image(
-      image: ExtendedNetworkImageProvider(url, cache: true),
+      image: ExtendedNetworkImageProvider(url, cache: true),  // 缓存图片
       width: width,
       height: height,
       fit: fit,

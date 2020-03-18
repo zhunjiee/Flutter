@@ -31,15 +31,6 @@ void main() {
             value: PlayMusicProvider()..init()),
         ChangeNotifierProvider<MinePlaylistProvider>.value(
             value: MinePlaylistProvider()),
-//        ChangeNotifierProvider(
-//          create: (_) => UserProvider(),
-//        ),
-//        ChangeNotifierProvider(
-//          create: (_) => PlayMusicProvider()..init(),
-//        ),
-//        ChangeNotifierProvider(
-//          create: (_) => MinePlaylistProvider(),
-//        ),
       ],
       child: MyApp(),
     ),

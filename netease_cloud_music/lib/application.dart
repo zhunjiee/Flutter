@@ -20,9 +20,9 @@ class Application {
   static double statusBarHeight;
   static double bottomBarHeight;
 
+  static GlobalKey<NavigatorState> key = GlobalKey();
   // Service Locator 可以将接口（抽象基类）与具体实现分离，同时允许通过接口从App中的任何位置访问具体实现。
   // 实现无 context 导航
-  static GlobalKey<NavigatorState> key = GlobalKey();
   static GetIt getIt = GetIt.instance;
   static setupLocator() {
     getIt.registerSingleton(NavigateService());
