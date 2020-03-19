@@ -84,7 +84,8 @@ class _SplashPageState extends State<SplashPage>
     Application.screenWidth = size.width;
     Application.screenHeight = size.height;
     Application.statusBarHeight = MediaQuery.of(context).padding.top;
-    Application.bottomBarHeight = MediaQuery.of(context).padding.bottom;
+    Application.bottomBarHeight = MediaQuery.of(context).padding.bottom;  // 系统自带: kBottomNavigationBarHeight
+
     // sharedPreferences
     await Application.initSharedPreferences();
     // 初始化本地存储用户信息

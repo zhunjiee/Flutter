@@ -40,7 +40,6 @@ class _IndexPageState extends State<IndexPage> {
     ];
 
     _pageController = PageController();
-
   }
 
   /// 各种第三方库初始化配置
@@ -88,12 +87,20 @@ class _IndexPageState extends State<IndexPage> {
     );
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    _pageController.dispose();
+  }
+
   _onBottomItemTapped(int index) {
     setState(() {
       _pageController.jumpToPage(index);
       _selectedIndex = index;
     });
   }
+
+  // ------------ Widgets ------------
 
   /// 自定义带有红色角标的底部导航按钮
   _buildBottomNavigationItemWithBadge(

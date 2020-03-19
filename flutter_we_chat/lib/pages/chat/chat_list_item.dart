@@ -14,14 +14,13 @@ class ChatListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Container(
-        width: ScreenUtil().setWidth(100),
-        height: ScreenUtil().setWidth(100),
-        alignment: Alignment.center,
-        child: CornerRadiusImage(
-          "images/avatar.png",
-          width: ScreenUtil().setWidth(100),
-        ),
+      contentPadding:
+          EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30)),
+      leading: CornerRadiusImage(
+        imgUrl,
+        radius: 8,
+        width: 100,
+        fit: BoxFit.fitWidth,
       ),
       title: Text(name),
       subtitle: Text(lastMsg),

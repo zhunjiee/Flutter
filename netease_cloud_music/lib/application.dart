@@ -17,8 +17,9 @@ class Application {
 
   static double screenWidth;
   static double screenHeight;
-  static double statusBarHeight;
-  static double bottomBarHeight;
+  static double statusBarHeight;  // 状态栏高度
+  static double navigationBarHeight;  // 导航栏栏高度  系统自带: kToolbarHeight
+  static double bottomBarHeight;  // 底部导航栏高度  系统自带: kBottomNavigationBarHeight
 
   static GlobalKey<NavigatorState> key = GlobalKey();
   // Service Locator 可以将接口（抽象基类）与具体实现分离，同时允许通过接口从App中的任何位置访问具体实现。
