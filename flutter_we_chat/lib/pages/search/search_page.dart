@@ -97,11 +97,11 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Widget _appointedRow(List<String> subList) {
-    int _i = 0;
+    int _idx = 0;
     return Row(
       children: subList.map((e) {
-        _i++;
-        return _appointedContentItem(e, _i == subList.length ? false : true);
+        _idx++;
+        return _appointedContentItem(e, _idx == subList.length ? false : true);
       }).toList(),
     );
   }

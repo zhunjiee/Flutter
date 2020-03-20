@@ -69,7 +69,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   /// 搜索框文字改变
   void _onChanged(String value) {
     print("onChanged : $value");
-    if (value.length > 0) {
+    if (value.isNotEmpty) {
       setState(() {
         showClear = true;
       });

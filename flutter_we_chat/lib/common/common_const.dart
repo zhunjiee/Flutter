@@ -1,9 +1,8 @@
 // 矢量字体图标
-const IconFont = "appIconFont";
+const ICON_FONT = "appIconFont";
 
 // 默认头像图片地址
-const AvatarImgUrl =
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcStSJPuGbyKL4NnEPTuyumS9CkheNYQdmpLwHW5VJ1kOCCoUpj9";
+const DEFAULT_AVATAR_URL = "https://pic1.zhimg.com/80/v2-6afa72220d29f045c15217aa6b275808_1440w.jpg";
 
 // 通讯录索引
 const INDEX_LETTERS = [

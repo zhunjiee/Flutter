@@ -475,7 +475,7 @@ class HotGoods extends StatelessWidget {
   }
 
   Widget _wrapHotGoodsList(BuildContext context) {
-    if (hotGoodsList.length != 0) {
+    if (hotGoodsList.isNotEmpty) {
       List<Widget> listWidget = hotGoodsList.map((value) {
         return _hotItem(context, value);
       }).toList();

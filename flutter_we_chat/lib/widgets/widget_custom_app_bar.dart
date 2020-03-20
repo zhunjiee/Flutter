@@ -67,7 +67,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
     return Row(
       children: <Widget>[
         Icon(
-          IconData(iconData, fontFamily: IconFont),
+          IconData(iconData, fontFamily: ICON_FONT),
           size: 22,
           color: Colors.white,
         ),

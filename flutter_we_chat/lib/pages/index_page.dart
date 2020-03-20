@@ -122,7 +122,7 @@ class _IndexPageState extends State<IndexPage> {
       child: Stack(
         alignment: AlignmentDirectional.topCenter,
         children: <Widget>[
-          Icon(IconData(codePoint, fontFamily: IconFont)),
+          Icon(IconData(codePoint, fontFamily: ICON_FONT)),
           showBadge
               ? Positioned(
                   top: 0,

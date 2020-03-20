@@ -161,8 +161,9 @@ class Playlist {
     cloudTrackCount = json['cloudTrackCount'];
     playCount = json['playCount'];
     trackCount = json['trackCount'];
-    if ((json['tags'] as List).length > 0) {
-      tags = (json['tags'] as List).cast<String>();
+    if ((json['tags'] as List).isNotEmpty) {
+//      tags = (json['tags'] as List).cast<String>();
+      tags = List<String>.from(json['tags'] as List);
     }
     trackUpdateTime = json['trackUpdateTime'];
     trackNumberUpdateTime = json['trackNumberUpdateTime'];
