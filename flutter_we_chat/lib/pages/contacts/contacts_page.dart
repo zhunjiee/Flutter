@@ -1,22 +1,11 @@
 import 'package:flutter/material.dart';
+import '../../widgets/widget_custom_app_bar.dart';
 
 class ContactsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("通讯录"),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search, color: Colors.black87),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.add_circle_outline, color: Colors.black87),
-            onPressed: () {},
-          ),
-        ],
-      ),
+      appBar: CustomAppBar(),
       body: Container(
         child: Center(
           child: Text("通讯录"),

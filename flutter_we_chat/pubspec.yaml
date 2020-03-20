@@ -42,6 +42,7 @@ dependencies:
   extended_image: ^0.7.1  # 屌炸天的 Image 扩展
   get_it: ^3.1.0  # 依赖注入
   flutter_easyloading: ^1.1.1 # loading遮罩
+  barcode_scan: ^2.0.1  # 二维码扫描
 
 dev_dependencies:
   flutter_test:

@@ -16,17 +16,25 @@ class ChatListItem extends StatelessWidget {
     return ListTile(
       contentPadding:
           EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30)),
-      leading: CornerRadiusImage(
-        imgUrl,
-        radius: 8,
-        width: 100,
-        fit: BoxFit.fitWidth,
-      ),
+      leading: _clipCornerRadiusImage(imgUrl, 4, ScreenUtil().setWidth(100)),
       title: Text(name),
       subtitle: Text(lastMsg),
       trailing: Text(
         timeStr,
         style: smallGrayTextStyle,
+      ),
+    );
+  }
+
+  /// 带占位图片的圆角图片
+  Widget _clipCornerRadiusImage(String url, double radius, double width) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(radius),
+      child: FadeInImage.assetNetwork(
+        placeholder: "images/default_nor_avatar.png",
+        image: url,
+        width: width,
+        height: width,
       ),
     );
   }

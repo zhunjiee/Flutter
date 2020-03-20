@@ -8,8 +8,8 @@
 
 import 'package:flutter/material.dart';
 
-class HorizontalPlaceholderView extends StatelessWidget {
-  HorizontalPlaceholderView(this.width);
+class HEmptyView extends StatelessWidget {
+  HEmptyView(this.width);
 
   final double width;
 

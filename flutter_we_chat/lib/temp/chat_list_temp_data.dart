@@ -5,87 +5,87 @@ class ChatListTempData {
     List<ChatModel> _chatModels = [];
 
     _chatModels.add(ChatModel(
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQiH3mCzekL-nfaUlyUGZgNYZUrw6hZ16t94cAfbUMKwSYn2W3P",
+        "http://searchfoto.ru/img/xyygpKbDS1y8pTjXUy83VS8rMS9fLSy3RL8mwz0yx9fcM0KuKCKkIKk0JD3HOTCvzjtJNcc40Kkz3SPRIVEvMLbAutzUyNgCzMmwNzSGsomJbQzCjIDnHNgUMwNx8W1OIMNBoQz1DAA.jpg",
         "biao",
         "在干什么呢",
         "2010/01/02"));
     _chatModels.add(ChatModel(
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS4JMNLEU2hiDy8Ex5xG50ANgHZreOetVwNJKRqWiYrYJOm7mIr",
+        "http://image.biaobaiju.com/uploads/20190731/18/1564570550-vxrhKOnbFL.jpeg",
         "花花酱",
         "在干什么呢",
         "2020/01/02"));
     _chatModels.add(ChatModel(
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTiLwxp7JZwSWKzBH-bMufQqrhFJo8mFW93femb-Tc4oIxxRDqt",
+        "http://a.hiphotos.baidu.com/zhidao/pic/item/ae51f3deb48f8c545405213538292df5e1fe7fd2.jpg",
         "赵四",
         "昨天的事情解决了吗？",
         "昨天"));
     _chatModels.add(ChatModel(
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQmXTcoRf6Iamd-VqKxYq_9OQaznMDt7gaR0NIooO56wFSm2syT",
+        "http://www.17qq.com/img_qqtouxiang/25065956.jpeg",
         "哥哥",
         "哈哈",
         "前天"));
     _chatModels.add(ChatModel(
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQgdRIcVlZhKfaIxLwK6uISA449_Xy12X7P5qoDhTu8Yv61YLfx",
+        "http://t-1.tuzhan.com/5628a45f460c/c-1/l/2012/09/21/17/d1c07038a5e542309d1743cfe108f088.jpg",
         "好的名字让朋友记住你",
         "。。。",
         "20:12"));
     _chatModels.add(ChatModel(
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTG5_BNUtecugKy-_nc1CpAsV_px4MReS4qGED-1jY5UnjnTgcj",
+        "http://t-1.tuzhan.com/4a2d8664148a/c-1/l/2012/09/21/18/0d41490a277d492dac8831265f3b6abc.png",
         "。。。",
         "来了吗",
         "09:09"));
     _chatModels.add(ChatModel(
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQs4Q6FnVBC2xzmzmryFs1pKkHZ8e2gOoRsE3UjLTme_jzF3mas",
+        "http://t-1.tuzhan.com/cd9e0b2e2b29/c-1/m/2012/09/21/17/c2c7c66593434753af79d50c4497657a.jpg",
         "Cling",
         "上课呢",
         "2020/02/29"));
     _chatModels.add(ChatModel(
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR3HsH3q2LkXh_abUc_T7Nx-iNkCgRUus4yr8givvbvpah05X43",
+        "http://www.17qq.com/img_qqtouxiang/11930794.jpeg",
         "Sky",
         "再看吧",
         "14:20"));
     _chatModels.add(ChatModel(
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTaXwwMnO760jdZUmWIcryDhNUL6iC-eA73kCKXRHbGfHXW_4_2",
+        "http://www.17qq.com/img_qqtouxiang/4878120.jpeg",
         "班级群",
         "大家记得提交作业",
         "昨天"));
     _chatModels.add(ChatModel(
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRQRNGE15zEjPG0iPMzszoSF15Gt1-P-BGQhLR9WXEnBhSPoU9c",
+        "http://img3.imgtn.bdimg.com/it/u=2529013183,2767048200&fm=26&gp=0.jpg",
         "技术交流群",
         "flutter移动端第一",
         "昨天"));
     _chatModels.add(ChatModel(
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTXLMYnpb-PMV0wPYf9L5kPJzgjSXvIfdJhhbQdLLlLieq8m5zA",
+        "http://t-1.tuzhan.com/b6d7b4715054/c-1/l/2012/09/21/18/a0c3d0c89fbd4c3fb6e89ad28e6326de.jpg",
         "java工程师王一",
         "面试咋样啊",
         "前天"));
     _chatModels.add(ChatModel(
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTQ66I7Z8V0nO5-pr4Ubd-HlM7WGJ78Mch-wszg1jx5UtOgeu7F",
+        "http://img1.touxiang.cn/uploads/20130424/24-074941_613.jpg",
         "移动端群",
         "flutter学习资料",
         "前天"));
     _chatModels.add(ChatModel(
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcREk_qXU3ZmiiiKVXmMJbUsKLHLFwHzJPIQsTG5__Egp_wS2qqF",
+        "http://t-1.tuzhan.com/9ef0d784dbba/c-1/m/2012/09/21/15/866763a1bff14ad4b4b765befb9f315e.jpg",
         "flutter 学习交流",
         "大家好",
         "2020/01/02"));
     _chatModels.add(ChatModel(
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT4hzXLbHh3WpNS2JPeDNGFrUxCy8G6q7ZhiEWch_rpsH-qjmlL",
+        "http://t-1.tuzhan.com/623664425012/c-1/l/2012/09/21/17/eb58e9a586e44653ae9ad552ec07e765.jpg",
         "考研帮",
         "考研看着",
         "2010/01/02"));
     _chatModels.add(ChatModel(
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSWhPmbTURlGR7Uw5eBPlXZnUEviQ6IPFOysANKNygCRMiGszFY",
+        "http://www.qq745.com/uploads/allimg/160729/8-160H9151020.jpg",
         "nike",
         "悼念科比逝世",
         "2010/01/02"));
     _chatModels.add(ChatModel(
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRun_G8_dzpbZ4C8vcg1JgdUtwHsAdax_RJLTqjgAYWDPZ_r1or",
+        "http://img5.imgtn.bdimg.com/it/u=2602765663,220599790&fm=26&gp=0.jpg",
         "建设银行",
         "你的账户余额为xxx",
         "2010/01/02"));
     _chatModels.add(ChatModel(
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTvhH1fNTnBRdIxFGWU7UtsYUfZME5rAQOBM2LMmqEKqxyIyK5t",
+        "http://tx.haiqq.com/uploads/allimg/140824/1U61V047-43.jpg",
         "徐蒙多",
         "打球约吗",
         "2010/01/02"));

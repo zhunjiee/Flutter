@@ -9,8 +9,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class VerticalPlaceholderView extends StatelessWidget {
-  VerticalPlaceholderView(this.height);
+class VEmptyView extends StatelessWidget {
+  VEmptyView(this.height);
 
   final double height;
 
