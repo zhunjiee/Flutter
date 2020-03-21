@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'chat/chat_list_page.dart';
@@ -27,10 +28,10 @@ class _IndexPageState extends State<IndexPage> {
       _buildBottomNavigationItemWithBadge(0xe608, 0xe603, "微信",
           showBadge: true),
       _buildBottomNavigationItemWithBadge(0xe601, 0xe656, "通讯录",
-          showBadge: true),
+          showBadge: false),
       _buildBottomNavigationItemWithBadge(0xe600, 0xe671, "发现",
           showBadge: true),
-      _buildBottomNavigationItemWithBadge(0xe6c0, 0xe626, "我", showBadge: true),
+      _buildBottomNavigationItemWithBadge(0xe6c0, 0xe626, "我", showBadge: false),
     ];
     bodyList = [
       ChatListPage(),
@@ -58,6 +59,7 @@ class _IndexPageState extends State<IndexPage> {
           children: bodyList,
           controller: _pageController,
           scrollDirection: Axis.horizontal,
+          physics: Platform.isIOS ? ClampingScrollPhysics() : AlwaysScrollableScrollPhysics(),
           onPageChanged: (index){
             setState(() {
               _selectedIndex = index;
@@ -136,7 +138,7 @@ class _IndexPageState extends State<IndexPage> {
                     ),
                   ),
                 )
-              : null,
+              : Container(),
         ],
       ),
     );
