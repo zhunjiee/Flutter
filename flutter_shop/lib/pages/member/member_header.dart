@@ -14,7 +14,7 @@ class MemberHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: ScreenUtil().setWidth(750),
-      height: ScreenUtil().setHeight(450),
+      height: ScreenUtil().setWidth(450),
       child: Stack(
         children: <Widget>[
           Positioned(

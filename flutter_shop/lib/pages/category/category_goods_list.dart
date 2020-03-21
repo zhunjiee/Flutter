@@ -17,6 +17,7 @@ import '../../provider/category_goods_list_provider.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import '../../routers/application.dart';
 import '../detail/detail_page.dart';
+import '../../widgets/custom_refresh_header_footer.dart';
 
 /*
 * 分类商品列表,可以上拉加载
@@ -74,28 +75,8 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
             onLoad: () async {
               _getMoreCategoryGoodsListData();
             },
-            header: ClassicalHeader(
-              refreshText: "下拉刷新",
-              refreshReadyText: "松手刷新",
-              refreshingText: "正在刷新中...",
-              refreshedText: "刷新完成",
-              refreshFailedText: "刷新失败",
-              noMoreText: "没有相关数据",
-              showInfo: false, // 不显示时间
-              enableHapticFeedback: false, // 取消震动反馈
-            ),
-            footer: ClassicalFooter(
-              // 如何显示中文还没找到好的办法
-              loadText: "上拉加载更多",
-              loadReadyText: "松手加载",
-              loadingText: "正在加载中...",
-              loadedText: "加载完成",
-              loadFailedText: "加载失败",
-              noMoreText: "已经到底了",
-              showInfo: false, // 不显示时间
-              enableInfiniteLoad: false, // 取消无限加载,隐藏footer
-              enableHapticFeedback: false, // 取消震动反馈
-            ),
+            header: CustomRefreshHeaderFooter.getHeader(),
+            footer: CustomRefreshHeaderFooter.getFooter(),
             controller: _refreshController,
           ),
         ),

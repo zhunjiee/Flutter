@@ -24,7 +24,7 @@ class DetailWeb extends StatelessWidget {
       );
     } else {
       return Container(
-        height: ScreenUtil().setHeight(200),
+        height: ScreenUtil().setWidth(200),
         child: Center(
           child: Text("暂无评论"),
         ),

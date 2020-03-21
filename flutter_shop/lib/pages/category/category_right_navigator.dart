@@ -42,7 +42,7 @@ class _RightCategoryNavigatorState extends State<RightCategoryNavigator> {
 
     // 1. 初始化 公开值 对象
     return Container(
-      height: ScreenUtil().setHeight(80),
+      height: ScreenUtil().setWidth(80),
       width: ScreenUtil().setWidth(570),
       decoration: BoxDecoration(
         color: Colors.white,

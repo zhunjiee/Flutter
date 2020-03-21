@@ -19,7 +19,7 @@ class CartBottom extends StatelessWidget {
       margin: EdgeInsets.all(5),
       color: Colors.white,
       width: ScreenUtil().setWidth(750),
-      height: ScreenUtil().setHeight(100),
+      height: ScreenUtil().setWidth(100),
       child: Row(
         children: <Widget>[
           _selectAllBtn(context),
@@ -58,7 +58,7 @@ class CartBottom extends StatelessWidget {
               Container(
                 alignment: Alignment.bottomRight,
                 width: ScreenUtil().setWidth(240),
-                height: ScreenUtil().setHeight(60),
+                height: ScreenUtil().setWidth(60),
                 child: Text(
                   "合计: ",
                   style: TextStyle(
@@ -69,7 +69,7 @@ class CartBottom extends StatelessWidget {
               Container(
                 alignment: Alignment.bottomLeft,
                 width: ScreenUtil().setWidth(160),
-                height: ScreenUtil().setHeight(60),
+                height: ScreenUtil().setWidth(60),
                 child: Text(
                   "¥ ${Provider.of<CartProvider>(context).allPrice}",
                   style: TextStyle(
@@ -100,7 +100,7 @@ class CartBottom extends StatelessWidget {
   Widget _payButton(BuildContext context) {
     return Container(
       width: ScreenUtil().setWidth(190),
-      height: ScreenUtil().setHeight(90),
+      height: ScreenUtil().setWidth(90),
       padding: EdgeInsets.only(left: 10, top: 5),
       child: RaisedButton(
         onPressed: () {},

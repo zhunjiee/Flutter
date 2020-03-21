@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:fluro/fluro.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'pages/index_page.dart';
 import 'provider/category_provider.dart';
 import 'provider/category_goods_list_provider.dart';
@@ -43,6 +45,18 @@ class MyApp extends StatelessWidget {
         ),
         home: IndexPageWithProvider(),
         debugShowCheckedModeBanner: false, // 去除debug字样
+
+        // 添加国际化支持
+        localizationsDelegates: [
+          GlobalEasyRefreshLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        supportedLocales: [
+          Locale('zh', 'CN'),
+          Locale('en', 'US'),
+        ],
+//        locale: Locale('zh', 'CN'),
       ),
     );
   }

@@ -43,7 +43,7 @@ class MemberOrder extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(top: 8),
       width: ScreenUtil().setWidth(750),
-      height: ScreenUtil().setHeight(150),
+      height: ScreenUtil().setWidth(150),
       padding: EdgeInsets.only(top: 20),
       color: Colors.white,
       child: Row(

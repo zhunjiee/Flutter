@@ -32,7 +32,7 @@ class CartPage extends StatelessWidget {
                   left: 0,
                   top: 0,
                   right: 0,
-                  bottom: ScreenUtil().setHeight(100),
+                  bottom: ScreenUtil().setWidth(100),
                   child: Consumer<CartProvider>(builder: (context, cartProvider, _){
                     List<CartModel> cartList = cartProvider.cartList;
                     return ListView.builder(

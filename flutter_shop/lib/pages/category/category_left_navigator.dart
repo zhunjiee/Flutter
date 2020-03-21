@@ -110,7 +110,7 @@ class _LeftCategoryNavigatorState extends State<LeftCategoryNavigator> {
         _getCategoryGoodsListData(1, model.mallCategoryId);
       },
       child: Container(
-        height: ScreenUtil().setHeight(100),
+        height: ScreenUtil().setWidth(100),
         padding: EdgeInsets.only(left: 10, top: 15),
         decoration: BoxDecoration(
           color: isSelected ? Colors.black12 : Colors.white,

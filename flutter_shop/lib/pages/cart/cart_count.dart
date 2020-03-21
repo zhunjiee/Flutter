@@ -43,7 +43,7 @@ class CartCount extends StatelessWidget {
       },
       child: Container(
         width: ScreenUtil().setWidth(45),
-        height: ScreenUtil().setHeight(45),
+        height: ScreenUtil().setWidth(45),
         alignment: Alignment.center,
         decoration: BoxDecoration(
             border: Border(
@@ -65,7 +65,7 @@ class CartCount extends StatelessWidget {
       },
       child: Container(
         width: ScreenUtil().setWidth(45),
-        height: ScreenUtil().setHeight(45),
+        height: ScreenUtil().setWidth(45),
         alignment: Alignment.center,
         decoration: BoxDecoration(
             border: Border(
@@ -85,7 +85,7 @@ class CartCount extends StatelessWidget {
       onTap: () {},
       child: Container(
         width: ScreenUtil().setWidth(70),
-        height: ScreenUtil().setHeight(45),
+        height: ScreenUtil().setWidth(45),
         alignment: Alignment.center,
         child: Text("${item.count}"),
       ),

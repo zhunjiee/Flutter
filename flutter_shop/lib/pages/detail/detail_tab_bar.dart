@@ -17,7 +17,7 @@ class DetailTabBar extends StatelessWidget {
     bool isLeft = Provider.of<GoodsDetailProvider>(context).isLeft;
     bool isRight = Provider.of<GoodsDetailProvider>(context).isRight;
     return Container(
-      height: ScreenUtil().setHeight(80),
+      height: ScreenUtil().setWidth(80),
       child: Row(
         children: <Widget>[
           _customTabBarLeftItem(context, isLeft),

@@ -48,7 +48,7 @@ class GoodsDetail extends StatelessWidget {
                   left: 0,
                   right: 0,
                   top: 0,
-                  bottom: ScreenUtil().setHeight(100),
+                  bottom: ScreenUtil().setWidth(100),
                   child: ListView(
                     children: <Widget>[
                       DetailTopArea(),

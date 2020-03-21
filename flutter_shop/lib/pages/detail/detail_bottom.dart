@@ -28,7 +28,7 @@ class DetailBottom extends StatelessWidget {
 
     return Container(
       width: ScreenUtil().setWidth(750),
-      height: ScreenUtil().setHeight(100),
+      height: ScreenUtil().setWidth(100),
       color: Colors.white,
       child: Row(
         children: <Widget>[
@@ -36,7 +36,7 @@ class DetailBottom extends StatelessWidget {
             children: <Widget>[
               Container(
                 width: ScreenUtil().setWidth(110),
-                height: ScreenUtil().setHeight(100),
+                height: ScreenUtil().setWidth(100),
                 child: RaisedButton(
                   onPressed: () {
 //                Application.router.navigateTo(context, "/cart");
@@ -74,7 +74,7 @@ class DetailBottom extends StatelessWidget {
 
           Container(
             width: ScreenUtil().setWidth(320),
-            height: ScreenUtil().setHeight(100),
+            height: ScreenUtil().setWidth(100),
             child: RaisedButton(
               onPressed: () async {
                 await Provider.of<CartProvider>(context, listen: false)
@@ -90,7 +90,7 @@ class DetailBottom extends StatelessWidget {
           ),
           Container(
             width: ScreenUtil().setWidth(320),
-            height: ScreenUtil().setHeight(100),
+            height: ScreenUtil().setWidth(100),
             child: RaisedButton(
               onPressed: () async {
                 await Provider.of<CartProvider>(context, listen: false).clear();
