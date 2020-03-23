@@ -22,7 +22,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     _setThemeColor();
     
-    /// 添加订阅者
+    /// 添加订阅者---------------------------------------------
     _colorSubscription = eventBus.on<ThemeColorEvent>().listen((event){
       // 缓存主题颜色
       _getCacheColor(event.colorStr);
@@ -49,7 +49,7 @@ class _MyAppState extends State<MyApp> {
     // TODO: implement dispose
     super.dispose();
 
-    /// 移除订阅者,防止内存泄漏
+    /// 移除订阅者,防止内存泄漏---------------------------------------------
     _colorSubscription.cancel();
   }
   
@@ -109,7 +109,7 @@ class MyHomePage extends StatelessWidget {
                   print("请输入颜色值");
                   return;
                 }
-                /// 触发事件，事件触发后该事件所有订阅者会被调用
+                /// 触发事件，事件触发后该事件所有订阅者会被调用---------------------------------------------
                 /// 发送订阅消息去修改颜色
                 eventBus.fire(ThemeColorEvent(_controller.text));
               },
