@@ -26,6 +26,20 @@ import Flutter
         }
     }
     
+    // 计算两个数的和
+    let METHOD_CHANNEL = "com.zhunjiee.flutter/android"
+    let  METHOD_CHANNEL_ADD = "numberAdd"
+    let methodChannel = FlutterMethodChannel(name: METHOD_CHANNEL, binaryMessenger: controller!.binaryMessenger)
+    methodChannel.setMethodCallHandler { (call, result) in
+        if (call.method == METHOD_CHANNEL_ADD) {
+            let dict: [String: Any]  = call.arguments as! [String : Any]
+            let num1 = (dict["num1"] as? NSNumber)?.intValue ?? 0
+            let num2 = (dict["num2"] as? NSNumber)?.intValue ?? 0
+            
+            result(NSNumber(value: num1 + num2))
+        }
+    }
+    
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
     

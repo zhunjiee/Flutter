@@ -4,12 +4,13 @@ import '../../widgets/widget_corner_radius_image.dart';
 import '../../common/common_text_style.dart';
 
 class ChatListItem extends StatelessWidget {
-  ChatListItem(this.imgUrl, this.name, this.lastMsg, this.timeStr);
+  ChatListItem(this.imgUrl, this.name, this.lastMsg, this.timeStr, {this.onItemTap});
 
   final String imgUrl;
   final String name;
   final String lastMsg;
   final String timeStr;
+  final VoidCallback onItemTap;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +24,7 @@ class ChatListItem extends StatelessWidget {
         timeStr,
         style: smallGrayTextStyle,
       ),
+      onTap: onItemTap,
     );
   }
 
