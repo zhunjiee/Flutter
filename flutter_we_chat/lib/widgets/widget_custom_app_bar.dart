@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterwechat/common/common_const.dart';
+import 'package:flutterwechat/common/common_constant.dart';
 import '../pages/search/search_page.dart';
 import 'h_empty_view.dart';
 import '../temp/add_list_temp_data.dart';
@@ -67,7 +67,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
     return Row(
       children: <Widget>[
         Icon(
-          IconData(iconData, fontFamily: ICON_FONT),
+          IconData(iconData, fontFamily: CommonConstant.ICON_FONT),
           size: 22,
           color: Colors.white,
         ),

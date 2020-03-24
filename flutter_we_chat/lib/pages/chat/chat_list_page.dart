@@ -16,12 +16,12 @@ class ChatListPage extends StatefulWidget {
 
 class _ChatListPageState extends State<ChatListPage> {
   // 获取电池电量
-  static const MethodChannel methodChannel =
-      MethodChannel('samples.flutter.io/battery');
-
-  static final String METHOD_CHANNEL = "com.zhunjiee.flutter/android";
-  static final String NATIVE_METHOD_ADD = "numberAdd";
-  static final MethodChannel _methodChannel = MethodChannel(METHOD_CHANNEL);
+//  static const MethodChannel methodChannel =
+//      MethodChannel('samples.flutter.io/battery');
+//
+//  static final String METHOD_CHANNEL = "com.zhunjiee.flutter/android";
+//  static final String NATIVE_METHOD_ADD = "numberAdd";
+//  static final MethodChannel _methodChannel = MethodChannel(METHOD_CHANNEL);
 
   List<ChatModel> _chatListData;
 
@@ -32,9 +32,9 @@ class _ChatListPageState extends State<ChatListPage> {
     _chatListData = ChatListTempData.mock();
 
     // 获取电池电量
-    methodChannel.invokeMethod('getBatteryLevel').then((v) {
-      print("电池电量: $v");
-    });
+//    methodChannel.invokeMethod('getBatteryLevel').then((v) {
+//      print("电池电量: $v");
+//    });
   }
 
   @override
@@ -63,9 +63,7 @@ class _ChatListPageState extends State<ChatListPage> {
                 model.name,
                 model.lastMsg,
                 model.time,
-                onItemTap: () {
-                  getNumberResult(12, 13);
-                },
+                onItemTap: () {},
               );
             },
             separatorBuilder: (context, index) {
@@ -93,9 +91,9 @@ class _ChatListPageState extends State<ChatListPage> {
     );
   }
 
-  void getNumberResult(int a, int b) async {
-    Map<String, int> map = {"num1": a, "num2": b};
-    int result = await _methodChannel.invokeMethod(NATIVE_METHOD_ADD, map);
-    print("调用原生平台计算后的结果为: $result");
-  }
+//  void getNumberResult(int a, int b) async {
+//    Map<String, int> map = {"num1": a, "num2": b};
+//    int result = await _methodChannel.invokeMethod(NATIVE_METHOD_ADD, map);
+//    print("调用原生平台计算后的结果为: $result");
+//  }
 }

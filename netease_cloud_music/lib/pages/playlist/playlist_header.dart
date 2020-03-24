@@ -12,7 +12,8 @@ import 'package:netease_cloud_music/provider/play_music_provider.dart';
 import '../../utils/common_text_style.dart';
 import '../../widgets/h_placeholder_view.dart';
 
-typedef PlayMusicCallback = void Function(PlayMusicProvider provider);
+//typedef PlayMusicCallback = void Function(PlayMusicProvider provider);
+typedef void PlayMusicCallback(PlayMusicProvider provider);
 
 class PlaylistHeader extends StatelessWidget
     implements PreferredSizeWidget {

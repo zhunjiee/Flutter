@@ -8,8 +8,18 @@
 
 import 'package:event_bus/event_bus.dart';
 
-/// 创建EventBus
-EventBus eventBus = EventBus();
+/// 创建全局EventBus
+class GlobalEvent {
+  EventBus eventBus;
+
+  GlobalEvent._internal() {
+    if (eventBus == null) {
+      eventBus = EventBus();
+    }
+  }
+  static final GlobalEvent _instance = GlobalEvent._internal();
+  factory GlobalEvent() => _instance;
+}
 
 class ThemeColorEvent {
 

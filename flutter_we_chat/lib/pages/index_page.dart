@@ -5,7 +5,7 @@ import 'chat/chat_list_page.dart';
 import 'contacts/contacts_page.dart';
 import 'discover/discover_page.dart';
 import 'mine/mine_page.dart';
-import '../common/common_const.dart';
+import '../common/common_constant.dart';
 import '../common/common_color.dart';
 
 class IndexPage extends StatefulWidget {
@@ -124,7 +124,7 @@ class _IndexPageState extends State<IndexPage> {
       child: Stack(
         alignment: AlignmentDirectional.topCenter,
         children: <Widget>[
-          Icon(IconData(codePoint, fontFamily: ICON_FONT)),
+          Icon(IconData(codePoint, fontFamily: CommonConstant.ICON_FONT)),
           showBadge
               ? Positioned(
                   top: 0,

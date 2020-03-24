@@ -11,9 +11,9 @@ import 'package:fluro/fluro.dart';
 import 'router_handler.dart';
 
 class Routes {
-  static String root = "/";
-  static String detailPage = "/detail";
-  static String cartPage = "/cart";
+  static final String root = "/";
+  static final String detailPage = "/detail";
+  static final String cartPage = "/cart";
 
   static void configureRoutes(Router router){
     router.notFoundHandler = Handler(

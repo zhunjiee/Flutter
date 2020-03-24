@@ -21,7 +21,7 @@ class CommonColor {
 
   /// 字符串转颜色对象 Color
   static Color getColor(String colorStr) {
-    if (colorStr.isNotEmpty) {
+    if (colorStr != null) {
       if (colorStr.substring(0, 1) != "#") {
         return primaryColor;
       }
