@@ -67,6 +67,12 @@ class _ChatListPageState extends State<ChatListPage> {
               );
             },
             separatorBuilder: (context, index) {
+              return Divider(
+                indent: ScreenUtil().setWidth(150),
+                thickness: 0.5,
+                color: Colors.grey[400],
+                height: 0,
+              );
               return Container(
                 height: ScreenUtil().setWidth(0.5),
                 margin: EdgeInsets.only(left: ScreenUtil().setWidth(150)),
