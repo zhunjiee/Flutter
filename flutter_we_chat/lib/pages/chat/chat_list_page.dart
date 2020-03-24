@@ -73,11 +73,6 @@ class _ChatListPageState extends State<ChatListPage> {
                 color: Colors.grey[400],
                 height: 0,
               );
-              return Container(
-                height: ScreenUtil().setWidth(0.5),
-                margin: EdgeInsets.only(left: ScreenUtil().setWidth(150)),
-                color: Colors.grey[400],
-              );
             },
             itemCount: 10,
             shrinkWrap: true,

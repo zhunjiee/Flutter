@@ -15,22 +15,18 @@ class ChatListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        ListTile(
-          contentPadding: EdgeInsets.symmetric(
-              horizontal: ScreenUtil().setWidth(30), vertical: 0),
-          leading:
-              _clipCornerRadiusImage(imgUrl, 4, ScreenUtil().setWidth(100)),
-          title: Text(name),
-          subtitle: Text(lastMsg),
-          trailing: Text(
-            timeStr,
-            style: smallGrayTextStyle,
-          ),
-          onTap: onItemTap,
-        ),
-      ],
+    return ListTile(
+      contentPadding: EdgeInsets.symmetric(
+          horizontal: ScreenUtil().setWidth(30), vertical: 0),
+      leading:
+      _clipCornerRadiusImage(imgUrl, 4, ScreenUtil().setWidth(100)),
+      title: Text(name),
+      subtitle: Text(lastMsg),
+      trailing: Text(
+        timeStr,
+        style: smallGrayTextStyle,
+      ),
+      onTap: onItemTap,
     );
   }
 
