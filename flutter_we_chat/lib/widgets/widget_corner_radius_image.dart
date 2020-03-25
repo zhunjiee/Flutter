@@ -7,7 +7,6 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CornerRadiusImage extends StatelessWidget {
   CornerRadiusImage(
@@ -27,18 +26,20 @@ class CornerRadiusImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(ScreenUtil().setWidth(radius)),
+      borderRadius: BorderRadius.circular(radius),
       child: src.startsWith("http")
-          ? Image.network(
-              src,
-              width: width == null ? null : ScreenUtil().setWidth(width),
-              height: height == null ? null : ScreenUtil().setWidth(height),
+          ? FadeInImage.assetNetwork(
+              // 带占位图片的网络加载图片方法
+              placeholder: "images/default_nor_avatar.png",
+              image: src,
+              width: width,
+              height: height,
               fit: fit,
             )
           : Image.asset(
               src,
-              width: width == null ? null : ScreenUtil().setWidth(width),
-              height: height == null ? null : ScreenUtil().setWidth(height),
+              width: width ,
+              height: height,
               fit: fit,
             ),
     );

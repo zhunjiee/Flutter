@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'chat/chat_list_page.dart';
+import 'chat_list/chat_list_page.dart';
 import 'contacts/contacts_page.dart';
 import 'discover/discover_page.dart';
 import 'mine/mine_page.dart';

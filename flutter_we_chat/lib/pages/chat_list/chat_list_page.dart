@@ -8,6 +8,7 @@ import '../../common/common_color.dart';
 import '../../widgets/widget_search_bar.dart';
 import '../search/search_page.dart';
 import '../../widgets/widget_custom_app_bar.dart';
+import '../../utils/navigation_util.dart';
 
 class ChatListPage extends StatefulWidget {
   @override
@@ -63,15 +64,17 @@ class _ChatListPageState extends State<ChatListPage> {
                 model.name,
                 model.lastMsg,
                 model.time,
-                onItemTap: () {},
+                onItemTap: () {
+                  NavigationUtil.goChatPage(context);
+                },
               );
             },
             separatorBuilder: (context, index) {
               return Divider(
                 indent: ScreenUtil().setWidth(150),
-                thickness: 0.5,
-                color: Colors.grey[400],
-                height: 0,
+                thickness: 0.3, // 这才是分割线的宽度
+                color: Colors.grey[600],
+                height: 0, // 分割线的默认上下距离设为0
               );
             },
             itemCount: 10,

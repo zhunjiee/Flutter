@@ -12,7 +12,7 @@ class ContactModel {
   String url;
   int type;
   String name;
-  String startLetter;
+  String startLetter; // 开头字母
 
   ContactModel({this.type, this.url, this.name,this.startLetter});
 }

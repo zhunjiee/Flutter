@@ -1,18 +1,17 @@
 /**
  * @ClassName widget_circular_image
- * @Description TODO
+ * @Description 剪裁圆形图片
  * @Author HouGe
  * @Date 2020-02-27 15:11
  * @Version 1.0
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CircularImage extends StatelessWidget {
   CircularImage(
-    this.src,
-    this.width, {
+    this.src, {
+    this.width,
     this.fit = BoxFit.cover,
   });
 
@@ -22,19 +21,18 @@ class CircularImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(width / 2),
+    return ClipOval(
       child: src.startsWith("http")
           ? Image.network(
               src,
-              width: ScreenUtil().setWidth(width),
-              height: ScreenUtil().setWidth(width),
+              width: width,
+              height: width,
               fit: fit,
             )
           : Image.asset(
               src,
-              width: ScreenUtil().setWidth(width),
-              height: ScreenUtil().setWidth(width),
+              width: width,
+              height: width,
               fit: fit,
             ),
     );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../widgets/widget_corner_radius_image.dart';
 import '../../common/common_text_style.dart';
 
 class ChatListItem extends StatelessWidget {
@@ -17,15 +16,13 @@ class ChatListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.symmetric(
-          horizontal: ScreenUtil().setWidth(30), vertical: 0),
-      leading:
-      _clipCornerRadiusImage(imgUrl, 4, ScreenUtil().setWidth(100)),
+        horizontal: ScreenUtil().setWidth(30),
+        vertical: 0,
+      ),
+      leading: _clipCornerRadiusImage(imgUrl, 4, ScreenUtil().setWidth(100)),
       title: Text(name),
       subtitle: Text(lastMsg),
-      trailing: Text(
-        timeStr,
-        style: smallGrayTextStyle,
-      ),
+      trailing: Text(timeStr, style: smallGrayTextStyle),
       onTap: onItemTap,
     );
   }

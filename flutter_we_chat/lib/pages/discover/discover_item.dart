@@ -9,8 +9,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DiscoverListTile extends StatelessWidget {
-  DiscoverListTile(this.src, this.title, {this.showSeparator = false});
+class DiscoverItem extends StatelessWidget {
+  DiscoverItem(this.src, this.title, {this.showSeparator = false});
 
   final String src;
   final String title;
@@ -55,18 +55,14 @@ class DiscoverListTile extends StatelessWidget {
             ],
           ),
           // 分割线
-          Divider(
-            indent: ScreenUtil().setWidth(70),
-            thickness: 0.5, // 这才是分割线的宽度
-            color: showSeparator ? Colors.grey[400] : Colors.transparent,
-            height: 0, // 分割线的默认上下距离设为0
-          ),
+
         ],
       ),
       padding: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
-      fillColor: Colors.white,  // 背景颜色
+      fillColor: Colors.white, // 背景颜色
       elevation: 0, // 去除阴影
-      highlightElevation: 0,  // 去除高亮阴影
+      highlightElevation: 0, // 去除高亮阴影
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,  // 去除 最小高度48 限制
     );
   }
 }

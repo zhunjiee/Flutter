@@ -1,10 +1,13 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutterwechat/temp/contact_list_temp_data.dart';
 import '../../widgets/widget_custom_app_bar.dart';
 import '../../common/common_constant.dart';
 import '../../model/contact_model.dart';
-import '../../common/common_color.dart';
+import 'contact_header_item.dart';
+import 'contact_item.dart';
 
 class ContactsPage extends StatefulWidget {
   @override
@@ -12,31 +15,41 @@ class ContactsPage extends StatefulWidget {
 }
 
 class _ContactsPageState extends State<ContactsPage> {
+  // 首字母索引列表
+  final List<String> _letterList = CommonConstant.INDEX_LETTERS;
   // 头部固定4行(新的朋友/群聊/标签/公众号)
   List<ContactModel> _baseContactList = [];
   // 星标朋友
   List<ContactModel> _starFriendList = [];
-  // 联系人
+  // 原始联系人
   List<ContactModel> _contactsList = [];
 
+  // 组装好的联系人列表
+  List<ContactModel> _compactContactList = [];
 
   // ------------------------ Life Cycle ------------------------
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     /// 模拟数据
     List<ContactModel> tempData = ContactListTempData.mock();
+    // 顶部固定分组
     _baseContactList.addAll([
-      ContactModel(type: 0, url: "images/ic_new_friend.png", name: "新的朋友"),
-      ContactModel(type: 0, url: "images/ic_group_chat.png", name: "群聊"),
-      ContactModel(type: 0, url: "images/ic_tag.png", name: "标签"),
-      ContactModel(type: 0, url: "images/ic_public_account.png", name: "公众号")
+      ContactModel(type: 1, url: "images/ic_new_friend.png", name: "新的朋友"),
+      ContactModel(type: 1, url: "images/ic_group_chat.png", name: "群聊"),
+      ContactModel(type: 1, url: "images/ic_tag.png", name: "标签"),
+      ContactModel(type: 1, url: "images/ic_public_account.png", name: "公众号")
     ]);
+    // 星标朋友
     _starFriendList.addAll(tempData);
+    // 联系人
+    _contactsList.addAll(tempData);
+    _contactsList.addAll(tempData);
 
+    // 组装好的联系人数组
+    _compactContactList = _allContactList();
   }
 
   @override
@@ -49,15 +62,18 @@ class _ContactsPageState extends State<ContactsPage> {
             SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  _buildGroupHeaderItem("haha"),
                   ListView.builder(
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text("第$index行"),
-                      );
+                      ContactModel model = _compactContactList[index];
+                      if (model.type == 0) {
+                        return ContactHeaderItem(model.name);
+                      } else {
+                        return ContactItem(
+                            model.url == null ? "images/avatar.png" : model.url,
+                            model.name);
+                      }
                     },
-                    itemCount: 50,
-                    itemExtent: 60,
+                    itemCount: _compactContactList.length,
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                   ),
@@ -72,39 +88,43 @@ class _ContactsPageState extends State<ContactsPage> {
     );
   }
 
-
   // ------------------------ Methods ------------------------
 
+  /// 组装好的联系人列表
+  List<ContactModel> _allContactList() {
+    List<ContactModel> list = [];
+    List<List<ContactModel>> tempList = _letterList
+        .map((letter) => _letterWithContacts(letter))
+        .toList(); // 二维数组
+    // 变为一维数组
+    tempList.forEach((o) {
+      if (o.isNotEmpty) {
+        list.addAll(o);
+      }
+    });
+    print(list);
+    return list;
+  }
+
+  /// 首字母 + 下面的联系人
+  List<ContactModel> _letterWithContacts(String letter) {
+    // ↑ ☆ 不进行创建
+    if (letter == _letterList[0] || letter == _letterList[1]) return [];
+
+    List<ContactModel> list = [];
+    // 筛选出联系人数组里以传入字母开头的所有联系人
+    _contactsList.forEach((contact) {
+      if (contact.startLetter == letter) {
+        list.add(contact);
+      }
+    });
+    if (list.isNotEmpty) {
+      list.insert(0, ContactModel(type: 0, name: letter));
+    }
+    return list;
+  }
 
   // ------------------------ Widgets ------------------------
-
-  /// 联系人列表单个 item
-  Widget _buildContactItem() {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          ListTile(),
-          Divider(),
-        ],
-      ),
-    );
-  }
-
-  /// 每个分组的头部 item
-  Widget _buildGroupHeaderItem(String title) {
-    return Container(
-      height: 30,
-//      width: double.infinity,
-      padding: EdgeInsets.only(left: 10),
-      color: navThemeColor,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Text(title, style: TextStyle(fontSize: 12, color: Colors.grey[600]),),
-        ],
-      ),
-    );
-  }
 
   /// 字符索引视图
   Positioned _buildIndexLetterView() {
@@ -120,11 +140,12 @@ class _ContactsPageState extends State<ContactsPage> {
             onTap: () {},
             child: Padding(
               padding:
-              EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(3)),
+                  EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(3)),
               child: Center(
                 child: Text(
                   letter,
-                  style: TextStyle(fontSize: ScreenUtil().setSp(20), color: Colors.black87),
+                  style: TextStyle(
+                      fontSize: ScreenUtil().setSp(20), color: Colors.black87),
                 ),
               ),
             ),

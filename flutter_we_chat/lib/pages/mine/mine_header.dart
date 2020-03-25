@@ -27,8 +27,8 @@ class MineHeader extends StatelessWidget {
           children: <Widget>[
             CornerRadiusImage(
               "images/avatar.png",
-              width: 110,
-              radius: 8,
+              width: ScreenUtil().setWidth(110),
+              radius: ScreenUtil().setWidth(8),
             ),
             Container(
               height: ScreenUtil().setWidth(110),

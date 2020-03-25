@@ -23,6 +23,8 @@ class CircularImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 可以用 ClipOval 直接剪裁圆形图片, 但是不能设置图片宽高
+    // 这里为了设置图片宽高故采用ClipRRect方式剪裁圆形图片
     return ClipRRect(
       borderRadius: BorderRadius.circular(width / 2),
       child: src.startsWith("http")
