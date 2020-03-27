@@ -42,7 +42,7 @@ dependencies:
   get_it: ^3.1.0  # 依赖注入
   flutter_easyloading: ^1.1.1 # loading遮罩
   audioplayers: ^0.14.0 # 音频播放
-
+  jpush_flutter: 0.5.3  # 极光推送
 
 dev_dependencies:
   flutter_test:

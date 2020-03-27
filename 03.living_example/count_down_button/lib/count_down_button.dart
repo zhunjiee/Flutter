@@ -6,8 +6,8 @@
  * @Version 1.0
  */
 
-import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:flutter/material.dart';
 
 class CountDownButton extends StatefulWidget {
   CountDownButton(this.seconds, {this.onTimeFinish});
@@ -58,7 +58,12 @@ class _CountDownButtonState extends State<CountDownButton> {
 
   /// 倒计时
   void _startCountDownTimer() {
-    // timer定时器
+    // 只能倒计时
+    _timer = Timer(Duration(seconds: 10), (){
+      print("10秒时间到了");
+    });
+
+    // 循环的
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
         if (_countDownTime < 1) {

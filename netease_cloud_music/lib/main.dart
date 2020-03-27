@@ -1,6 +1,9 @@
+import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:fluro/fluro.dart';
+import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'utils/log_utils.dart';
 import 'application.dart';
@@ -37,7 +40,23 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+  final JPush jPush = JPush();
+  AppLifecycleState lifecycleState = AppLifecycleState.resumed;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    initPlatformState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return FlutterEasyLoading(
@@ -62,5 +81,70 @@ class MyApp extends StatelessWidget {
         home: SplashPage(),
       ),
     );
+  }
+
+  @override
+  Future didChangeAppLifecycleState(AppLifecycleState state) async {
+    super.didChangeAppLifecycleState(state);
+    lifecycleState = state;
+    print("lifecycleChanged -------> $state");
+  }
+
+  /// 极光推送相关配置
+  Future<void> initPlatformState() async {
+    try {
+      jPush.addEventHandler(
+          onReceiveNotification: (Map<String, dynamic> message) async {
+        try {
+          var extras = message['extras'];
+          var extrasMap = extras["cn.jpush.android.EXTRA"];
+          var notifyId = extras["cn.jpush.android.NOTIFICATION_ID"];
+          print("flutter onReceiveNotification: $message");
+          var extrasJson = json.decode(extrasMap);
+          if (extrasMap != null) {
+            var type = extrasJson["type"].toString();
+            if (type != null) {
+              String title = message["title"];
+              String alert = message["alert"];
+              print("$title =============================== $alert");
+              // App在前台
+              if (lifecycleState != null &&
+                  lifecycleState == AppLifecycleState.resumed) {
+                print("notifyid: $notifyId, title: $title , message: $alert");
+                jPush.clearNotification(notificationId: notifyId);
+              }
+            }
+          }
+        } catch (e) {
+          print("flutter catch: $e");
+        }
+      }, onOpenNotification: (Map<String, dynamic> message) async {
+        print("flutter onOpenNotification: $message");
+      }, onReceiveMessage: (Map<String, dynamic> message) async {
+        print("flutter onReceiveMessage: $message");
+      });
+    } on PlatformException catch (e) {
+      print("flutter onReceiveMessage: ${e.message},${e.code},${e.details}");
+    }
+    // 配置必要信息
+    jPush.setup(
+      appKey: "98f23c8696c6207132052724", //你自己应用的 AppKey
+      channel: "developer-default",
+      production: false,
+      debug: true,
+    );
+    // 监听jPush
+    jPush.applyPushAuthority(
+        new NotificationSettingsIOS(sound: true, alert: true, badge: true));
+
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    jPush.getRegistrationID().then((rid) {
+      print("flutter get registration id : $rid");
+    });
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
   }
 }
