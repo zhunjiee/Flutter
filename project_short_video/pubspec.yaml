@@ -43,7 +43,8 @@ dependencies:
   get_it: ^3.1.0  # 依赖注入
   flutter_easyloading: ^1.1.1 # loading遮罩
   audioplayers: ^0.14.0 # 音频播放
-  jpush_flutter: 0.5.3  # 极光推送
+  video_player: ^0.10.8+1 # 视频播放
+#  jpush_flutter: 0.5.3  # 极光推送
 
 
 dev_dependencies:
@@ -63,9 +64,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
-  #  - images/a_dot_ham.jpeg
+  assets:
+    - tab_bar_add_btn.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
