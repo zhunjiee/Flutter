@@ -14,14 +14,34 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    // 倒计时跳转
+    Future.delayed(Duration(milliseconds: 3000), (){
+
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        color: Colors.red,
+        color: Colors.blue,
       ),
+    );
+  }
+
+  Widget _buildSplashBackground() {
+    return Image.asset("images/splash_bg.png",
+      width: double.infinity,
+      height: double.infinity,
+      fit: BoxFit.cover,
     );
   }
 }

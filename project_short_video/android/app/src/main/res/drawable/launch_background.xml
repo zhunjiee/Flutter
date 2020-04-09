@@ -9,4 +9,6 @@
             android:gravity="center"
             android:src="@mipmap/launch_image" />
     </item> -->
+    <!-- 撑满屏幕、可能会有拉伸 -->
+    <item android:drawable="@drawable/launch_image"></item>
 </layer-list>
