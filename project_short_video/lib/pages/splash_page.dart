@@ -7,6 +7,7 @@
  */
 
 import 'package:flutter/material.dart';
+import '../utils/navigator_util.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -22,7 +23,7 @@ class _SplashPageState extends State<SplashPage> {
 
     // 倒计时跳转
     Future.delayed(Duration(milliseconds: 3000), (){
-
+      NavigatorUtil.goHomePage(context);
     });
   }
 
@@ -32,7 +33,7 @@ class _SplashPageState extends State<SplashPage> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        color: Colors.blue,
+        color: Colors.redAccent,
       ),
     );
   }
