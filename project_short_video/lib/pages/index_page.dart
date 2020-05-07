@@ -7,6 +7,7 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'home/home_page.dart';
 import 'app/app_page.dart';
 import 'record/record_page.dart';
@@ -35,6 +36,40 @@ class _IndexPageState extends State<IndexPage> {
       ZonePage(),
       MinePage(),
     ];
+
+    bottomItemList = [
+      BottomNavigationBarItem(
+        icon: Text(
+          "首页",
+          style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold, color: Colors.redAccent),
+        ),
+        title: Container(
+          width: 11,
+          height: 2,
+          decoration: BoxDecoration(
+            color: Color(0xFFFF5600),
+            borderRadius: BorderRadius.all(Radius.circular(1.0)),
+          ),
+        ),
+        activeIcon:
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(CupertinoIcons.search),
+        title: Text("应用"),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(CupertinoIcons.shopping_cart),
+        title: Text("+"),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(CupertinoIcons.profile_circled),
+        title: Text("社区"),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(CupertinoIcons.person),
+        title: Text("我的"),
+      ),
+    ];
   }
 
   @override
@@ -44,32 +79,18 @@ class _IndexPageState extends State<IndexPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: bottomItemList,
         currentIndex: _selectedIndex,
-        onTap: (index){},
-        type: BottomNavigationBarType.fixed,  // 超过3个需要设置此属性，取消点击放大效果
+        onTap: (index) {
+          print(index);
+
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        type: BottomNavigationBarType.fixed, // 超过3个需要设置此属性，取消点击放大效果
         fixedColor: Colors.redAccent,
-        unselectedItemColor: Colors.black87,
+        unselectedItemColor: Color(0xFF9B9B9B),
+//        selectedItemColor: Colors.white,
       ),
     );
   }
-
-  /// 创建底部导航栏单个Item
-  BottomNavigationBarItem _buildBottomNavigationItemWithBadge(String title) {
-    return BottomNavigationBarItem(
-        icon: _bottomNavigationBarItemIcon(),
-      activeIcon: _bottomNavigationBarItemIcon(),
-      title: Text(title, style: TextStyle(fontSize: 14),)
-    );
-}
-
-Widget _bottomNavigationBarItemIcon(int codePoint, bool showBadge) {
-    return Container(
-      width: 60,
-      child: Stack(
-        alignment: AlignmentDirectional.topCenter,
-        children: <Widget>[
-          Icon
-        ],
-      ),
-    );
-}
 }
