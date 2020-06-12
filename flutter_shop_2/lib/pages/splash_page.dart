@@ -9,6 +9,7 @@ import 'dart:async';
  */
 
 import 'package:flutter/material.dart';
+import '../utils/navigation_utils.dart';
 
 class SplashPage extends StatefulWidget {
   SplashPage(this.seconds, {this.onTimeFinish});
@@ -36,12 +37,14 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
 
-    return Container(
-      color: Colors.redAccent,
-      child: Center(
-        child: Text(
-          "倒计时$_countDownNum",
-          style: TextStyle(fontSize: 30, color: Colors.white),
+    return Scaffold(
+      body: Container(
+        color: Colors.redAccent,
+        child: Center(
+          child: Text(
+            "倒计时$_countDownNum",
+            style: TextStyle(fontSize: 30, color: Colors.white, fontStyle: FontStyle.italic),
+          ),
         ),
       ),
     );
@@ -55,7 +58,10 @@ class _SplashPageState extends State<SplashPage> {
         if (_countDownNum == 0) {
           // 停止倒计时
           _countDownTimer.cancel();
+          // 附加事件
           widget.onTimeFinish();
+          // 跳转到首页
+          NavigationUtils.goHomePage(context);
         } else {
           _countDownNum -= 1;
         }
