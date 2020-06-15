@@ -12,6 +12,7 @@ import 'route_handler.dart';
 import '../pages/login/login_page.dart';
 
 class Routes {
+  static final String rootPage = "/";
   static final String homePage = "/index";
 
   static void configRoutes(Router router) {

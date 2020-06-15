@@ -20,14 +20,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.pink,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        platform: TargetPlatform.iOS, // 向又滑返回前一页, 导航栏标题居中
       ),
-      onGenerateRoute: Application.router.generator,  // 生成路由
-      home: SplashPage(3, onTimeFinish: (){
-        print("倒计时完成");
-      },),
+      onGenerateRoute: Application.router.generator, // 生成路由
+      home: SplashPage(
+        3,
+        onTimeFinish: () {
+          print("倒计时完成");
+        },
+      ),
+      debugShowCheckedModeBanner: false,  // 去除debug字样
     );
   }
 }
-

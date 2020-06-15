@@ -1,24 +1,24 @@
 /**
- * @ClassName home_page
+ * @ClassName memeber_page
  * @Description TODO
  * @Author Houge
- * @Date 2020/6/12 8:56 AM
+ * @Date 2020/6/12 8:58 AM
  * @Version 1.0
  */
 
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class MemberPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("百姓生活+"),
+        title: Text("个人中心"),
       ),
       body: Container(
         child: Center(
           child: Text(
-            "首页",
+            "个人中心",
             style: TextStyle(fontSize: 30),
           ),
         ),
