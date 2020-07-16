@@ -37,7 +37,7 @@ class HttpRequest {
         CookieJar cookieJar = PersistCookieJar(dir: tempPath);
         BaseOptions options = BaseOptions(
           baseUrl: CommonUrl.baseUrl,
-          followRedirects: false, // 重定向
+          followRedirects: false, // 是否重定向
           receiveTimeout: 10000, // 接收超时10秒
           connectTimeout: 30000, // 连接超时30秒
         );
@@ -55,8 +55,7 @@ class HttpRequest {
   // 3. 工厂构造函数
   factory HttpRequest() => _instance;
 
-  // Dart中实现单例模式的标准做法就是使用static变量+工厂构造函数的方式，
-  // 这样就可以保证new HttpRequest()始终返回都是同一个实例
+
 
   /// GET 请求
   Future<Response> get(

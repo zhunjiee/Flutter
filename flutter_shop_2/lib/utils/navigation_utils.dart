@@ -1,6 +1,6 @@
 /**
  * @ClassName navigation_utils
- * @Description TODO
+ * @Description 路由跳转
  * @Author Houge
  * @Date 2020/6/12 9:24 AM
  * @Version 1.0
@@ -40,4 +40,5 @@ class NavigationUtils {
   static void goHomePage(BuildContext context) {
     _navigateTo(context, Routes.homePage, clearStack: true);
   }
+
 }

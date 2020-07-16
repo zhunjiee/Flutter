@@ -10,6 +10,9 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import '../pages/index_page.dart';
 
+/*
+* 首页
+* */
 Handler homeHandler = Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
     return IndexPage();
