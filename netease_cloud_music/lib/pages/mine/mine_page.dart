@@ -60,35 +60,35 @@ class _MinePageState extends State<MinePage>
       backgroundColor: Colors.white,
       body: FutureBuilder<MinePlaylistModel>(
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  _buildTopMenu(),
-                  Container(
-                    height: ScreenUtil().setWidth(20),
-                    color: Color(0xfff5f5f5),
-                  ),
-                  _realBuildPlaylist(snapshot.data.playlist),
-                ],
-              ),
-            );
-          } else if (snapshot.hasError) {
-            return Container(
-              child: Center(
-                child: NetErrorWidget(callback: () {
-                  setState(() {});
-                }),
-              ),
-            );
-          } else {
-            return Container(
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
-        },
+        if (snapshot.hasData) {
+          return SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                _buildTopMenu(),
+                Container(
+                  height: ScreenUtil().setWidth(20),
+                  color: Color(0xfff5f5f5),
+                ),
+                _realBuildPlaylist(snapshot.data.playlist),
+              ],
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return Container(
+            child: Center(
+              child: NetErrorWidget(callback: () {
+                setState(() {});
+              }),
+            ),
+          );
+        } else {
+          return Container(
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+      },
         future: _future,
       ),
     );

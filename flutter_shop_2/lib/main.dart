@@ -4,6 +4,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'routers/routes.dart';
 import 'application.dart';
 import 'pages/splash_page.dart';
+import 'utils/net_utils.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,20 +19,25 @@ class MyApp extends StatelessWidget {
     Routes.configRoutes(router);
     Application.router = router;
 
-    return FlutterEasyLoading(
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.pink,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          platform: TargetPlatform.iOS, // 向右滑返回前一页, 导航栏标题居中
-        ),
-        onGenerateRoute: Application.router.generator, // 生成路由
-        debugShowCheckedModeBanner: false, // 去除debug字样
-        home: SplashPage(3, onTimeFinish: () {
-          print("倒计时完成");
-        }),
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.pink,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        platform: TargetPlatform.iOS, // 向右滑返回前一页, 导航栏标题居中
       ),
+      onGenerateRoute: Application.router.generator, // 生成路由
+      debugShowCheckedModeBanner: false, // 去除debug字样
+      builder: (BuildContext context, Widget child) {
+        return Material(
+          child: FlutterEasyLoading(
+            child: child,
+          ),
+        );
+      },
+      home: SplashPage(3, onTimeFinish: () {
+        print("倒计时完成");
+      }),
     );
   }
 }

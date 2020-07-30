@@ -13,9 +13,9 @@ class CommonUrl {
   static const String baseUrl = "https://wxmini.baixingliangfan.cn/baixing/";
 
   // 商店首页
-  static const String homeUrl = baseUrl + "wxmini/homePageContent";
+  static const String homeUrl = "wxmini/homePageContent";
   // 商城首页热卖商品拉取
-  static const String homeBelowUrl = baseUrl + "wxmini/homePageBelowConten";
+  static const String homeBelowUrl = "wxmini/homePageBelowConten";
   // 商品类别信息
   static const String categoryUrl = baseUrl + "wxmini/getCategory";
   // 商品分类的商品列表

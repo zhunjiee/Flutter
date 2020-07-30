@@ -34,7 +34,11 @@ dependencies:
   dio: ^3.0.9 # 网络请求
   dio_cookie_manager: ^1.0.0  # dio cookie 管理
   cookie_jar: ^1.0.1  # Cookie 管理
-  flutter_easyloading: ^1.1.4 # 蒙版
+  flutter_easyloading: ^1.1.4 # 提示蒙版
+  fluttertoast: ^7.0.0  # Android样式提示
+  flutter_swiper: ^1.1.6  # 图片轮播
+  flutter_easyrefresh: ^2.1.1  # 下拉刷新控件
+  url_launcher: ^5.5.0  # 启动URL
 
 dev_dependencies:
   flutter_test:
@@ -55,6 +59,10 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/placeholder_image.png
+    - assets/images/header_background_img.jpg
+    - assets/images/header_img.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

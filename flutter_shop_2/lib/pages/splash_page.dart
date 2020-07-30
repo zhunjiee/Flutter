@@ -10,6 +10,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import '../utils/navigation_utils.dart';
+import '../utils/net_utils.dart';
 
 class SplashPage extends StatefulWidget {
   SplashPage(this.seconds, {this.onTimeFinish});
@@ -32,6 +33,7 @@ class _SplashPageState extends State<SplashPage> {
 
     _countDownNum = widget.seconds;
     _startCountDownTimer();
+    _initGlobalConfig();
   }
 
   @override
@@ -67,6 +69,12 @@ class _SplashPageState extends State<SplashPage> {
         }
       });
     });
+  }
+
+  /// 各种初始化
+  void _initGlobalConfig() {
+    // 网络请求工具类初始化
+    NetUtils();
   }
 
   @override

@@ -29,7 +29,7 @@ Future getRequest(String url, {Map formData}) async {
     if (formData == null) {
       response = await dio.get(serverPath[url]);
     } else {
-      response = await dio.get(
+      response = await dio.post(
         serverPath[url],
         queryParameters: formData,
       );

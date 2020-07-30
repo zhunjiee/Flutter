@@ -215,22 +215,22 @@ class ShopInfo {
 }
 
 class IntegralMallPic {
-  String pICTUREADDRESS;
-  String tOPLACE;
+  String pictureAddress;
+  String toPlace;
   int urlType;
 
-  IntegralMallPic({this.pICTUREADDRESS, this.tOPLACE, this.urlType});
+  IntegralMallPic({this.pictureAddress, this.toPlace, this.urlType});
 
   IntegralMallPic.fromJson(Map<String, dynamic> json) {
-    pICTUREADDRESS = json['PICTURE_ADDRESS'];
-    tOPLACE = json['TO_PLACE'];
+    pictureAddress = json['PICTURE_ADDRESS'];
+    toPlace = json['TO_PLACE'];
     urlType = json['urlType'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['PICTURE_ADDRESS'] = this.pICTUREADDRESS;
-    data['TO_PLACE'] = this.tOPLACE;
+    data['PICTURE_ADDRESS'] = this.pictureAddress;
+    data['TO_PLACE'] = this.toPlace;
     data['urlType'] = this.urlType;
     return data;
   }
@@ -379,3 +379,36 @@ class BxMallSubDto {
     return data;
   }
 }
+
+/*
+* 热门商品
+* */
+class HotGoodsModel {
+  String name;
+  String image;
+  double mallPrice;
+  String goodsId;
+  double price;
+
+  HotGoodsModel(
+      {this.name, this.image, this.mallPrice, this.goodsId, this.price});
+
+  HotGoodsModel.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    image = json['image'];
+    mallPrice = json['mallPrice'];
+    goodsId = json['goodsId'];
+    price = json['price'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['image'] = this.image;
+    data['mallPrice'] = this.mallPrice;
+    data['goodsId'] = this.goodsId;
+    data['price'] = this.price;
+    return data;
+  }
+}
+
