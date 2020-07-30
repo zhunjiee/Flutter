@@ -53,11 +53,52 @@ class _CustomFutureBuilderState<T> extends State<CustomFutureBuilder<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return _future == null ? widget.loadingWidget : FutureBuilder(
+      future: _future,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+          case ConnectionState.waiting:
+          case ConnectionState.active:
+            return widget.loadingWidget;
+          case ConnectionState.done:
+            if (snapshot.hasData) {
+              return widget.builder(context, snapshot.data);
+            } else if (snapshot.hasError) {
+              print("ERROR =================> ${snapshot.error}");
+              return NetErrorWidget(
+                callback: () {
+                  _request();
+                },
+              );
+            }
+        }
+        return Container();
+      },
+    );
   }
 
   @override
   void didUpdateWidget(CustomFutureBuilder<T> oldWidget) {
+    // 如果方法不一样了,那么重新请求
+    if (oldWidget.futureFunc != widget.futureFunc) {
+      print("The function have changed");
+      WidgetsBinding.instance.addPostFrameCallback((call) {
+        _request();
+      });
+    }
+    // 如果方法还一样，但是参数不一样了，则重新请求
+    if ((oldWidget.futureFunc == widget.futureFunc) &&
+        (oldWidget.params != null) &&
+        (widget.params != null)) {
+      if (oldParams != widget.params.values.join()) {
+        print("The parameters have changed");
+        oldParams = widget.params.values.join();
+        WidgetsBinding.instance.addPostFrameCallback((call) {
+          _request();
+        });
+      }
+    }
     // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
 
