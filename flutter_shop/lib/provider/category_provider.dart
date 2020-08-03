@@ -25,7 +25,7 @@ class CategoryProvider with ChangeNotifier {
   int get page => _page;
   bool get noMore => _noMore;
 
-//  曝光数据的方法
+///  曝光数据的方法
 
   // 曝光大类下面的子分类
   void exposeChildCategoryList(List<BxMallSubDto> list, String mallCategoryId) {

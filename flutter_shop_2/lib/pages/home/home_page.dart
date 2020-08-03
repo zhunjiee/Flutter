@@ -1,3 +1,5 @@
+import 'dart:math';
+
 /**
  * @ClassName home_page
  * @Description TODO
@@ -10,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttershop2/pages/home/home_floor.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../utils/net_utils.dart';
@@ -19,6 +22,9 @@ import 'category_navigator.dart';
 import 'home_hot_goods.dart';
 import '../../widgets/custom_future_builder.dart';
 import '../../widgets/widget_net_error.dart';
+import 'home_recommend_goods.dart';
+import 'home_floor.dart';
+import '../../widgets/custom_refresh_header_footer.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -36,6 +42,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     _refreshController = EasyRefreshController();
+    _getHomePageHotGoodsContentData();
   }
 
   @override
@@ -52,32 +59,41 @@ class _HomePageState extends State<HomePage> {
             if (_model.category.length > 10) {
               _model.category.removeRange(10, _model.category.length);
             }
-            return EasyRefresh(
-              controller: _refreshController,
-              child: ListView(
-                children: <Widget>[
-                  // 轮播图
-                  CustomSwipe(_model.slides),
-                  // 分类导航
-                  CategoryNavigator(
-                    _model.category,
-                    onTapAction: (Category category) {
-                      print(category.mallCategoryName);
-                    },
-                  ),
-                  ADBanner(_model.advertesPicture.pictureAddress),
-                  LeaderPhone(
-                      _model.shopInfo.leaderImage, _model.shopInfo.leaderPhone),
-                  HomeHotGoods(_hotGoodsList),
-                ],
+            return Container(
+              child: EasyRefresh(
+                controller: _refreshController,
+                child: ListView(
+                  children: <Widget>[
+                    // 轮播图
+                    CustomSwipe(_model.slides),
+                    // 分类导航
+                    CategoryNavigator(
+                      _model.category,
+                      onTapAction: (Category category) {
+                        print(category.mallCategoryName);
+                      },
+                    ),
+                    ADBanner(_model.advertesPicture.pictureAddress),
+                    LeaderPhone(
+                        _model.shopInfo.leaderImage, _model.shopInfo.leaderPhone),
+                    RecommendGoods(_model.recommend),
+                    HomeFloor(_model.floor1Pic.pictureAddress, _model.floor1),
+                    HomeFloor(_model.floor2Pic.pictureAddress, _model.floor2),
+                    HomeFloor(_model.floor3Pic.pictureAddress, _model.floor3),
+                    HomeHotGoods(_hotGoodsList),
+                  ],
+                ),
+                onRefresh: () async {
+                  _getNewHomePageContentData();
+                },
+                onLoad: () async {
+                  _getHomePageHotGoodsContentData();
+                },
+                header: CustomRefreshHeaderFooter.getHeader(),
+                footer: CustomRefreshHeaderFooter.getFooter(),
+                enableControlFinishLoad: true,
+                emptyWidget: _model == null ? NetErrorWidget() : null,
               ),
-              onRefresh: () async {
-                _getNewHomePageContentData();
-              },
-              onLoad: () async {
-                _getHomePageHotGoodsContentData();
-              },
-              emptyWidget: _model == null ? NetErrorWidget() : null,
             );
           },
           futureFunc: getHomePageContent,
@@ -100,7 +116,7 @@ class _HomePageState extends State<HomePage> {
     _hotGoodsList.clear();
     _page = 1;
     await NetUtils().getHomePageBelowContent(_page).then((value) {
-      if (value != null) {
+      if (value.length != 0) {
         setState(() {
           _hotGoodsList.addAll(value);
           _page++;
@@ -115,15 +131,15 @@ class _HomePageState extends State<HomePage> {
   * */
   void _getHomePageHotGoodsContentData() async {
     await NetUtils().getHomePageBelowContent(_page).then((value) {
-      if (value != null) {
+      if (value.length != 0) {
         setState(() {
           _hotGoodsList.addAll(value);
           _page++;
+          _refreshController.finishLoad(success: true);
         });
       } else {
         // 没有更多
         _refreshController.finishLoad(noMore: true);
-        Fluttertoast.showToast(msg: "全部加载完成");
       }
     });
   }
@@ -179,6 +195,7 @@ class LeaderPhone extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.white,
       padding: EdgeInsets.symmetric(horizontal: 10),
       child: GestureDetector(
         onTap: _launchUrl,

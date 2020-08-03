@@ -5,7 +5,6 @@
 /// @Version 1.0
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'widget_net_error.dart';
 
 typedef ValueWidgetBuilder<T> = Widget Function(BuildContext context, T value);
@@ -16,16 +15,7 @@ class CustomFutureBuilder<T> extends StatefulWidget {
     @required this.futureFunc,
     this.params,
     Widget loadingWidget,
-  }) : loadingWidget = loadingWidget ?? Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: <Widget>[
-      Container(
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
-    ],
-  );
+  }) : loadingWidget = loadingWidget ?? _defaultLoadingWidget();
 
   final ValueWidgetBuilder<T> builder;
   final Function futureFunc;
@@ -34,6 +24,19 @@ class CustomFutureBuilder<T> extends StatefulWidget {
 
   @override
   _CustomFutureBuilderState<T> createState() => _CustomFutureBuilderState<T>();
+
+  static Widget _defaultLoadingWidget() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Container(
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
+        ),
+      ],
+    );
+  }
 }
 
 class _CustomFutureBuilderState<T> extends State<CustomFutureBuilder<T>> {

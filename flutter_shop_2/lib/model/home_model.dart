@@ -15,9 +15,9 @@ class HomeModel {
   IntegralMallPic toShareCode;
   List<Recommend> recommend;
   IntegralMallPic advertesPicture;
-  List<Floor1> floor1;
-  List<Floor1> floor2;
-  List<Floor1> floor3;
+  List<Floor> floor1;
+  List<Floor> floor2;
+  List<Floor> floor3;
   IntegralMallPic saoma;
   IntegralMallPic newUser;
   IntegralMallPic floor1Pic;
@@ -70,21 +70,21 @@ class HomeModel {
         ? new IntegralMallPic.fromJson(json['advertesPicture'])
         : null;
     if (json['floor1'] != null) {
-      floor1 = new List<Floor1>();
+      floor1 = new List<Floor>();
       json['floor1'].forEach((v) {
-        floor1.add(new Floor1.fromJson(v));
+        floor1.add(new Floor.fromJson(v));
       });
     }
     if (json['floor2'] != null) {
-      floor2 = new List<Floor1>();
+      floor2 = new List<Floor>();
       json['floor2'].forEach((v) {
-        floor2.add(new Floor1.fromJson(v));
+        floor2.add(new Floor.fromJson(v));
       });
     }
     if (json['floor3'] != null) {
-      floor3 = new List<Floor1>();
+      floor3 = new List<Floor>();
       json['floor3'].forEach((v) {
-        floor3.add(new Floor1.fromJson(v));
+        floor3.add(new Floor.fromJson(v));
       });
     }
     saoma = json['saoma'] != null
@@ -273,13 +273,13 @@ class Recommend {
   }
 }
 
-class Floor1 {
+class Floor {
   String image;
   String goodsId;
 
-  Floor1({this.image, this.goodsId});
+  Floor({this.image, this.goodsId});
 
-  Floor1.fromJson(Map<String, dynamic> json) {
+  Floor.fromJson(Map<String, dynamic> json) {
     image = json['image'];
     goodsId = json['goodsId'];
   }

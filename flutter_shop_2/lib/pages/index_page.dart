@@ -8,7 +8,6 @@ import 'package:flutter/cupertino.dart';
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'home/home_page.dart';
 import 'category/category_page.dart';
 import 'cart/cart_page.dart';
@@ -19,8 +18,9 @@ class IndexPage extends StatefulWidget {
   _IndexPageState createState() => _IndexPageState();
 }
 
-class _IndexPageState extends State<IndexPage>
-    with AutomaticKeepAliveClientMixin {
+class _IndexPageState extends State<IndexPage> {
+  // 选中索引
+  int _selectedIndex = 0;
   // 底部导航栏数组
   final List<BottomNavigationBarItem> bottomItemList = [
     BottomNavigationBarItem(
@@ -49,26 +49,8 @@ class _IndexPageState extends State<IndexPage>
     MemberPage(),
   ];
 
-  // 选中索引
-  int _selectedIndex = 0;
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-
-  }
-
   @override
   Widget build(BuildContext context) {
-    // 屏幕适配控件初始化, 放在initState方法中报错
-    ScreenUtil.init(context, width: 750.0, height: 1334.0);
-
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,

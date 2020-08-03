@@ -6,6 +6,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttershop2/config/common_text_style.dart';
 import '../../model/home_model.dart';
 
 typedef CategoryOnTapCallback = void Function(Category category);
@@ -62,7 +63,7 @@ class CategoryNavigator extends StatelessWidget {
               return child;
             },
           ),
-          Text(category.mallCategoryName),
+          Text(category.mallCategoryName, style: common14TextStyle,),
         ],
       ),
     );

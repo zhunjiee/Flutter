@@ -110,7 +110,12 @@ packages:
       name: flutter_easyrefresh
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.4"
+  flutter_localizations:
+    dependency: "direct main"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_page_indicator:
     dependency: transitive
     description:
@@ -155,7 +160,7 @@ packages:
       name: fluttertoast
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "7.0.0"
+    version: "7.0.2"
   http_parser:
     dependency: transitive
     description:
@@ -170,6 +175,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.12"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.16.1"
   matcher:
     dependency: transitive
     description:
@@ -225,7 +237,7 @@ packages:
       name: provider
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "4.3.0"
+    version: "4.3.1"
   pub_semver:
     dependency: transitive
     description:

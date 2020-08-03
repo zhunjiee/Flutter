@@ -7,6 +7,9 @@
  */
 
 import 'package:flutter/material.dart';
+import 'category_left_navigator.dart';
+import 'category_top_navigator.dart';
+import 'category_goods_list.dart';
 
 class CategoryPage extends StatelessWidget {
   @override
@@ -15,11 +18,18 @@ class CategoryPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("分类"),
       ),
-      body: Container(
-        child: Center(
-          child: Text(
-            "分类",
-            style: TextStyle(fontSize: 30),
+      body: SafeArea(
+        child: Container(
+          child: Row(
+            children: <Widget>[
+              LeftCategoryNavigator(),
+              Column(
+                children: <Widget>[
+                  TopCategoryNavigator(),
+                  CategoryGoodsList(),
+                ],
+              )
+            ],
           ),
         ),
       ),

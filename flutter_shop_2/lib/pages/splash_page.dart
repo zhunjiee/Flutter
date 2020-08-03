@@ -9,6 +9,7 @@ import 'dart:async';
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../utils/navigation_utils.dart';
 import '../utils/net_utils.dart';
 
@@ -33,11 +34,12 @@ class _SplashPageState extends State<SplashPage> {
 
     _countDownNum = widget.seconds;
     _startCountDownTimer();
-    _initGlobalConfig();
   }
 
   @override
   Widget build(BuildContext context) {
+    // 初始化全局配置
+    _initGlobalConfig(context);
 
     return Scaffold(
       body: Container(
@@ -50,6 +52,14 @@ class _SplashPageState extends State<SplashPage> {
         ),
       ),
     );
+  }
+
+  /// 各种初始化全局配置
+  void _initGlobalConfig(BuildContext context) {
+    // 屏幕适配控件
+    ScreenUtil.init(context, width: 750.0, height: 1334.0);
+    // 网络请求工具类
+    NetUtils();
   }
 
   /// 倒计时
@@ -69,12 +79,6 @@ class _SplashPageState extends State<SplashPage> {
         }
       });
     });
-  }
-
-  /// 各种初始化
-  void _initGlobalConfig() {
-    // 网络请求工具类初始化
-    NetUtils();
   }
 
   @override
